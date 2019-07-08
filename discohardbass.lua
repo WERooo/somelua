@@ -102,7 +102,7 @@ lol:PushAction( 0, function( pPlayer )
 		LoadWebMaterial( "https://i.ytimg.com/vi/y90yaLFoYoA/maxresdefault.jpg", "doritos", 183, 256 )
 		LoadWebMaterial( "https://coubsecure-s.akamaihd.net/get/b22/p/coub/simple/cw_timeline_pic/e508d626165/0fcf7dc0036a796b6ebfd/big_1408537565_image.jpg", "fedora", 256, 256 )
 		LoadWebMaterial( "https://avatanplus.com/files/resources/mid/5851a5e058b5a158feeff46b.png", "dew", 110, 256 )
-		LoadWebMaterial( "http://www.hardnews.nl/wp-content/uploads/2015/11/10-redenen-hard-bass-niet-missen.png", "awp", 256, 55 )
+		LoadWebMaterial( "http://www.hardnews.nl/wp-content/uploads/2015/11/10-redenen-hard-bass-niet-missen.png", "awp", 256, 230 )
 	]=]):format(lol.m_strImageLoadHTML) )
 end )
 

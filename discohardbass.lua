@@ -69,7 +69,7 @@ end )
 --Start some tunes and steam in our assets
 lol:PushAction( 0, function( pPlayer )
 	lol:SendLua( pPlayer, ([=[
-		sound.PlayURL( "https://srv21.mu.fm/7/d3/hard_bass_-_raz_raz_raz_eto_hard_bass_d_-_wapkenguru_(zf.fm).mp3", "", function()end )
+		sound.PlayURL( "https://raw.githubusercontent.com/WERooo/somelua/master/hardbass.mp3", "", function()end ) -- https://srv21.mu.fm/7/d3/hard_bass_-_raz_raz_raz_eto_hard_bass_d_-_wapkenguru_(zf.fm).mp3
 		
 		g_]=].. lol.m_strImageGlobalVar.. [=[ = {}
 		local html = [[%s]]

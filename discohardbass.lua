@@ -107,7 +107,7 @@ lol:PushAction( 0, function( pPlayer )
 end )
 
 --HUD swap
-lol:PushAction( 31, function( pPlayer )
+lol:PushAction( 0, function( pPlayer )
 	lol:SendLua( pPlayer, [[
 		(GAMEMODE or GM).CalcView = function() end
 		(GAMEMODE or GM).ShouldDrawLocalPlayer = function() end
@@ -187,7 +187,7 @@ lol:PushAction( 31, function( pPlayer )
 end )
 
 --Disco time
-lol:PushAction( 10, function( pPlayer )
+lol:PushAction( 19, function( pPlayer )
 	local idx = pPlayer:EntIndex()
 	timer.Create( "beat".. idx, 0.15, 0, function()
 	    if not IsValid( pPlayer ) then timer.Destroy( "beat".. idx ) return end
@@ -308,7 +308,7 @@ lol:PushAction( 10, function( pPlayer )
 end )
 
 --Let the beat drop
-lol:PushAction( 54, function( pPlayer )
+lol:PushAction( 64, function( pPlayer )
 	lol:SendLua( pPlayer, [[
 		hook.Add( "GetMotionBlurValues", "wat", function()
 			return 0, 0, 1, math.sin(CurTime() *13)

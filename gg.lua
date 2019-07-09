@@ -18,5 +18,4 @@ if LocalPlayer().visuel1 ~= true then
             hook.Remove('HUDPaint','c')
             hook.Remove('RenderScreenspaceEffects','ohgod')
             timer.Remove('thedrop')
-            timer.Remove('spamsondeouf')
         end

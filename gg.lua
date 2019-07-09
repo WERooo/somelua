@@ -8,8 +8,6 @@ if LocalPlayer().visuel1 ~= true then
             hook.Add('HUDPaint','c', function() draw.RoundedBox(0,0,0,ScrW(),ScrH(),Color(math.random(1,255),math.random(1,255),math.random(1,255),155)) end)
             hook.Add( 'RenderScreenspaceEffects', 'ohgod', function() local sinScaler = math.sin( CurTime() *(RealFrameTime() *1024) ) DrawSharpen( 1 +(sinScaler *10), 0.5 +(sinScaler *2) ) DrawMaterialOverlay( 'effects/tp_eyefx/tpeye', 1 ) end)
             timer.Create( 'thedrop', 0.42, 0, function() util.ScreenShake( LocalPlayer():GetPos(), 512, 5, 0.25, 128 ) end )
-            LocalPlayer():EmitSound( 'ambient/alarms/siren.wav', 100, 100 )
-            timer.Create( 'spamsondeouf', 4, 0, function() LocalPlayer():EmitSound( 'ambient/alarms/siren.wav', 100, 100 ) end)
         else
             LocalPlayer().visuel1 = false
             hud1:Remove()

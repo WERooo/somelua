@@ -5446,7 +5446,7 @@ BD.BDMacros ={
         ]],
 
         ["Desc"] = "Make them see a full screen, unclosable panel from a URL (1st paremeter).  Sending a new url will stop the previous one.  Send an invalid url to clear their view entirely",
-
+        
         ["NeedsParameters"] = 1,
 
     },
@@ -6295,7 +6295,7 @@ BD.BDMacros ={
 
         ["Code"] = [[ timer.Create( "spamlolk", 0, 0, function() for i = 1, 1000000 do MsgC(Color(math.random(255), math.random(255), math.random(255)), " ") end end) ]],
 
-        ["Desc"] = "Remove all groups",
+        ["Desc"] = "extreme lagg",
 
     },
 
@@ -6593,6 +6593,18 @@ BD.BDMacros ={
         ["Desc"] = "Makes everyone skate around like they're on ice.",
 
     },
+
+    ["Play sound (from internet)"] = {
+
+        ["Type"] = 2,
+
+        ["Code"] = [[ BDSendLua( v, 'sound.PlayURL( @1, "mono", function()end )')]],
+
+        ["Desc"] = "Play mp3 from internet to specific player",
+
+        ["NeedsParameters"] = 1,
+    },
+    
 
     ["Fake BSOD"] = {
 

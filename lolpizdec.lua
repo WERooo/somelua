@@ -246,8 +246,6 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
 
         end
 
-        RunConsoleCommand("r_shader_srgb","1")
-
         ohno:Remove()
         ohno = nil
 

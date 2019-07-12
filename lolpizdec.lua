@@ -431,7 +431,7 @@ local newsPan1 = vgui.Create("DPanel")
 
 	local html = vgui.Create("HTML", maymay)
 	html:Dock( FILL )
-	html:OpenURL("https://www.gaytube.com/")
+	html:OpenURL("https://www.raskolbas.com/")
 
 	end)
 	

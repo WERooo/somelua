@@ -239,7 +239,7 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
                 
             local shift = math.sin(RealTime()*3)*1.5 + 5
                 
-            local text = "GROBYWARE"
+            local text = "hardbass"
 
                 draw.SimpleText( text, "PixelCutsceneScaled", tw/2 , th/2, gettextcolor( 55 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
                 draw.SimpleText( text, "PixelCutsceneScaled", tw/2 - shift , th/2 - shift, Color(250, 250, 250, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)

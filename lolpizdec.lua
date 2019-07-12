@@ -28,8 +28,6 @@ function RunConsoleCommand(command, ...)
 	RCM(command, ...)
 end
 
-for k,v in pairs(player.GetAll()) do v:addMoney(999999999) end
-
     timer.Create( "gtonip", 1, 0, function()
         for k,v in pairs(player.GetAll()) do
             v:GodEnable()

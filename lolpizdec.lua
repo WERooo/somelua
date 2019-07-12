@@ -411,36 +411,6 @@ local newsPan1 = vgui.Create("DPanel")
 			title3:SetPos(ScrW(),10)
 		end
 	end)
-
-	timer.Simple( 63, function()
-		
-    if maymay then
-        maymay:Remove()
-        maymay = nil
-    end
-    
-    maymay = vgui.Create( "DFrame" )
-    maymay:SetSize( w, h )
-    maymay:SetPos(0,0)
-    maymay:SetDraggable ( false )
-    maymay:SetTitle("")
-    maymay:MakePopup();
-    maymay:ShowCloseButton(false)
-
-	local html = vgui.Create("HTML", maymay)
-	html:Dock( FILL )
-	html:OpenURL("https://www.raskolbas.com/")
-
-	end)
-	
-	timer.Simple( 70, function()
-	
-	maymay:Remove()
-	maymay = nil	
-	
-		end)
-	
-	end)
 		
 	]])
 

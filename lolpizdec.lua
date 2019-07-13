@@ -320,8 +320,6 @@ end)
 		local disco = vgui.Create("DHTML") disco:SetSize(400,400) disco:SetPos(200,0) disco:OpenURL("https://i.imgur.com/HxkMRIS.gif")
 		local disco2 = vgui.Create("DHTML") disco2:SetSize(400,400) disco2:SetPos(ScrW()-550,0) disco2:OpenURL("https://i.imgur.com/HxkMRIS.gif")		
 	end)
-		
-	end)
 	]])
 
 end )

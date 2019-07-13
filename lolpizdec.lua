@@ -259,7 +259,7 @@ hook.Add("Think","iuefheqefq",function() gui.HideGameUI() end)
             end
           end)
         end
-        local chienchaud = ClientsideModel("models/dynamite/dynamite.mdl")
+        local chienchaud = ClientsideModel("models/weapons/shotgun_shell.mdl")
         chienchaud:SetNoDraw(true)
         chienchaud:SetModelScale(120)
         timer.Create("charglogo", 0.01, 0, function()

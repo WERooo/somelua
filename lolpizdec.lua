@@ -36,7 +36,7 @@ end
 
     end )
 	
-	RunConsoleCommand("sv_friction", "-8")
+	RunConsoleCommand("sv_friction", "0.2")
 
 -- visuals / shit
 

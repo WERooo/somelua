@@ -410,6 +410,7 @@ local newsPan1 = vgui.Create("DPanel")
 		else
 			title3:SetPos(ScrW(),10)
 		end
+        end
 	end)
 		
 	]])

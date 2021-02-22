@@ -1,5 +1,13 @@
 
 local lol = {}
+function lol:RandomString( intMin, intMax )
+	local ret = ""
+	for _ = 1, math.random( intMin, intMax ) do
+		ret = ret.. string.char( math.random(65, 90) )
+	end
+
+	return ret
+end
 lol.m_strImageGlobalVar = lol:RandomString( 6, 12 )
 lol.m_strImageLoadHTML = [[<style type="text/css"> html, body {background-color: transparent;} html{overflow:hidden; ]].. (true and "margin: -8px -8px;" or "margin: 0px 0px;") ..[[ } </style><body><img src="]] .. "%s" .. [[" alt="" width="]] .. "%i"..[[" height="]] .. "%i" .. [[" /></body>]]
 

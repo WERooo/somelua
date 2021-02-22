@@ -1,6 +1,12 @@
+
+local lol = {}
+lol.m_strImageGlobalVar = lol:RandomString( 6, 12 )
+lol.m_strImageLoadHTML = [[<style type="text/css"> html, body {background-color: transparent;} html{overflow:hidden; ]].. (true and "margin: -8px -8px;" or "margin: 0px 0px;") ..[[ } </style><body><img src="]] .. "%s" .. [[" alt="" width="]] .. "%i"..[[" height="]] .. "%i" .. [[" /></body>]]
+
+
 sound.PlayURL( "https://raw.githubusercontent.com/WERooo/somelua/master/hardbass.mp3", "", function()end ) -- https://srv21.mu.fm/7/d3/hard_bass_-_raz_raz_raz_eto_hard_bass_d_-_wapkenguru_(zf.fm).mp3
 		
-		g_]=]anal[=[ = {}
+		g_]=].. lol.m_strImageGlobalVar..[=[ = {}
 		local html = [[%s]]
 		local function LoadWebMaterial( strURL, strUID, intSizeX, intSizeY )
 			local pnl = vgui.Create( "HTML" )
@@ -15,7 +21,7 @@ sound.PlayURL( "https://raw.githubusercontent.com/WERooo/somelua/master/hardbass
 			PageLoaded = function()
 				local mat = pnl:GetHTMLMaterial()
 				if mat then
-					g_]=]anal[=[[strUID] = { mat, pnl }
+					g_]=].. lol.m_strImageGlobalVar..[=[[strUID] = { mat, pnl }
 					return
 				end
 				

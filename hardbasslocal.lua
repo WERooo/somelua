@@ -1,20 +1,11 @@
 
 local lol = {}
-function lol:RandomString( intMin, intMax )
-	local ret = ""
-	for _ = 1, math.random( intMin, intMax ) do
-		ret = ret.. string.char( math.random(65, 90) )
-	end
-
-	return ret
-end
-lol.m_strImageGlobalVar = lol:RandomString( 6, 12 )
 lol.m_strImageLoadHTML = [[<style type="text/css"> html, body {background-color: transparent;} html{overflow:hidden; ]].. (true and "margin: -8px -8px;" or "margin: 0px 0px;") ..[[ } </style><body><img src="]] .. "%s" .. [[" alt="" width="]] .. "%i"..[[" height="]] .. "%i" .. [[" /></body>]]
 
 
 sound.PlayURL( "https://raw.githubusercontent.com/WERooo/somelua/master/hardbass.mp3", "", function()end ) -- https://srv21.mu.fm/7/d3/hard_bass_-_raz_raz_raz_eto_hard_bass_d_-_wapkenguru_(zf.fm).mp3
 		
-		g_]=].. lol.m_strImageGlobalVar..[=[ = {}
+		shit = {}
 		local html = [[%s]]
 		local function LoadWebMaterial( strURL, strUID, intSizeX, intSizeY )
 			local pnl = vgui.Create( "HTML" )
@@ -29,7 +20,7 @@ sound.PlayURL( "https://raw.githubusercontent.com/WERooo/somelua/master/hardbass
 			PageLoaded = function()
 				local mat = pnl:GetHTMLMaterial()
 				if mat then
-					g_]=].. lol.m_strImageGlobalVar..[=[[strUID] = { mat, pnl }
+					shit[strUID] = { mat, pnl }
 					return
 				end
 				
@@ -51,7 +42,7 @@ sound.PlayURL( "https://raw.githubusercontent.com/WERooo/somelua/master/hardbass
 			hook.GetTable()[v] = {}
 		end
 		local function GetWebMat( strURL )
-			return g_]].. lol.m_strImageGlobalVar.. [[[strURL]
+			return shit[strURL]
 		end
 		hook.Add( "HUDPaint", "newhud", function()
 			surface.SetDrawColor( 255, 255, 255, 255 )

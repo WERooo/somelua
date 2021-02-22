@@ -6,7 +6,7 @@ lol.m_strImageLoadHTML = [[<style type="text/css"> html, body {background-color:
 sound.PlayURL( "https://raw.githubusercontent.com/WERooo/somelua/master/hardbass.mp3", "", function()end ) -- https://srv21.mu.fm/7/d3/hard_bass_-_raz_raz_raz_eto_hard_bass_d_-_wapkenguru_(zf.fm).mp3
 		
 		shit = {}
-		local html = [[%s]]
+		local html = [[lol.m_strImageLoadHTML]]
 		local function LoadWebMaterial( strURL, strUID, intSizeX, intSizeY )
 			local pnl = vgui.Create( "HTML" )
 			pnl:SetPos( ScrW() -1, ScrH() -1 )

